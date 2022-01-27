@@ -1,5 +1,0 @@
-\contentsline {section}{\numberline {1}Description}{3}{}%
-\contentsline {subsection}{\numberline {1.1}What Problem Are You Trying To Solve?}{3}{}%
-\contentsline {subsection}{\numberline {1.2}Why Is This An Important Problem?}{3}{}%
-\contentsline {subsection}{\numberline {1.3}What Is The Context Of The Problem You Are Solving?}{3}{}%
-\contentsline {section}{\numberline {2}Revisions}{3}{}%
