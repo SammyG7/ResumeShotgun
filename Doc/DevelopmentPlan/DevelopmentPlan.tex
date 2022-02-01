@@ -2,6 +2,7 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{hyperref}
 
 \title{SE 3XA3: Development Plan\\The Resume Shotgun}
 
@@ -17,43 +18,53 @@
 
 \begin{document}
 
+\maketitle
+
+Put your introductory blurb here.
+
+\section{Team Meeting Plan}
+The team will be meeting during regular weekly lab sections to plan and develop collaboratively. Outside of class time, the team will be using \href{https://lettucemeet.com/}{Lettuce Meet} to plan and schedule meeting times that work for everyone.
+
+\section{Team Communication Plan}
+Primary forms of communication will be through weekly lab sections and using a Discord group chat. The Discord group chat allows for text messaging, sharing files, sharing links, and unlimited voice calls.
+\section{Team Member Roles}
+A scribe will be designated for each team meeting, rotating between members each meeting. If a scribe can not attend a meeting, then the next group member will be chosen, with the original scribe taking up the role during the next meeting. It will be the role of the scribe to record what happens during meetings and update any plans accordingly. The order of rotation for scribes will be as follows: Jeremy Langner, Sam Gorman, Gavin Jameson
+
+Similarly, the team leader will rotate between meetings and be responsible for guiding and keeping meetings on track. The order of rotation for leaders will be as follows: Gavin Jameson, Jeremy Langner, Sam Gorman
+\section{Git Workflow Plan} \label{sec:gitflow}
+The team plans on using a similar Git Workflow plan as presented in lecture  \href{https://nvie.com/posts/a-successful-git-branching-model/}{here}. This outline has two main branches with an infinite lifetime throughout the project 'Master' and 'Develop'. Master branch is used for production or main deliverables while the Develop branch is used for the incremental and developmental design process that yields frequent changes. Finally, each member will have their own individual branch to exclusively work independently on features and fixes that can be merged into Develop upon completion.
+\section{Proof of Concept Demonstration Plan}
+
+\section{Technology}
+Since the original project is written in Python and it is a language that we are comfortable using, we will continue writing the project in Python. Our supporting documentation will be generated with doxygen. As mentioned in \ref{sec:gitflow} and \ref{sec:style}, we will be following specific workflows and conventions - as Python has many capable IDEs, we will use whichever we are comfortable with that allows us to maintain what was discussed in those sections. 
+\section{Coding Style} \label{sec:style}
+A few conventions will be followed:
+\begin{itemize}
+  \item Variables and functions will be named according to camel case, in which the first word begins with a lower case letter and all subsequent words are capitalized (ie. sumOfProducts())
+  \item Indentations will be achieved through four individual spaces rather than a \textbackslash tab character
+  \item Equations will be formatted with spaces in between numbers and operations (ie. [1 + 2] ** 6 is proper form)
+  \item Single line comments will be formatted with two comment characters, followed by a space, followed by the message (ie. \%\% Example Comment)
+  \item Comments will be placed above important blocks of code, including but not limited to: Function declarations, variable initialization blocks, large loops or conditional statements, complicated mathematical equations. 
+\end{itemize}
+\section{Project Schedule}
+
+Provide a pointer to your Gantt Chart.
+
+\section{Project Review}
+
+\newpage
+
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
 \begin{tabularx}{\textwidth}{llX}
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
+February 1 & Everyone & Filled out Team Meeting Plan, Team Communication Plan, Team Member Roles, Git Workflow Plan, Technology, and Coding Style. \\
 Date2 & Name(s) & Description of changes\\
 ... & ... & ...\\
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\newpage
-
-\maketitle
-
-Put your introductory blurb here.
-
-\section{Team Meeting Plan}
-
-\section{Team Communication Plan}
-
-\section{Team Member Roles}
-
-\section{Git Workflow Plan}
-
-\section{Proof of Concept Demonstration Plan}
-
-\section{Technology}
-
-\section{Coding Style}
-
-\section{Project Schedule}
-
-Provide a pointer to your Gantt Chart.
-
-\section{Project Review}
 
 \end{document}
