@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-01-19" view-index="0" gantt-divider-location="251" resource-divider-location="300" version="3.1.3103" locale="en_CA">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Name" width="138" order="0"/>
+        <field id="tpd4" name="Begin date" width="55" order="1"/>
+        <field id="tpd5" name="End date" width="54" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="3" name="Development Plan" color="#8cb6ce" meeting="false" start="2022-01-31" duration="4" complete="90" thirdDate="2022-02-04" thirdDate-constraint="0" expand="true"/>
+        <task id="4" name="Requirements Document Revision 0" color="#8cb6ce" meeting="false" start="2022-02-03" duration="9" complete="0" thirdDate="2022-02-11" thirdDate-constraint="0" expand="true">
+            <depend id="13" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="13" name="Milestone Requirements Document Revision 0" color="#8cb6ce" meeting="true" start="2022-02-12" duration="0" complete="0" thirdDate="2022-02-11" thirdDate-constraint="0" expand="true"/>
+        <task id="5" name="Proof of Concept Demo" color="#8cb6ce" meeting="false" start="2022-02-14" duration="14" complete="0" thirdDate="2022-02-28" thirdDate-constraint="0" expand="true">
+            <depend id="16" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" name="Milestone Proof of Concept Demo" color="#8cb6ce" meeting="true" start="2022-02-28" duration="0" complete="0" thirdDate="2022-02-28" thirdDate-constraint="0" expand="true"/>
+        <task id="6" name="Test Plan Revision" color="#8cb6ce" meeting="false" start="2022-03-01" duration="11" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="21" name="Milestone Test Plan Revision" color="#8cb6ce" meeting="true" start="2022-03-12" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="7" name="Design and Doc Revision 0" color="#8cb6ce" meeting="false" start="2022-03-01" duration="18" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="23" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="23" name="Milestone Design and Doc Revision 0" color="#8cb6ce" meeting="true" start="2022-03-19" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="8" name="Revision 0 Demo" color="#8cb6ce" meeting="false" start="2022-03-07" duration="18" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="25" name="Milestone Revision 0 Demo" color="#8cb6ce" meeting="true" start="2022-03-25" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Final Demo" color="#8cb6ce" meeting="false" start="2022-03-25" duration="14" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="35" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="35" name="Milestone Final Demo" color="#8cb6ce" meeting="true" start="2022-04-08" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="10" name="Peer Eval" color="#8cb6ce" meeting="false" start="2022-04-04" duration="5" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="37" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="37" name="Milestone Peer Eval" color="#8cb6ce" meeting="true" start="2022-04-09" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="11" name="Final Documentation" color="#8cb6ce" meeting="false" start="2022-03-25" duration="19" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true">
+            <depend id="39" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="39" name="Milestone Final Documentation" color="#8cb6ce" meeting="true" start="2022-04-13" duration="0" complete="0" thirdDate="2022-03-04" thirdDate-constraint="0" expand="true"/>
+        <task id="2" name="Problem Statement" color="#8cb6ce" meeting="false" start="2022-01-24" duration="4" complete="100" thirdDate="2022-01-27" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Sam Gorman" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="1" name="Jeremy Langner" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="2" name="Gavin Jameson" function="SoftwareDevelopment:2" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="2" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="3" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="4" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="5" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="7" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="8" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="9" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="10" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="11" resource-id="0" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="6" resource-id="0" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="2" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="3" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="34.0"/>
+        <allocation task-id="4" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="5" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="6" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="33.0"/>
+        <allocation task-id="7" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="8" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="9" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="10" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="11" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="2" resource-id="2" function="SoftwareDevelopment:2" responsible="true" load="34.0"/>
+        <allocation task-id="3" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="4" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="5" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="6" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="7" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="8" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="9" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="10" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+        <allocation task-id="11" resource-id="2" function="SoftwareDevelopment:2" responsible="false" load="33.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
