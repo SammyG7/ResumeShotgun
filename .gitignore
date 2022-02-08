@@ -120,3 +120,5 @@ dmypy.json
 *.gz
 *.toc
 *.out
+*.lof
+*.lot
