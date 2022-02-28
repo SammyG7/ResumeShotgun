@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 import os # to get the resume file
 import time # to sleep
 import get_links
+import get_links_indeed
+import View
 
 # sample application links if we don't want to run get_links.py
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
@@ -163,9 +165,12 @@ def lever(driver):
     driver.find_element_by_class_name('template-btn-submit').click()
 
 if __name__ == '__main__':
-
+    #View.displayTest()
     # call get_links to automatically scrape job listings from glassdoor
-    aggregatedURLs = get_links.getURLs()
+    if View.chooseType() == "1":
+        aggregatedURLs = get_links.getURLs()
+    else:
+        aggregatedURLs = get_links_indeed.getURLs()
     print(f'Job Listings: {aggregatedURLs}')
     print('\n')
 
