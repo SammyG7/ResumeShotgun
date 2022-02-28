@@ -122,3 +122,6 @@ dmypy.json
 *.out
 *.lof
 *.lot
+
+# Chromedriver
+chromedriver.exe
