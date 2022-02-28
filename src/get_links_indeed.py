@@ -24,15 +24,20 @@ PREFERENCES = {
 # helper method to give user time to log into glassdoor
 def login(driver):
     driver.get('https://ca.indeed.com/')
+    
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'html.parser')
+    mosaic = soup.find(id='mosaic-data')
+    text = mosaic.text.split("\n")
 
-    # keep waiting for user to log-in until the URL changes to user page
-    while True:
-        try:
-            WebDriverWait(driver, 1).until(EC.url_contains("member"))
-        except TimeoutException:
-            break
-##        WebDriverWait(driver, 1).until(EC.url_contains("member"))
-    return True # return once this is complete
+    for x in text:
+        if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
+            logInCheck = x
+
+    if('"isLoggedIn":false' in logInCheck):
+        navigateToLogin()
+
+    return True 
 
 # navigate to appropriate job listing page
 def go_to_listings(driver):
