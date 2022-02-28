@@ -167,39 +167,47 @@ def lever(driver):
 if __name__ == '__main__':
     #View.displayTest()
     # call get_links to automatically scrape job listings from glassdoor
-    if View.chooseType() == "1":
-        aggregatedURLs = get_links.getURLs()
-    else:
-        aggregatedURLs = get_links_indeed.getURLs()
-    print(f'Job Listings: {aggregatedURLs}')
-    print('\n')
-
-    driver = webdriver.Chrome(executable_path='./chromedriver')
-    for url in aggregatedURLs:
-        print('\n')
-
-        if 'greenhouse' in url:
-            driver.get(url)
-            try:
-                greenhouse(driver)
-                print(f'SUCCESS FOR: {url}')
-            except Exception:
-                # print(f"FAILED FOR {url}")
-                continue
-
-        elif 'lever' in url:
-            driver.get(url)
-            try:
-                lever(driver)
-                print(f'SUCCESS FOR: {url}')
-            except Exception:
-                # print(f"FAILED FOR {url}")
-                continue
-        # i dont think this else is needed
-        else:
-            # print(f"NOT A VALID APP LINK FOR {url}")
-            continue
-
-        time.sleep(1) # can lengthen this as necessary (for captcha, for example)
-
+##    if View.chooseType() == "1":
+##        aggregatedURLs = get_links.getURLs()
+##    else:
+##        aggregatedURLs = get_links_indeed.getURLs()
+##    print(f'Job Listings: {aggregatedURLs}')
+##    print('\n')
+##
+##    driver = webdriver.Chrome(executable_path='./chromedriver')
+##    for url in aggregatedURLs:
+##        print('\n')
+##
+##        if 'greenhouse' in url:
+##            driver.get(url)
+##            try:
+##                greenhouse(driver)
+##                print(f'SUCCESS FOR: {url}')
+##            except Exception:
+##                # print(f"FAILED FOR {url}")
+##                continue
+##
+##        elif 'lever' in url:
+##            driver.get(url)
+##            try:
+##                lever(driver)
+##                print(f'SUCCESS FOR: {url}')
+##            except Exception:
+##                # print(f"FAILED FOR {url}")
+##                continue
+##        # i dont think this else is needed
+##        else:
+##            # print(f"NOT A VALID APP LINK FOR {url}")
+##            continue
+##
+##        time.sleep(1) # can lengthen this as necessary (for captcha, for example)
+    running = True
+    currentmenu = View.mainMenu
+    print("Go")
+    #action()
+    print("Go2")
+    while(running):
+        nextaction = action()
+        print("-------------")
+        
     driver.close()
