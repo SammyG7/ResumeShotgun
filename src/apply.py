@@ -169,7 +169,7 @@ if __name__ == '__main__':
     print(f'Job Listings: {aggregatedURLs}')
     print('\n')
 
-    driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(executable_path='./chromedriver')
     for url in aggregatedURLs:
         print('\n')
 
