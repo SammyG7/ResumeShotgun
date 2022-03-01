@@ -1,12 +1,34 @@
+## ---------- imports ----------
 from menuMessages import *
-from os.path import isfile
+from os.path import isfile, join
+from os import getcwd
 from time import sleep
+import yaml
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
-#### load all stored prefrences from YAML here ####
+## ---------- functions ----------
+##
+#  @brief Gets location of resume
+#  @return String corresponding to location of resume file
+#
+def getResumePath():
+    return resumePath
+
+##
+#  @brief Gets keywords
+#  @return List of strings specified as keywords for searching
+#
+def getKeywords():
+    return keywords
 
 ##
 #  @brief Changes state dictating what menu is shown
 #  @param Integer for new menu state number (default does not change menu)
+#  @return True if menu was updated (same menu page or not), False if
+#  invalid input was given
 #
 def changeMenu(newMenu = -2):
     if newMenu == -1:
@@ -38,10 +60,10 @@ def limit(value, mx = 9, mn = 1):
 #  input
 #
 def promptInput(forceInt = True, multiple = False):
-    msg = "Input choices separated\n by commas: " if multiple else "Input choice: "
+    msg = wrappedString("Input choices separated by commas:") if multiple else wrappedString("Input choice:")
     userInput = input(msg)
     processedInput = []
-    for choice in userInput.split():
+    for choice in userInput.split(","):
         try:
             choice = int(choice.replace(" ","")) if forceInt else choice.strip()
             processedInput.append(choice)
@@ -52,42 +74,112 @@ def promptInput(forceInt = True, multiple = False):
     else:
         return -1
 
-def updateSite(num, cursite):
-    if(num == 1):
-        return "glassdoor"
-    elif(num == 2):
-        return "indeed"
-    else:
-        return cursite
+##
+#  @brief Loads saved profile information from file
+#  @details Currently using "profile.yaml"
+#
+def loadProfile():
+    global resumePath
+    global keywords
+    global site
+    if isfile("profile.yaml"):
+        print("Loading profile...\n")
+        profileFile = open("profile.yaml", "r")
+        profile = yaml.load(profileFile, Loader=Loader)
+        profileFile.close()
+        try:
+            ## resumePath
+            try:
+                if isfile(profile["resumePath"]): resumePath = profile["resumePath"]
+                else:
+                    input("Resume can not be accessed, \n" +
+                          "using blank value. \n\n" +
+                          "([Enter] to continue)")
+            except KeyError:
+                input("Resume can not be found in profile, \n" +
+                      "using blank value. \n\n" +
+                      "([Enter] to continue)")
+            ## keywords
+            try:
+                keywords = profile["keywords"]
+            except KeyError:
+                input("Keywords can not be found in profile, \n" +
+                      "using blank value. \n\n" +
+                      "([Enter] to continue)")
+            ## site
+            try:
+                site = profile["site"]
+            except KeyError:
+                input("Site can not be found in profile, \n" +
+                      "using default value. \n\n" +
+                      "([Enter] to continue)")
+        except TypeError:
+            input("Profile read error, \n" +
+                  "using blank values. \n\n" +
+                  "([Enter] to continue)")
+    else: 
+        input("Profile not found, \n" +
+              "using blank values. \n\n" +
+              "([Enter] to continue)")
 
-## ------------- Running loop ----------------
+##
+#  @brief Saves profile information to file
+#  @details Currently using "profile.yaml"
+#
+def saveProfile():
+    global resumePath
+    global keywords
+    global site
+    print("Saving profile...\n")
+    profileFile = open("profile.yaml", "w")
+    yaml.dump({
+        "resumePath": resumePath,
+        "keywords": keywords,
+        "site": site
+        }, profileFile, Dumper = Dumper)
+    profileFile.close()
+    input("Saved! \n\n" +
+          "([Enter] to continue)")
+
+##
+#  @brief Runs menu, allowing user to tweak preferences
+#  @return String for site to apply to
+#
 def run():
+    
     global menu
     global resumePath
+    global keywords
+    global site
 
     menu = 0
     resumePath = ""
+    keywords = []
     site = "glassdoor"
+
+    loadProfile()
     
     clearScreen()
     
-    ## menu == 6 is the exit value in main menu
-    while menu != 6:
+    while menu >= 0:
         ## Main
         if menu == 0:
             displayMenuMain()
-            while not changeMenu(limit(promptInput(),6)): pass
+            while not changeMenu(limit(promptInput(), mx = 5, mn = 0)): pass
+            ## only occurs when going "back" on main, aka exit
+            if menu == 0: menu = -1
         ## Main/Resume
         elif menu == 1:
             displayMenuResume(resumePath)
             updated = False
             while not updated:
                 choice = promptInput(forceInt = False)
-                if choice == "1":
+                if choice == "0":
                     changeMenu(0)
                     updated = True
                 elif isfile(choice):
-                    resumePath = choice
+                    if isfile(join(getcwd(), choice)): resumePath = join(getcwd(), choice)
+                    else: resumePath = choice
                     changeMenu()
                     updated = True
                 else:
@@ -99,9 +191,27 @@ def run():
             changeMenu(0)
         ## Main/Keywords
         elif menu == 3:
-            displayMenuPlaceholder("Main/Keywords")
-            sleep(5)
-            changeMenu(0)
+            displayMenuKeywords(keywords)
+            updated = False
+            while not updated:
+                choice = promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "1":
+                    keywords = []
+                    changeMenu()
+                    updated = True
+                elif len(choice) == 1 and choice[0] == "0":
+                    changeMenu(0)
+                    updated = True
+                elif len(choice) > 0:
+                    for word in choice:
+                        if word.replace(" ", "") != "":
+                            word = word.lower()
+                            try: keywords.remove(word)
+                            except ValueError: keywords.append(word)
+                    changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Job
         elif menu == 4:
             displayMenuPlaceholder("Main/Job")
@@ -109,11 +219,25 @@ def run():
             changeMenu(0)
         ## Main/Sites
         elif menu == 5:
-            displayMenuSites()
-            site = updateSite(promptInput(), site)
-            changeMenu(0)
+            displayMenuSites(site)
+            updated = False
+            while not updated:
+                choice = promptInput()
+                if choice == 0:
+                    changeMenu(0)
+                    updated = True
+                elif choice == 1:
+                    site = "glassdoor"
+                    changeMenu()
+                    updated = True
+                elif choice == 2:
+                    site = "indeed"
+                    changeMenu()
+                    updated = True
+                else:
+                    displayError("input")
+
+    saveProfile()
 
     return site
-      
-#### save preferences to yaml here ####
-            
+
