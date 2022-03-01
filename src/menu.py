@@ -1,12 +1,15 @@
+## ---------- imports ----------
 from menuMessages import *
-from os.path import isfile
+from os.path import isfile, join
+from os import getcwd
 from time import sleep
+import yaml
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
-#### load all stored prefrences from YAML here ####
-
-menu = 0
-resumePath = ""
-
+## ---------- functions ----------
 ##
 #  @brief Changes state dictating what menu is shown
 #  @param Integer for new menu state number (default does not change menu)
@@ -54,8 +57,37 @@ def promptInput(forceInt = True, multiple = False):
         return processedInput if multiple else processedInput[0]
     else:
         return -1
+## ---------- default variable values ----------
+menu = 0
+resumePath = ""
+## ---------- set up variables from yaml ----------
+if isfile("profile.yaml"):
+    print("Loading profile...\n")
+    profileFile = open("profile.yaml", "r")
+    profile = yaml.load(profileFile, Loader=Loader)
+    profileFile.close()
+    try:
+        ## resumePath
+        try:
+            if isfile(profile["resumePath"]): resumePath = profile["resumePath"]
+            else:
+                input("Resume can not be accessed, \n" +
+                      "using blank value. \n\n" +
+                      "([Enter] to continue)")
+        except KeyError:
+            input("Resume can not be found in profile, \n" +
+                  "using blank value. \n\n" +
+                  "([Enter] to continue)")
+    except TypeError:
+        input("Profile read error, \n" +
+              "using blank values. \n\n" +
+              "([Enter] to continue)")
+else: 
+    input("Profile not found, \n" +
+          "using blank values. \n\n" +
+          "([Enter] to continue)")
 
-## ------------- Running loop ----------------
+## ---------- the loop that runs it ----------
 clearScreen()
 ## menu == 6 is the exit value in main menu
 while menu != 6:
@@ -73,7 +105,8 @@ while menu != 6:
                 changeMenu(0)
                 updated = True
             elif isfile(choice):
-                resumePath = choice
+                if isfile(join(getcwd(), choice)): resumePath = join(getcwd(), choice)
+                else: resumePath = choice
                 changeMenu()
                 updated = True
             else:
@@ -99,6 +132,12 @@ while menu != 6:
         sleep(5)
         changeMenu(0)
         
-                
-#### save preferences to yaml here ####
-            
+## ---------- save profile ----------
+print("Saving profile...\n")
+profileFile = open("profile.yaml", "w")
+yaml.dump({
+    "resumePath": resumePath
+    }, profileFile, Dumper = Dumper)
+profileFile.close()
+input("Finished! \n\n" +
+      "([Enter] to close)")
