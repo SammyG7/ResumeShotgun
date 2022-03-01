@@ -4,9 +4,6 @@ from time import sleep
 
 #### load all stored prefrences from YAML here ####
 
-menu = 0
-resumePath = ""
-
 ##
 #  @brief Changes state dictating what menu is shown
 #  @param Integer for new menu state number (default does not change menu)
@@ -55,50 +52,68 @@ def promptInput(forceInt = True, multiple = False):
     else:
         return -1
 
+def updateSite(num, cursite):
+    if(num == 1):
+        return "glassdoor"
+    elif(num == 2):
+        return "indeed"
+    else:
+        return cursite
+
 ## ------------- Running loop ----------------
-clearScreen()
-## menu == 6 is the exit value in main menu
-while menu != 6:
-    ## Main
-    if menu == 0:
-        displayMenuMain()
-        while not changeMenu(limit(promptInput(),6)): pass
-    ## Main/Resume
-    elif menu == 1:
-        displayMenuResume(resumePath)
-        updated = False
-        while not updated:
-            choice = promptInput(forceInt = False)
-            if choice == "1":
-                changeMenu(0)
-                updated = True
-            elif isfile(choice):
-                resumePath = choice
-                changeMenu()
-                updated = True
-            else:
-                displayError("file")
-    ## Main/Personal
-    elif menu == 2:
-        displayMenuPlaceholder("Main/Personal")
-        sleep(5)
-        changeMenu(0)
-    ## Main/Keywords
-    elif menu == 3:
-        displayMenuPlaceholder("Main/Keywords")
-        sleep(5)
-        changeMenu(0)
-    ## Main/Job
-    elif menu == 4:
-        displayMenuPlaceholder("Main/Job")
-        sleep(5)
-        changeMenu(0)
-    ## Main/Sites
-    elif menu == 5:
-        displayMenuPlaceholder("Main/Sites")
-        sleep(5)
-        changeMenu(0)
-        
-                
+def run():
+    global menu
+    global resumePath
+
+    menu = 0
+    resumePath = ""
+    site = "glassdoor"
+    
+    clearScreen()
+    
+    ## menu == 6 is the exit value in main menu
+    while menu != 6:
+        ## Main
+        if menu == 0:
+            displayMenuMain()
+            while not changeMenu(limit(promptInput(),6)): pass
+        ## Main/Resume
+        elif menu == 1:
+            displayMenuResume(resumePath)
+            updated = False
+            while not updated:
+                choice = promptInput(forceInt = False)
+                if choice == "1":
+                    changeMenu(0)
+                    updated = True
+                elif isfile(choice):
+                    resumePath = choice
+                    changeMenu()
+                    updated = True
+                else:
+                    displayError("file")
+        ## Main/Personal
+        elif menu == 2:
+            displayMenuPlaceholder("Main/Personal")
+            sleep(5)
+            changeMenu(0)
+        ## Main/Keywords
+        elif menu == 3:
+            displayMenuPlaceholder("Main/Keywords")
+            sleep(5)
+            changeMenu(0)
+        ## Main/Job
+        elif menu == 4:
+            displayMenuPlaceholder("Main/Job")
+            sleep(5)
+            changeMenu(0)
+        ## Main/Sites
+        elif menu == 5:
+            displayMenuSites()
+            site = updateSite(promptInput(), site)
+            changeMenu(0)
+
+    return site
+      
 #### save preferences to yaml here ####
             
