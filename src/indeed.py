@@ -22,6 +22,7 @@ location = ""
 pages = 0
 allJobs = []
 
+
 def search(keyword, location):
     driverLocation = "/usr/bin/chromedriver"
     driver = webdriver.Chrome(executable_path=driverLocation)
@@ -95,7 +96,14 @@ def pageParser():
 
 
 if __name__ == "__main__":
+    #Search indeed based on a keyword and a location.
     #search(sys.argv[1],sys.argv[2])
+
+    #get jobsed based on a passed url which is added to a list
     #getJobs("https://ca.indeed.com/jobs?q=Engineer&l=Toronto%2CON&vjk=f6f5b3957533926a")
+
+    #Helper method to get the number of pages required
     #getPages("https://ca.indeed.com/jobs?q=Engineer&l=Toronto%2CON&vjk=f6f5b3957533926a")
-    pageParser()
+
+    #Page parser to traverse indeed website
+    #pageParser()
