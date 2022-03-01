@@ -39,6 +39,17 @@ def displayMenuResume(path):
           " 1) Go back \n" +
           "\n")
 
+def displayMenuSites():
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Sites                 \n" +
+          "==============================\n" +
+          " Select the preffered site:\n" +
+          "\n" +
+          " 1) Glassdor \n" +
+          " 2) Indeed \n" +
+          "\n")
+
 ##
 #  @brief Displays text for unimplemented menu
 #  @param String for menu location (default "??")

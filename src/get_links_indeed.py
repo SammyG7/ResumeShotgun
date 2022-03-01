@@ -23,15 +23,21 @@ PREFERENCES = {
 
 # helper method to give user time to log into glassdoor
 def login(driver):
-    driver.get('https://www.glassdoor.com/index.htm')
+    driver.get('https://ca.indeed.com/')
+    
+    page_source = driver.page_source
+    soup = BeautifulSoup(page_source, 'html.parser')
+    mosaic = soup.find(id='mosaic-data')
+    text = mosaic.text.split("\n")
 
-    # keep waiting for user to log-in until the URL changes to user page
-    while True:
-        try:
-            WebDriverWait(driver, 1).until(EC.url_contains("member"))
-        except TimeoutException:
-            break
-    return True # return once this is complete
+    for x in text:
+        if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
+            logInCheck = x
+
+    if('"isLoggedIn":false' in logInCheck):
+        navigateToLogin()
+
+    return True 
 
 # navigate to appropriate job listing page
 def go_to_listings(driver):
@@ -128,9 +134,10 @@ def aggregate_links(driver):
 
 # 'main' method to iterate through all pages and aggregate URLs
 def getURLs():
-    driver = webdriver.Chrome(executable_path='/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(executable_path='./chromedriver')
     success = login(driver)
     if not success:
+        print("Failure"*20)
         # close the page if it gets stuck at some point - this logic can be improved
         driver.close()
 
@@ -141,7 +148,7 @@ def getURLs():
     allLinks = set()
     page = 1
     next_url = ''
-    while page < 5: # pick an arbitrary number of pages so this doesn't run infinitely
+    while page < 3: # pick an arbitrary number of pages so this doesn't run infinitely
         print(f'\nNEXT PAGE #: {page}\n')
 
         # on the first page, the URL is unique and doesn't have a field for the page number
