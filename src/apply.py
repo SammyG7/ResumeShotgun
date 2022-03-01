@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 import os # to get the resume file
 import time # to sleep
-import get_links
+import get_links_glassdoor
 import get_links_indeed
 import menu
 
@@ -169,7 +169,7 @@ if __name__ == '__main__':
     site = menu.run()
     
     if(site == "glassdoor"):
-        aggregatedURLs = get_links.getURLs()
+        aggregatedURLs = get_links_glassdoor.getURLs()
     else:
         aggregatedURLs = get_links_indeed.getURLs()
         
@@ -188,6 +188,7 @@ if __name__ == '__main__':
             except Exception:
                 # print(f"FAILED FOR {url}")
                 continue
+
 
         elif 'lever' in url:
             driver.get(url)
