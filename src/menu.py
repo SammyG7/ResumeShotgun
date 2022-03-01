@@ -11,8 +11,24 @@ except ImportError:
 
 ## ---------- functions ----------
 ##
+#  @brief Gets location of resume
+#  @return String corresponding to location of resume file
+#
+def getResumePath():
+    return resumePath
+
+##
+#  @brief Gets keywords
+#  @return List of strings specified as keywords for searching
+#
+def getKeywords():
+    return keywords
+
+##
 #  @brief Changes state dictating what menu is shown
 #  @param Integer for new menu state number (default does not change menu)
+#  @return True if menu was updated (same menu page or not), False if
+#  invalid input was given
 #
 def changeMenu(newMenu = -2):
     if newMenu == -1:
@@ -44,10 +60,10 @@ def limit(value, mx = 9, mn = 1):
 #  input
 #
 def promptInput(forceInt = True, multiple = False):
-    msg = "Input choices separated\n by commas: " if multiple else "Input choice: "
+    msg = wrappedString("Input choices separated by commas:") if multiple else wrappedString("Input choice:")
     userInput = input(msg)
     processedInput = []
-    for choice in userInput.split():
+    for choice in userInput.split(","):
         try:
             choice = int(choice.replace(" ","")) if forceInt else choice.strip()
             processedInput.append(choice)
@@ -57,9 +73,12 @@ def promptInput(forceInt = True, multiple = False):
         return processedInput if multiple else processedInput[0]
     else:
         return -1
+
 ## ---------- default variable values ----------
 menu = 0
 resumePath = ""
+keywords = []
+
 ## ---------- set up variables from yaml ----------
 if isfile("profile.yaml"):
     print("Loading profile...\n")
@@ -78,6 +97,13 @@ if isfile("profile.yaml"):
             input("Resume can not be found in profile, \n" +
                   "using blank value. \n\n" +
                   "([Enter] to continue)")
+        ## keywords
+        try:
+            keywords = profile["keywords"]
+        except KeyError:
+            input("Keywords can not be found in profile, \n" +
+                  "using blank value. \n\n" +
+                  "([Enter] to continue)")
     except TypeError:
         input("Profile read error, \n" +
               "using blank values. \n\n" +
@@ -90,18 +116,20 @@ else:
 ## ---------- the loop that runs it ----------
 clearScreen()
 ## menu == 6 is the exit value in main menu
-while menu != 6:
+while menu >= 0:
     ## Main
     if menu == 0:
         displayMenuMain()
-        while not changeMenu(limit(promptInput(),6)): pass
+        while not changeMenu(limit(promptInput(), mx = 5, mn = 0)): pass
+        ## only occurs when going "back" on main, aka exit
+        if menu == 0: menu = -1
     ## Main/Resume
     elif menu == 1:
         displayMenuResume(resumePath)
         updated = False
         while not updated:
             choice = promptInput(forceInt = False)
-            if choice == "1":
+            if choice == "0":
                 changeMenu(0)
                 updated = True
             elif isfile(choice):
@@ -118,9 +146,27 @@ while menu != 6:
         changeMenu(0)
     ## Main/Keywords
     elif menu == 3:
-        displayMenuPlaceholder("Main/Keywords")
-        sleep(5)
-        changeMenu(0)
+        displayMenuKeywords(keywords)
+        updated = False
+        while not updated:
+            choice = promptInput(forceInt = False, multiple = True)
+            if len(choice) == 1 and choice[0] == "1":
+                keywords = []
+                changeMenu()
+                updated = True
+            elif len(choice) == 1 and choice[0] == "0":
+                changeMenu(0)
+                updated = True
+            elif len(choice) > 0:
+                for word in choice:
+                    if word.replace(" ", "") != "":
+                        word = word.lower()
+                        try: keywords.remove(word)
+                        except ValueError: keywords.append(word)
+                changeMenu()
+                updated = True
+            else:
+                displayError("empty")
     ## Main/Job
     elif menu == 4:
         displayMenuPlaceholder("Main/Job")
@@ -136,7 +182,8 @@ while menu != 6:
 print("Saving profile...\n")
 profileFile = open("profile.yaml", "w")
 yaml.dump({
-    "resumePath": resumePath
+    "resumePath": resumePath,
+    "keywords": keywords
     }, profileFile, Dumper = Dumper)
 profileFile.close()
 input("Finished! \n\n" +
