@@ -56,8 +56,12 @@ def displayMenuKeywords(keywords):
           "\n")
 
 ## @brief Displays text for sites menu options
-#  @param site current site
-def displayMenuSites(site):
+#  @param site String indicating current site
+#  @param siteList List of strings of names of available sites
+def displayMenuSites(site, siteList):
+    siteString = ""
+    for n in range(len(siteList)):
+        siteString += " " + str(n+1) + ") " + siteList(n) + "\n"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Sites                 \n" +
@@ -68,14 +72,13 @@ def displayMenuSites(site):
           wrappedString("Input number corresponding to the site " +
                         "you want to use.") + "\n" +
           "\n" +
-          " 1) Glassdoor \n" +
-          " 2) Indeed \n" +
+          siteString +
           "\n" +
           " 0) Go back \n" +
           "\n")
 
 ## @brief Displays text for unimplemented menu
-#  @param menu Optional string for menu location (default "??")
+#  @param menu (optional) String for menu location (default "??")
 def displayMenuPlaceholder(menu = "??"):
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +

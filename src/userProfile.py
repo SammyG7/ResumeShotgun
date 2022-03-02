@@ -4,6 +4,7 @@
 #  @date Mar 1, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
+from sites import SITESLIST
 from os.path import isfile, join
 try:
     from yaml import CLoader as Loader, CDumper as Dumper
@@ -95,7 +96,7 @@ class userProfile:
     #  @details Method also checks if file exists, and if it does not it will not change it
     #  @param file A string indicating a path to a resume file
     #  @param appendWorking (optional) Append the working directory to the file if applicable
-    #  @return Boolean True if file exists and successfully changes, False if not
+    #  @return Boolean True if file exists and updates, False if not
     def setResumePath(self, file, appendWorking = True):
         if isfile(file):
             if appendWorking and isfile(join(getcwd(), file)):
@@ -118,7 +119,12 @@ class userProfile:
         else: 
             self.__keywords = keywords
 
-    ## @brief CHECK
+    ## @brief Method tries to set active site for scraping
+    #  @details Method will not change the active site if it does not map to one in the list
+    #  @param site Integer inicating index of site to swap to
+    #  @return Boolean True if the site was updated, False if not
     def setSite(self, site):
-        self.__site = site
+        try: self.__site = SITESLIST[site]
+        except IndexError: return False
+        return True
 
