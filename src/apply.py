@@ -6,6 +6,7 @@ import time # to sleep
 import get_links_glassdoor
 import get_links_indeed
 import menu
+from userProfile import *
 
 # sample application links if we don't want to run get_links.py
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
@@ -166,7 +167,11 @@ def lever(driver):
 
 if __name__ == '__main__':
 
-    site = menu.run()
+    profile = userProfile()
+    profile.loadProfile()
+    menu.run(profile)
+    profile.saveProfile()
+    site = profile.getSite()
     
     if(site == "glassdoor"):
         aggregatedURLs = get_links_glassdoor.getURLs()

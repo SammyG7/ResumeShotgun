@@ -61,7 +61,7 @@ def displayMenuKeywords(keywords):
 def displayMenuSites(site, siteList):
     siteString = ""
     for n in range(len(siteList)):
-        siteString += " " + str(n+1) + ") " + siteList(n) + "\n"
+        siteString += " " + str(n+1) + ") " + siteList[n] + "\n"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Sites                 \n" +

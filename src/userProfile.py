@@ -5,7 +5,9 @@
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
+from os import getcwd
 from os.path import isfile, join
+from yaml import load, dump
 try:
     from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
@@ -27,7 +29,7 @@ class userProfile:
         if isfile(file):
             print(wS("Loading profile from " + file + "...") + "\n")
             profileFile = open(file, "r")
-            profile = yaml.load(profileFile, Loader=Loader)
+            profile = load(profileFile, Loader=Loader)
             profileFile.close()
             try:
                 ## resumePath
@@ -62,13 +64,9 @@ class userProfile:
     #  @details Will overwrite the file if it exists already
     #  @param file (optional) A string indicating a path to the profile to write 
     def saveProfile(self, file = "profile.yaml"):
-        print(wS("Saving profile to " file "...") + "\n")
+        print(wS("Saving profile to " + file + "...") + "\n")
         profileFile = open(file, "w")
-        yaml.dump({
-            "resumePath": self.getResumePath(),
-            "keywords": self.getKeywords(),
-            "site": self.getSite()
-            }, profileFile, Dumper = Dumper)
+        dump(self.getProfileDict(), profileFile, Dumper = Dumper)
         profileFile.close()
         print("Saved! \n")
         waitForUser()
@@ -87,8 +85,18 @@ class userProfile:
 
     ## @brief Method gets site that will be scraped
     #  @return String indicating name of site
-    def getResumePath(self):
+    def getSite(self):
         return self.__site
+
+    ## @brief Method gets all values stored in profile
+    #  @return Dictionary with string keys matching values in profile
+    def getProfileDict(self):
+        profile = {
+            "resumePath": self.getResumePath(),
+            "keywords": self.getKeywords(),
+            "site": self.getSite()
+        }
+        return profile
 
     # ---------- setters ----------
 
@@ -103,6 +111,9 @@ class userProfile:
                 self.__resumePath = join(getcwd(), file)
             else: 
                 self.__resumePath = file
+            return True
+        else:
+            return False
 
     ## @brief Method sets keywords
     #  @param keywords A list of strings used as keywords

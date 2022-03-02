@@ -1,14 +1,7 @@
 ## ---------- imports ----------
 from menuMessages import *
 from sites import SITESLIST
-from os.path import isfile, join
-from os import getcwd
 from time import sleep
-import yaml
-try:
-    from yaml import CLoader as Loader, CDumper as Dumper
-except ImportError:
-    from yaml import Loader, Dumper
 
 ## ---------- functions ----------
 ##
@@ -77,7 +70,7 @@ def promptInput(forceInt = True, multiple = False):
 
 ## @brief Runs menu, allowing user to tweak preferences
 #  @param profile userProfile object to manipulate
-def run():
+def run(profile):
     
     global menu
     menu = 0
@@ -93,7 +86,7 @@ def run():
             if menu == 0: menu = -1
         ## Main/Resume
         elif menu == 1:
-            displayMenuResume(profile.getresumePath())
+            displayMenuResume(profile.getResumePath())
             updated = False
             while not updated:
                 choice = promptInput(forceInt = False)
@@ -148,6 +141,4 @@ def run():
                     updated = True
                 else:
                     displayError("input")
-
-    return site
 
