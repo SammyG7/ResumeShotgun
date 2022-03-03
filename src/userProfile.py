@@ -19,9 +19,21 @@ class userProfile:
     ## @brief Constructor for userProfile
     #  @details Sets default values for profile
     def __init__(self):
-        self.__resumePath = ""
         self.__keywords = []
         self.__site = "glassdoor"
+        self.__firstName = ""
+        self.__lastName = ""
+        self.__email = ""
+        self.__phone = ""
+        self.__organisation = ""
+        self.__resumePath = ""
+        self.__socials = ""
+        self.__location = ""
+        self.__gradMonth = ""
+        self.__gradYear = ""
+        self.__university = ""
+        self.SOCIALS = ["github", "linkedin", "youtube", "twitter"]
+        
 
     ## @brief Method attempts to load values from the given file to itself
     #  @param file (optional) A path to the saved profile

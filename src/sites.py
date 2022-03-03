@@ -12,3 +12,5 @@ GETLINKSFILE = {
 	"glassdoor": "get_links_glassdoor.py",
 	"indeed": "get_links_indeed.py"
 }
+
+SOCIALS = ["github", "linkedin", "youtube", "twitter"]
