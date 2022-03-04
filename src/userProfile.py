@@ -32,7 +32,7 @@ class userProfile:
         self.__gradMonth = ""
         self.__gradYear = ""
         self.__university = ""
-        self.SOCIALS = ["github", "linkedin", "youtube", "twitter"]
+
         
 
     ## @brief Method attempts to load values from the given file to itself
