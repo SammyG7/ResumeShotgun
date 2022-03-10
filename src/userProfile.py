@@ -149,5 +149,6 @@ class userProfile:
     def setSite(self, site):
         try: self.__site = SITESLIST[site]
         except IndexError: return False
+        except TypeError: return False
         return True
 
