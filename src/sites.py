@@ -17,7 +17,7 @@ GETLINKSFILE = {
 #  @param username String indicating username on site
 #  @param site String indicating title of site
 #  @return String indicating URL of user's profile on the site
-def userToURL(username, site)
+def userToURL(username, site):
     url = ""
     if site == "github": url = "github.com/" + username
     elif site == "linkedin": url = "linkedin.com/in/" + username
