@@ -11,18 +11,20 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\makeatletter
+\def\itemlabel#1#2{\def\@currentlabel{#2}\phantomsection\label{#1}}
 
-\title{SE 3XA3: Test Plan\\Title of Project}
+\title{SE 3XA3: Test Plan\\The Resume Shotgun}
 
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\author{Team 5, Proper Mars Tribe
+		\\ Gavin Jameson, jamesong
+		\\ Jeremy Langner, langnerj
+		\\ Sam Gorman, gormans
 }
 
 \date{\today}
 
-\input{../Comments}
+%\input{../Comments}
 
 \begin{document}
 
@@ -33,44 +35,21 @@
 \listoftables
 \listoffigures
 
-\begin{table}[bp]
-\caption{\bf Revision History}
-\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
-\midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
 \newpage
 
 \pagenumbering{arabic}
-
-This document ...
 
 \section{General Information}
 
 \subsection{Purpose}
 
+Testing is crucial for our product, as it deals with user information and parties other than the user. We need to ensure that the user's information is not misused through unintentional release of the information, or incorrect representation of the user. Furthermore, errors will waste the time of employers as they will have to deal with any data sent to them, however briefly, correct or not.
+
 \subsection{Scope}
 
+Since the output of our product is not self-contained, manual testing will need to be done frequently for processes occurring nearer to the end. There are also limited tests we can do for robustness, since as mentioned in previous documents, there are ethical concerns with submitting incorrect or incomplete applications.
+
 \subsection{Acronyms, Abbreviations, and Symbols}
-	
-\begin{table}[hbp]
-\caption{\textbf{Table of Abbreviations}} \label{Table}
-
-\begin{tabularx}{\textwidth}{p{3cm}X}
-\toprule
-\textbf{Abbreviation} & \textbf{Definition} \\
-\midrule
-Abbreviation1 & Definition1\\
-Abbreviation2 & Definition2\\
-\bottomrule
-\end{tabularx}
-
-\end{table}
 
 \begin{table}[!htbp]
 \caption{\textbf{Table of Definitions}} \label{Table}
@@ -79,8 +58,8 @@ Abbreviation2 & Definition2\\
 \toprule
 \textbf{Term} & \textbf{Definition}\\
 \midrule
-Term1 & Definition1\\
-Term2 & Definition2\\
+Glassdoor & Online job board. One of the sites from which links are pulled and applied to.\\
+Indeed & Online job board. One of the sites from which links are pulled and applied to.\\
 \bottomrule
 \end{tabularx}
 
@@ -88,164 +67,821 @@ Term2 & Definition2\\
 
 \subsection{Overview of Document}
 
+This document outlines the test cases and procedures, as well as their rationale, that will be used for the Resume Shotgun. This document also serves as a way to trace requirements, how they are being implemented, and what modifications have been made to them after the product has been partially implemented.
+
 \section{Plan}
 	
 \subsection{Software Description}
 
+The Resume Shotgun is a tool to automatically aggregate job postings relevant to the user, fill in required fields with user data, and submit applications. 
+
 \subsection{Test Team}
+
+As there is a lot of manual testing to be done, which is very time consuming, the development team is also the testing team. This testing team consists of Gavin Jameson, Jeremy Langner, and Sam Gorman.
 
 \subsection{Automated Testing Approach}
 
+We will be using Python's unittest module for automatic white box testing of the internal modules. 
+
 \subsection{Testing Tools}
+
+As mentioned above, we will use unittest for automated testing. If for whatever reason there are tests that unittest can not handle, pytest will be used as a supplement. 
 
 \subsection{Testing Schedule}
 		
-See Gantt Chart at the following url ...
+See \href{https://gitlab.cas.mcmaster.ca/jamesong/application_3xa3_l01_grp05/-/blob/main/ProjectSchedule/3XA3_Gantt.png}{Gantt Chart}.
 
 \section{System Test Description}
 	
-\subsection{Tests for Functional Requirements}
+\subsection{Tests for Functional Requirements} \label{sec:funcreq}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\subsubsection{Profile Information}
+
+Note: The userProfile module being tested assumes inputs are of the correct type. The user never directly inputs values to the functions being tested (they are validated first by the menu, which is also tested), so we do not need to worry about the user inputting incorrect types.
+
+\paragraph{Setters/Getters} \itemlabel{para:PS}{PS Tests} % PARAGRAPH IS HERE <------------
 
 \begin{enumerate}
+% // test separator //
+\item{\itemlabel{item:PS-1}{Test-PS-1} Test-PS-1: Set Keywords\\} 
 
-\item{test-id1\\}
+Type: Functional, Dynamic
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+Initial State: keywords == []
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+Input: ["pointless"]
+
+Final State: ["pointless"]
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state.
+% // test separator //
+\item{\itemlabel{item:PS-2}{Test-PS-2} Test-PS-2: Add/Remove Keywords\\} 
+
+Type: Functional, Dynamic
+
+Initial State: keywords == ["pointless"]
+
+Input: ["pointless", "redundant"]
+
+Final State: ["redundant"]
+
+How test will be performed: Use \ref{item:PS-1} to set state, use setter with input and toggle flag set to true, getter for ensuring final state. 
+% // test separator //
+\item{\itemlabel{item:PS-3}{Test-PS-3} Test-PS-3: Set Site\\}
+
+Type: Functional, Dynamic
+
+Initial State: site = "glassdoor"
+
+Input: 1
+
+Output: True 
+
+Final State: site = "indeed"
+
+How test will be performed: Default value is "glassdoor," use setter with input, getter for ensuring final state. Ensure output from setter is True.
+% // test separator //
+\item{\itemlabel{item:PS-4}{Test-PS-4} Test-PS-4: Set Site Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: site = "glassdoor"
+
+Input: 5173
+
+Output: False 
+
+Final State: site = "glassdoor"
+
+How test will be performed: Default value is "glassdoor," use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{Test-PS-5: Set First Name\\}
+
+Type: Functional, Dynamic
+
+Initial State: firstName = ""
+
+Input: "The"
+
+Final State: firstName = "The" 
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state.
+% // test separator //
+\item{Test-PS-6: Set Last Name\\}
+
+Type: Functional, Dynamic
+
+Initial State: lastName = ""
+
+Input: "User"
+
+Final State: lastName = "User" 
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. 
+% // test separator //
+\item{Test-PS-7: Set Email\\}
+
+Type: Functional, Dynamic
+
+Initial State: email = ""
+
+Input: "email@domain.web"
+
+Output: True
+
+Final State: email = "email@domain.web"
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is True.
+% // test separator //
+\item{Test-PS-8: Set Email Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: email = ""
+
+Input: "oopsies..."
+
+Output: False
+
+Final State: email = ""
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{Test-PS-9: Set Phone\\}
+
+Type: Functional, Dynamic
+
+Initial State: phone = ""
+
+Input: 1234567890
+
+Output: True
+
+Final State: phone = 1234567890
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is True.
+% // test separator //
+\item{Test-PS-10: Set Phone Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: phone = ""
+
+Input: 1234
+
+Output: False
+
+Final State: phone = ""
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{Test-PS-11: Set Organisation\\}
+
+Type: Functional, Dynamic
+
+Initial State: organisation = ""
+
+Input: "3XA3"
+
+Final State: organisation = "3XA3" 
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state.
+% // test separator //
+\item{\itemlabel{item:PS-12}{Test-PS-12} Test-PS-12: Set Resume Path\\}
+
+Type: Functional, Dynamic
+
+Initial State: resumePath = ""
+
+Input: "resume.pdf" (assuming it is in the same directory as testing file)
+
+Output: True
+
+Final State: resumePath = "PATH/TO/FILE/resume.pdf"
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{\itemlabel{item:PS-13}{Test-PS-13} Test-PS-13: Set Resume Path Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: resumePath = ""
+
+Input: "thisdoesnotexist.pdf"
+
+Output: False
+
+Final State: resumePath = ""
+
+How test will be performed: Default value is "", use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{\itemlabel{item:PS-14}{Test-PS-14} Test-PS-14: Set Socials\\}
+
+Type: Functional, Dynamic
+
+Initial State: socials = []
+
+Input: ["account"]
+
+Final State: socials = ["account"]
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state.
+% // test separator //
+\item{Test-PS-15: Add/Remove Socials\\}
+
+Type: Functional, Dynamic
+
+Initial State: socials = ["linkedin"]
+
+Input: ["linkedin", "github"]
+
+Final State: ["github"] 
+
+How test will be performed: Use \ref{item:PS-14} to set state, use setter with input and toggle flag set to true, getter for ensuring final state.
+% // test separator //
+\item{Test-PS-16: Set Location\\}
+
+Type: Functional, Dynamic
+
+Initial State: location = []
+
+Input: ["Hamilton", Ontario", "Canada"]
+
+Output: True
+
+Final State: location = ["Hamilton", Ontario", "Canada"]
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state. Ensure output from setter is True.
+% // test separator //
+\item{Test-PS-17: Set Location Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: location = []
+
+Input: ["earth"]
+
+Output: False
+
+Final State: location = []
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{Test-PS-18: Set Grad\\}
+
+Type: Functional, Dynamic
+
+Initial State: grad = []
+
+Input: [5, 2024]
+
+Output: True
+
+Final State: grad = [5, 2024]
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state. Ensure output from setter is True.
+% // test separator //
+\item{Test-PS-19: Set Grad Invalid\\}
+
+Type: Functional, Dynamic
+
+Initial State: grad = []
+
+Input: [13, 2024]
+
+Output: False
+
+Final State: grad = []
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state. Ensure output from setter is False.
+% // test separator //
+\item{Test-PS-20: Set University\\}
+
+Type: Functional, Dynamic
+
+Initial State: university = ""
+
+Input: "S-cool"
+
+Final State: university = "S-cool"
+
+How test will be performed: Default value is [], use setter with input, getter for ensuring final state.
+% // test separator //
+\item{\itemlabel{item:PS-21}{Test-PS-21} Test-PS-21: Get Dictionary\\}
+
+Type: Functional, Dynamic
+
+Initial State: Default userProfile
+
+Input: N/A
+
+Output: Dictionary containing every variable in profile
+
+How test will be performed: Default values set on initialisation, use getter for output and ensure each variable is contained in the dictionary with the value expected.
+
+\end{enumerate}
+		
+\paragraph{Saving/Loading} \itemlabel{para:PF}{PF Tests} % PARAGRAPH IS HERE <------------
+
+\begin{enumerate}
+% // test separator //
+\item{Test-PF-1: Save Profile\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: Every variable something other than default
+	
+Input: N/A
+
+Output: Variables in testprofile.yaml
+
+How test will be performed: Use \ref{para:PS} to set state, use saveProfile method to get values from file, \ref{item:PS-21} to ensure final state.
+% // test separator //
+\item{Test-PF-2: Load Profile\\}
+
+Type: Functional, Dynamic
+
+Initial State: Default userProfile
+	
+Input: test2profile.yaml (existing file)
+
+Final State: Variables from test2profile.yaml
+
+How test will be performed: Default values set on initialisation, use loadProfile method to get values from file, \ref{item:PS-21} to ensure final state.
+% // test separator //
+\item{Test-PF-3: Load Profile Broken\\}
+
+Type: Functional, Dynamic
+
+Initial State: Default userProfile
+	
+Input: test3profile.yaml (existing file, missing some profile values)
+
+Final State: Variables from test3profile.yaml, otherwise default value
+
+How test will be performed: Default values set on initialisation, use loadProfile method to get values from file, \ref{item:PS-21} to ensure final state.
+% // test separator //
+\item{Test-PF-4: Load Profile Missing\\}
+
+Type: Functional, Dynamic
+
+Initial State: Default userProfile
+	
+Input: testnoprofile.yaml (not a file)
+
+Final State: Default userProfile
+
+How test will be performed: Default values set on initialisation, use loadProfile method, \ref{item:PS-21} to ensure final state.
+% // test separator //
+\item{Test-PF-5: Load Profile Unreadable\\}
+
+Type: Functional, Dynamic
+
+Initial State: Default userProfile
+	
+Input: test0profile.yaml (empty file)
+
+Final State: Default userProfile
+
+How test will be performed: Default values set on initialisation, use loadProfile method, \ref{item:PS-21} to ensure final state.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{User Interactions}
 
-...
+Note: In this section, "Output" is what is verified manually.
+		
+\paragraph{Main Menu} \itemlabel{para:MM}{MM Tests} % PARAGRAPH IS HERE <------------
+
+\begin{enumerate}
+% // test separator //
+\item{\itemlabel{item:MM-1}{Test-MM-1} Test-MM-1: To Resume\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 1
+
+Output: Visual for Menu/Resume
+
+Final State: menu = 1
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-2}{Test-MM-2} Test-MM-2: To Personal Info\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 2
+
+Output: Visual for Menu/Info
+
+Final State: menu = 2
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-3}{Test-MM-3} Test-MM-3: To Keywords\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 3
+
+Output: Visual for Menu/Keywords
+
+Final State: menu = 3
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-4}{Test-MM-4} Test-MM-4: To Job Preferences\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 4
+
+Output: Visual for Menu/Jobs
+
+Final State: menu = 4
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-5}{Test-MM-5} Test-MM-5: To Sites\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 5
+
+Output: Visual for Menu/Sites
+
+Final State: menu = 5
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-6}{Test-MM-6} Test-MM-6: Exit\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: 0
+
+Output: Menu closed
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{\itemlabel{item:MM-7}{Test-MM-7} Test-MM-7: Exit\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 0
+
+Input: "string"
+
+Output: Same menu with error message
+
+How test will be performed: Main menu opens by default, send input using keyboard in application window, visually check menu has not changed, but sent an error message.
+\end{enumerate}
+
+\paragraph{Resume Menu} \itemlabel{para:MR}{MR Tests} % PARAGRAPH IS HERE <------------
+
+\begin{enumerate}
+% // test separator //
+\item{Test-MR-1: New File\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 1
+
+How test will be performed: Use \ref{item:MM-1} to set menu state, perform \ref{item:PS-12} through keyboard in application window, visually check menu has updated.
+% // test separator //
+\item{Test-MR-2: New File Invalid\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 1
+
+How test will be performed: Use \ref{item:MM-1} to set menu state, perform \ref{item:PS-13} through keyboard in application window, visually check menu has not changed, but sent an error message.
+% // test separator //
+\item{Test-MR-3: Go Back\\}
+
+Type: Functional, Dynamic, Manual
+
+Initial State: menu = 1
+
+Input: 0
+
+Output: Visual for Menu (main)
+
+How test will be performed: Use \ref{item:MM-1} to set menu state, send input using keyboard in application window, visually check menu has updated.
+\end{enumerate}
+
+\paragraph{Personal Info, Keywords, Job Preferences, and Sites Menus\\} \itemlabel{para:MO}{MO Tests} % PARAGRAPH IS HERE <------------
+
+Each sub menu (and their sub menus, if applicable) listed above can be tested nearly identically to either \ref{para:MM} or \ref{para:MR}, depending on if it has sub menus or not, respectively. Slight variations on inputs and initial states to the tests may be required depending on what inputs are requested from the sub menus or setter it is using (as tested with \ref{para:PS}).
+
+If a string is not a wanted input for sub menus with access to setters (i.e. input consisting of something other than 0-9), \ref{item:MM-7} shall be used in addition to \ref{para:MR}. 
+
+\subsubsection{Website Interactions}
+		
+\paragraph{Indeed}
+
+\begin{enumerate}
+
+\item{Test-SKL1: Search Keyword and Location with Indeed\\}
+
+Type: Unit
+					
+Initial State: User profile is updated and menu is able to select to run Indeed module.
+					
+Input: Two strings, first one representing keyword for job, second represents the city location
+					
+Output: Indeed URL page with results.
+					
+How test will be performed: The tester will manually search selected keyword and location, record the Indeed URL page based on search results and compare that URL string with the actually output URL string.
+
+\item{\itemlabel{item:GJ1}{Test-GJ1}Test-GJ1: Get Jobs\\}
+
+Type: Unit
+					
+Initial State: None.
+					
+Input: Indeed URL with keyword/location search results.
+					
+Output: Integer representing the amount of pages to be searched based on the search results.
+					
+How test will be performed: The tester will manually find an Indeed URL with at least one page result. They will then count the number of pages displayed at the top or bottom of the webpage and compare such count to the output of the getPages() function.
+
+\item{Test-GP1: Get Pages\\}
+
+Type: Unit
+					
+Initial State: An Indeed URL search result page with > 0 jobs results is available.
+					
+Input: Indeed URL with keyword/location search results.
+					
+Output: List of Tuples that contain the job title, company and link to indeed job posting.
+					
+How test will be performed: The tester will manually find an Indeed URL with at least one job result. They will then create a list of tuples that contain job title, company, and link. Then the tester will run the getJobs() function and assert that every item in their manual list is in the actual output from the function.
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\subsubsection{Look and Feel} 
+
+\itemlabel{para:NFLF}{Test-NF-LF-1}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{Test-NF-LF-1\\}
 
-Type: 
+Type: Manual Dynamic
 					
-Initial State: 
+Initial State: None
 					
-Input/Condition: 
+Input/Condition: None
 					
-Output/Result: 
+Output/Result: Menu displayed through command line is determined to be easily readable by tester. 
 					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+How test will be performed: The application will be launched from the preferred shell of the tester. Success will be determined by if text is properly formatted and easy to understand. 
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Performance}
 
-...
+\itemlabel{para:NFPF}{Test-NF-PF-1}
+
+\begin{enumerate}
+
+\item{Test-NF-PF-1\\}
+
+Type: Non-Functional Dynamic
+					
+Initial State: On menu with all user information input correctly. 
+					
+Input/Condition: None. 
+					
+Output/Result: A correct list of at least 100 links aggregated in less than 5 minutes.  
+					
+How test will be performed: The "link scraper" will be run with while tracking how many links it has pulled. Once it has collected 100, the program will be terminated and execution time will be compared.  
+
+\end{enumerate}
+
+\subsubsection{Operational and Environmental}
+
+\itemlabel{para:NFOEO}{Test-NF-OEO-X}
+\paragraph{Operating Systems}
+
+\begin{enumerate}
+
+\item{Test-NF-OEO-1\\}
+
+Type: Manual Dynamic
+					
+Initial State: None
+					
+Input/Condition: None
+					
+Output/Result: Program Executes Successfully
+					
+How test will be performed: The program will be executed on a Windows machine. A test will be considered successful if the program starts and menus are able to be navigated correctly. 
+
+\item{Test-NF-OEO-2\\}
+
+Type: Manual Dynamic
+					
+Initial State: None
+					
+Input/Condition: None
+					
+Output/Result: Program Executes Successfully
+					
+How test will be performed: The program will be executed on a IOS machine. A test will be considered successful if the program starts and menus are able to be navigated correctly. 
+
+\item{Test-NF-OEO-3\\}
+
+Type: Manual Dynamic
+					
+Initial State: None
+					
+Input/Condition: None
+					
+Output/Result: Program Executes Successfully
+					
+How test will be performed: The program will be executed on a Linux machine. A test will be considered successful if the program starts and menus are able to be navigated correctly. 
+
+\end{enumerate}
+
+\itemlabel{para:NFOEB}{Test-NF-OEB-X}
+\paragraph{Browser}
+
+\begin{enumerate}
+
+\item{Test-NF-OEB-1\\}
+
+Type: Manual Dynamic
+					
+Initial State: On menu with all relevant user information input. 
+					
+Input/Condition: Desired browser: Chrome. 
+					
+Output/Result: Correct list of links from desired site. 
+					
+How test will be performed: The "link scraping" portion of the program will be run with a Chrome driver to launch the desired sites from a Google Chrome tab. 
+
+\item{Test-NF-OEB-2\\}
+
+Type: Manual Dynamic
+					
+Initial State: On menu with all relevant user information input.
+					
+Input/Condition: Desired browser: Safari.
+					
+Output/Result: Correct list of links from desired site. 
+					
+How test will be performed: The "link scraping" portion of the program will be run with a Safari driver to launch the desired sites from a Safari tab.
+
+\item{Test-NF-OEB-3\\}
+
+Type: Manual Dynamic
+					
+Initial State: On menu with all relevant user information input.
+					
+Input/Condition: Desired browser: Firefox.
+					
+Output/Result: Correct list of links from desired site. 
+					
+How test will be performed: The "link scraping" portion of the program will be run with a Firefox driver to launch the desired sites from a Firefox tab. 
+
+\end{enumerate}
+
+\subsubsection{Security}
+
+\begin{enumerate}
+
+\itemlabel{para:NFSC}{Test-NF-SC-X}
+
+\item{Test-NF-SC-1\\}
+
+Type: Manual Static
+					
+Initial State: Program has been executed at least once and a password input by user. 
+					
+Input/Condition: None. 
+					
+Output/Result: Password is omitted from saved user information file. 
+					
+How test will be performed: The file which stores user information will be checked after program execution to ensure that the password was not stored permanently. 
+
+\item{Test-NF-SC-2\\}
+
+Type: Dynamic
+					
+Initial State: Program is running and on menu. 
+					
+Input/Condition: User has input password. 
+					
+Output/Result: The file where the password is stored has an encrypted string rather than the plain text password. 
+					
+How test will be performed: To prevent any password being exposed during run time, it will be encrypted during use. The save file will be checked to make sure the correct encrypted string is present.  
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Traceability Between Test Cases and Requirements}
 
+Functional Requirements:
+
+\begin{itemize}
+    \item FR1 tested through Personal Info Menu from \ref{para:MO} using \ref{para:PS}
+    \item FR2 tested through \ref{para:MR} 
+    \item FR3 tested through \ref{para:PF}
+    \item FR4 tested through Sites Menu from \ref{para:MO} using \ref{item:PS-3}, \ref{item:PS-4}
+    \item FR5 tested through Keywords Menu from \ref{para:MO} using \ref{item:PS-1}, \ref{item:PS-2}
+    \item FR6 tested through \ref{item:MM-6}, \ref{item:PS-21}
+    \item FR7 tested through \ref{item:GJ1},
+    \item FR8 tested through \ref{item:GJ1},
+\end{itemize}
+
+\noindent Non-Functional Requirements:
+
+\begin{itemize}
+    \item LF1 tested through \ref{para:NFLF}
+    \item PR1 tested through \ref{para:NFPF}
+    \item OE1 tested through \ref{para:NFOEO}
+    \item OE2 tested through \ref{para:NFOEB}
+    \item SR1 tested through \ref{para:NFSC}
+\end{itemize}
+
+\noindent Note: Certain non-functional requirements, such as Humanity, Maintainability, Cultural, and Legal were not suited to have tests designed for them, and as such are excluded here. 
+
 \section{Tests for Proof of Concept}
 
-\subsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+For the proof of concept tests, manual versions of tests covering saving and loading profiles, and menu interactions with resumes, sites and keywords had been conducted. From section \ref{sec:funcreq}, that corresponds to:
 
 \begin{enumerate}
-
-\item{test-id1\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
+  \item \ref{item:PS-1}, \ref{item:PS-2}, \ref{item:PS-3}, \ref{item:PS-4}, \ref{item:PS-12}, \ref{item:PS-13}, \ref{item:PS-21} 
+  \item \ref{para:PF}
+  \item \ref{para:MM}
+  \item \ref{para:MR}
+  \item Keywords and Sites Menus from \ref{para:MO}
 \end{enumerate}
-
-\subsection{Area of Testing2}
-
-...
 
 	
 \section{Comparison to Existing Implementation}	
-				
+The existing implementation did not feature a testing plan, execution or report available to the public. There was a single functional call that was commented out that was meant to run getURLs() which returns the URLs based on search results. There was no strategy, framework or design plan however for such test thus is was a dynamic manual test.
+
+
 \section{Unit Testing Plan}
+
 		
 \subsection{Unit testing of internal functions}
-		
-\subsection{Unit testing of output files}		
+Unit testing is a useful testing strategy for individually testing "units" which are typically functions or methods within certain modules. It is important to test these methods individually the ensure they work and to gain confidence in testing the larger interactions and systems that use such functions/methods to operate. 
+Unit tests will be conducted by inputting expected inputs, boundary cases and invalid cases thus ensuring proper testing coverage is achieved. Based on these inputs we have to manually determine the expected output and make a comparison to the actual output vs to the expected output using the testing framework. Unittest, a common python framework, will be used to test such internal functions since it has plenty of functionality, different options to explore comparison methods, and plenty of online support. 
+\subsection{Unit testing of output files}
+The only output file that will require to be tested is a .yaml file that contains the user profile information and outcomes of running the application. This will be tested by comparing the yaml file contents with the expected output. This would be done by creating several different profiles then running the application that produces the yaml file and testing it outcomes.
 
-\bibliographystyle{plainnat}
+%\bibliographystyle{plainnat}
 
-\bibliography{SRS}
+%\bibliography{SRS}
 
 \newpage
 
 \section{Appendix}
 
-This is where you can place additional information.
-
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+N/A
 
 \subsection{Usability Survey Questions?}
 
-This is a section that would be appropriate for some teams.
+N/A
+
+\newpage
+
+\section{Revision History}
+
+\begin{table}[hp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Mar 8 & 0.1 & Planning format and tests that had not yet been decided\\
+Mar 10 & 0.2 & Mostly filled in\\
+Mar 11 & 1.0 & Finished filling in\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \end{document}
