@@ -16,26 +16,47 @@ except ImportError:
 ## @brief this class represents the preferences of a user for job searching 
 class userProfile:
 
+    ## @brief Dictionary of default variable states and if they need updating for use
+    #  @details Tuple; index 0 is value, index 1 is if it requires changing
+    DEFAULT = {
+            "keywords": ([], False),
+            "site": ("glassdoor", False),
+            "firstName": ("", True),
+            "lastName": ("", True),
+            "email": ("", True),
+            "phone": ("", True),
+            "organisation": ("", False),
+            "resumePath": ("", True),
+            "socials": ([], False),
+            "location": ((), True),
+            "gradDate": ((), False),
+            "university": ("", False)
+        }
+
     ## @brief Constructor for userProfile
     #  @details Sets default values for profile
-    def __init__(self):
-        self.__keywords = []
-        self.__site = "glassdoor"
-        self.__firstName = ""
-        self.__lastName = ""
-        self.__email = ""
-        self.__phone = ""
-        self.__organisation = ""
-        self.__resumePath = ""
-        self.__socials = []
-        self.__location = ()
-        self.__grad = ()
-        self.__university = ""
+    #  @param userPrompts (optional) Boolean default class value for if user
+    #  should require confirmations when performing tasks like saving/loading
+    def __init__(self, userPrompts = True):
+        self.__keywords = self.DEFAULT["keywords"][0]
+        self.__site = self.DEFAULT["site"][0]
+        self.__firstName = self.DEFAULT["firstName"][0]
+        self.__lastName = self.DEFAULT["lastName"][0]
+        self.__email = self.DEFAULT["email"][0]
+        self.__phone = self.DEFAULT["phone"][0]
+        self.__organisation = self.DEFAULT["organisation"][0]
+        self.__resumePath = self.DEFAULT["resumePath"][0]
+        self.__socials = self.DEFAULT["socials"][0]
+        self.__location = self.DEFAULT["location"][0]
+        self.__gradDate = self.DEFAULT["gradDate"][0]
+        self.__university = self.DEFAULT["university"][0]
+        self.__userPrompts = userPrompts
 
     ## @brief Method attempts to load values from the given file to itself
     #  @param userPrompts (optional) Boolean for if user should require confirmations
     #  @param file (optional) A string of the path to the saved profile
-    def loadProfile(self, userPrompts = True, file = "profile.yaml"):
+    def loadProfile(self, userPrompts = "", file = "profile.yaml"):
+        if userPrompts == "": userPrompts = self.__userPrompts
         if isfile(file):
             print(wS("Loading profile from " + file + "...") + "\n")
             profileFile = open(file, "r")
@@ -47,40 +68,60 @@ class userProfile:
                     self.__keywords = profile["keywords"]
                 except KeyError:
                     print(wS("Keywords can not be found in profile, using default value.") + "\n")
-                    if userPrompt: waitForUser()
+                    if userPrompts: waitForUser()
                 ## site
                 try:
                     self.__site = profile["site"]
                 except KeyError:
                     print(wS("Site can not be found in profile, using default value.") + "\n")
-                    if userPrompt: waitForUser()
+                    if userPrompts: waitForUser()
                 ## resumePath
                 try:
                     if isfile(profile["resumePath"]): self.__resumePath = profile["resumePath"]
                     else:
                         print(wS("Resume can not be accessed, using blank value.") + "\n")
-                        waitForUser()
+                        if userPrompts: waitForUser()
                 except KeyError:
                     print(wS("Resume can not be found in profile, using default value.") + "\n")
-                    if userPrompt: waitForUser()
+                    if userPrompts: waitForUser()
+                print("Done! \n")
+                if userPrompts: waitForUser()
             except TypeError:
                 print(wS("Profile read error, using default values.") + "\n")
-                if userPrompt: waitForUser()
+                if userPrompts: waitForUser()
         else: 
             print(wS("Profile not found, using default values.") + "\n")
-            if userPrompt: waitForUser()
+            if userPrompts: waitForUser()
 
     ## @brief Method attempts to save its variable values to the given file
     #  @details Will overwrite the file if it exists already
     #  @param userPrompts (optional) Boolean for if user should require confirmations
     #  @param file (optional) A string indicating a path to the profile to write 
-    def saveProfile(self, userPrompts = True, file = "profile.yaml"):
+    def saveProfile(self, userPrompts = "", file = "profile.yaml"):
+        if userPrompts == "": userPrompts = self.__userPrompts
         print(wS("Saving profile to " + file + "...") + "\n")
         profileFile = open(file, "w")
         dump(self.getProfileDict(), profileFile, Dumper = Dumper)
         profileFile.close()
         print("Saved! \n")
-        if userPrompt: waitForUser()
+        if userPrompts: waitForUser()
+
+    def isComplete(self, userPrompts = ""):
+        if userPrompts == "": userPrompts = self.__userPrompts
+        currentProfile = self.getProfileDict()
+        msg = " "
+        for key in self.DEFAULT:
+            elem = self.DEFAULT[key]
+            if elem[1] and elem[0] == currentProfile[key]:
+                msg += key + ", "
+        if msg == " ":
+            print(wS("Profile ready!") + "\n")
+            if userPrompts: waitForUser()
+            return True
+        else:
+            print(wS("These fields still need an input:\n" + msg[:-2]) + "\n")
+            if userPrompts: waitForUser()
+            return False
 
     # ---------- getters ----------
 
@@ -137,8 +178,8 @@ class userProfile:
 
     ## @brief Method gets graduation date
     #  @return Tuple of 2 integers indicating the month and year of graduation
-    def getGrad(self):
-        return self.__grad
+    def getGradDate(self):
+        return self.__gradDate
 
     ## @brief Method gets university attended
     #  @return String indicating name of university
@@ -150,7 +191,7 @@ class userProfile:
     def getProfileDict(self):
         profile = {
             "keywords": self.getKeywords(),
-            "site": self.getSite()
+            "site": self.getSite(),
             "firstName": self.getFirstName(),
             "lastName": self.getLastName(),
             "email": self.getEmail(),
@@ -159,7 +200,7 @@ class userProfile:
             "resumePath": self.getResumePath(),
             "socials": self.getSocials(),
             "location": self.getLocation(),
-            "grad": self.getGrad(),
+            "gradDate": self.getGradDate(),
             "university": self.getUniversity()
         }
         return profile
