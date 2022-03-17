@@ -9,8 +9,8 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
-import os # to get the resume file
-import time # to sleep
+import os 
+import time 
 import get_links_glassdoor
 import get_links_indeed
 import menu
