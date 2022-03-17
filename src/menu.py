@@ -1,29 +1,26 @@
-## ---------- imports ----------
+## @file menu.py
+#  @author Gavin Jameson
+#  @brief Allows the user to easily view and set new values for a user profile
+#  @date Mar 17, 2022
+
 from menuMessages import *
 from sites import SITESLIST
 from time import sleep
 
-## ---------- functions ----------
-##
-#  @brief Gets location of resume
+## @brief Gets location of resume
 #  @return String corresponding to location of resume file
-#
 def getResumePath():
     return resumePath
 
-##
-#  @brief Gets keywords
+## @brief Gets keywords
 #  @return List of strings specified as keywords for searching
-#
 def getKeywords():
     return keywords
 
-##
-#  @brief Changes state dictating what menu is shown
-#  @param Integer for new menu state number (default does not change menu)
+## @brief Changes state dictating what menu is shown
+#  @param newMenu (optional) Integer for new menu state number (default does not change menu)
 #  @return True if menu was updated (same menu page or not), False if
 #  invalid input was given
-#
 def changeMenu(newMenu = -2):
     if newMenu == -1:
         displayError("input")
@@ -37,22 +34,22 @@ def changeMenu(newMenu = -2):
         menu = newMenu
         return True
 
-##
-#  @brief Processes integer inputs to only allow numbers
+## @brief Processes integer inputs to only allow numbers
 #  within a given range; sets them to -1 if they are not
-#
+#  @param value Integer to process
+#  @param mx (optional) Maximum allowed integer
+#  @param mn (optional) Minimum allowed integer
+#  @return Integer indicating the original input if it is within
+#  the range, or -1 if it was not in the range
 def limit(value, mx = 9, mn = 1):
     return value if value >= mn and value <= mx else -1
 
-##
-#  @brief Prompts user for a menu selection and processes result
-#  @param Boolean True if the input(s) must be of type integer (default True)
-#  @param Boolean True if multiple choices should be returned (default False for
-#  only one choice)
+## @brief Prompts user for a menu selection and processes result
+#  @param forceInt (optional) Boolean True if the input(s) must be of type integer 
+#  @param multiple (optional) Boolean True if multiple choices should be returned 
 #  @return Integer for menu choice if one choice is desired, a list of
 #  integers if multiple are desired, and -1 if there is an error or no
 #  input
-#
 def promptInput(forceInt = True, multiple = False):
     msg = wrappedString("Input choices separated by commas:") if multiple else wrappedString("Input choice:")
     userInput = input(msg)

@@ -1,7 +1,7 @@
 ## @file userProfile.py
 #  @author Gavin Jameson
-#  @brief profile module
-#  @date Mar 14, 2022
+#  @brief user profile module
+#  @date Mar 17, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
@@ -13,7 +13,7 @@ try:
 except ImportError:
     from yaml import Loader, Dumper
 
-## @brief this class represents the preferences of a user for job searching 
+## @brief This class represents the preferences of a user for job searching 
 class userProfile:
 
     ## @brief Dictionary of default variable states and if they need updating for use
@@ -38,18 +38,31 @@ class userProfile:
     #  @param userPrompts (optional) Boolean default class value for if user
     #  should require confirmations when performing tasks like saving/loading
     def __init__(self, userPrompts = True):
+        ## @brief Words used in searches to help locate better fitting jobs
         self.__keywords = self.DEFAULT["keywords"][0]
+        ## @brief The site that will be scraped for URLs
         self.__site = self.DEFAULT["site"][0]
+        ## @brief User's first name
         self.__firstName = self.DEFAULT["firstName"][0]
+        ## @brief User's last name
         self.__lastName = self.DEFAULT["lastName"][0]
+        ## @brief User's email address
         self.__email = self.DEFAULT["email"][0]
+        ## @brief User's phone number
         self.__phone = self.DEFAULT["phone"][0]
+        ## @brief User's current workplace/affiliation
         self.__organisation = self.DEFAULT["organisation"][0]
+        ## @brief Path to resume file
         self.__resumePath = self.DEFAULT["resumePath"][0]
+        ## @brief List of links to user's social media pages
         self.__socials = self.DEFAULT["socials"][0]
+        ## @brief User's area of residence
         self.__location = self.DEFAULT["location"][0]
+        ## @brief User's date of graudation from their program
         self.__gradDate = self.DEFAULT["gradDate"][0]
+        ## @brief User's university
         self.__university = self.DEFAULT["university"][0]
+        ## @brief Default value of whether or not confirmation messages should be shown
         self.__userPrompts = userPrompts
 
     ## @brief Method attempts to load values from the given file to itself
@@ -58,7 +71,7 @@ class userProfile:
     def loadProfile(self, userPrompts = "", file = "profile.yaml"):
         if userPrompts == "": userPrompts = self.__userPrompts
         if isfile(file):
-            print(wS("Loading profile from " + file + "...") + "\n")
+            if userPrompts: print(wS("Loading profile from " + file + "...") + "\n")
             profileFile = open(file, "r")
             profile = load(profileFile, Loader=Loader)
             profileFile.close()
@@ -67,31 +80,37 @@ class userProfile:
                 try:
                     self.__keywords = profile["keywords"]
                 except KeyError:
-                    print(wS("Keywords can not be found in profile, using default value.") + "\n")
-                    if userPrompts: waitForUser()
+                    if userPrompts:
+                        print(wS("Keywords can not be found in profile, using default value.") + "\n")
+                        waitForUser()
                 ## site
                 try:
                     self.__site = profile["site"]
                 except KeyError:
-                    print(wS("Site can not be found in profile, using default value.") + "\n")
-                    if userPrompts: waitForUser()
+                    if userPrompts:
+                        print(wS("Site can not be found in profile, using default value.") + "\n")
+                        waitForUser()
                 ## resumePath
                 try:
                     if isfile(profile["resumePath"]): self.__resumePath = profile["resumePath"]
-                    else:
+                    elif userPrompts:
                         print(wS("Resume can not be accessed, using blank value.") + "\n")
-                        if userPrompts: waitForUser()
+                        waitForUser()
                 except KeyError:
-                    print(wS("Resume can not be found in profile, using default value.") + "\n")
-                    if userPrompts: waitForUser()
-                print("Done! \n")
-                if userPrompts: waitForUser()
+                    if userPrompts:
+                        print(wS("Resume can not be found in profile, using default value.") + "\n")
+                        waitForUser()
+                if userPrompts: 
+                    print("Done! \n")
+                    waitForUser()
             except TypeError:
-                print(wS("Profile read error, using default values.") + "\n")
-                if userPrompts: waitForUser()
+                if userPrompts: 
+                    print(wS("Profile read error, using default values.") + "\n")
+                    waitForUser()
         else: 
-            print(wS("Profile not found, using default values.") + "\n")
-            if userPrompts: waitForUser()
+            if userPrompts: 
+                print(wS("Profile not found, using default values.") + "\n")
+                waitForUser()
 
     ## @brief Method attempts to save its variable values to the given file
     #  @details Will overwrite the file if it exists already
@@ -99,13 +118,18 @@ class userProfile:
     #  @param file (optional) A string indicating a path to the profile to write 
     def saveProfile(self, userPrompts = "", file = "profile.yaml"):
         if userPrompts == "": userPrompts = self.__userPrompts
-        print(wS("Saving profile to " + file + "...") + "\n")
+        if userPrompts: print(wS("Saving profile to " + file + "...") + "\n")
         profileFile = open(file, "w")
         dump(self.getProfileDict(), profileFile, Dumper = Dumper)
         profileFile.close()
-        print("Saved! \n")
-        if userPrompts: waitForUser()
+        if userPrompts:
+            print("Saved! \n")
+            waitForUser()
 
+    ## @brief Method verifies that all profile elements were changed that are required
+    #  for a base job application
+    #  @param userPrompts (optional) Boolean for if user should require confirmations
+    #  @return Boolean if required changes have been made
     def isComplete(self, userPrompts = ""):
         if userPrompts == "": userPrompts = self.__userPrompts
         currentProfile = self.getProfileDict()
@@ -115,12 +139,14 @@ class userProfile:
             if elem[1] and elem[0] == currentProfile[key]:
                 msg += key + ", "
         if msg == " ":
-            print(wS("Profile ready!") + "\n")
-            if userPrompts: waitForUser()
+            if userPrompts:
+                print(wS("Profile ready!") + "\n")
+                waitForUser()
             return True
         else:
-            print(wS("These fields still need an input:\n" + msg[:-2]) + "\n")
-            if userPrompts: waitForUser()
+            if userPrompts:
+                print(wS("These fields still need an input:\n" + msg[:-2]) + "\n")
+                waitForUser()
             return False
 
     # ---------- getters ----------
@@ -155,8 +181,8 @@ class userProfile:
     def getPhone(self):
         return self.__phone
 
-    ## @brief Method gets current employment location
-    #  @return String indicating place of employment
+    ## @brief Method gets organisation name
+    #  @return String indicating organisation
     def getOrganisation(self):
         return self.__organisation
 
@@ -206,6 +232,9 @@ class userProfile:
         return profile
 
     # ---------- setters ----------
+    # if an input can be of the correct type but can be easily validated on whether or not
+    # it is of the correct format, it will be - those setters will all have a return boolean
+    # indicating if it was changed (validated) = True, or not changed (not valid) = False
 
     ## @brief Method sets keywords
     #  @param keywords A list of strings used as keywords
@@ -232,6 +261,37 @@ class userProfile:
         except TypeError: return False
         return True
 
+    ## @brief Method sets first name
+    #  @param name String indicating name
+    def setFirstName(self, name):
+        pass # TODO
+
+    ## @brief Method sets last name
+    #  @param name String indicating name
+    def setLastName(self, name):
+        pass # TODO
+
+    ## @brief Method tries to set email
+    #  @details Method will not change the value if the new input is invalid
+    #  @param email String indicating email
+    #  @return Boolean True if email was updated (has top-level domain and "@"), False if not
+    def setEmail(self, email):
+        pass # TODO
+
+    ## @brief Method tries to set phone number
+    #  @details Method will not change the value if the new input is invalid;
+    #  accepts different formats including those with brackets or dashes; do not include
+    #  country codes
+    #  @param phone String of numbers indicating email
+    #  @return Boolean True if email was updated (exactly 10 numbers), False if not
+    def setPhone(self, phone):
+        pass # TODO
+
+    ## @brief Method sets organisation
+    #  @param org String indicating organisation name
+    def setOrganisation(self, org):
+        pass # TODO
+
     ## @brief Method tries to set path to resume file
     #  @details Method also checks if file exists, and if it does not it will not change it
     #  @param file A string indicating a path to a resume file
@@ -246,4 +306,33 @@ class userProfile:
             return True
         else:
             return False
+
+    ## @brief Method sets social links
+    #  @details When toggleMode = True, only the site name is required to remove an element
+    #  @param links A list of strings used as links
+    #  @param toggleMode (optional) If true, instead of overwriting the class varible with 
+    #  the parameter, it will add words to the class varable from the parameter that are not 
+    #  there and remove ones that are
+    def setSocials(self, links, toggleMode = False):
+        pass # TODO
+
+    ## @brief Method sets location
+    #  @details If 2 inputs received, it will be stored as a length 3 with a blank value
+    #  between the two inputted values so indexing always access the same
+    #  kind of location (i.e. country)
+    #  @param loc A length 2 or 3 list of strings indicating locations in the form
+    #  [city, state/province, country] or [city, country]
+    def setLocation(self, loc):
+        pass # TODO
+
+    ## @brief Method tries to set grad date
+    #  @param grad A length 2 list of integers in the form [grad month, grad year]
+    #  @return Boolean True if date was updated (grad month number must be from 1-12), False if not
+    def setGradDate(self, grad):
+        pass # TODO
+    
+    ## @brief Method sets university
+    #  @param name String indicating university name
+    def setUniversity(self, name):
+        pass # TODO
 
