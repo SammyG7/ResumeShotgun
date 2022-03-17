@@ -1,3 +1,8 @@
+## @file Indeed.py
+#  @author Jeremy Langner
+#  @brief Module that extracts job posting links from Indeed and returns the job title and company to the user.
+#  @date March 17, 2022
+
 import sys
 import time
 import requests
@@ -22,7 +27,11 @@ location = ""
 pages = 0
 allJobs = []
 
-
+## @brief Enters in search parameters and returns url of results.
+#  @details Uses Selenium to send keys to Indeed.com
+#  @param keyword a string representing the job title/poistion that the user is interested in searching for.
+#  @param location a string representing the desired job location.
+#  @return string representing the url of the search results. 
 def search(keyword, location):
     driverLocation = "/usr/bin/chromedriver"
     driver = webdriver.Chrome(executable_path=driverLocation)
@@ -40,6 +49,9 @@ def search(keyword, location):
     
     return driver.current_url
 
+## @brief Traverses through the url to search and save jobs on a single page.
+#  @param url a string representing an Indeed url with valid search results.
+#  @return list containing tuples of job title and company.
 def getJobs(url):
 
     page = requests.get(url)
@@ -57,7 +69,12 @@ def getJobs(url):
         jobs.append(job[:2])
     print(jobs)
 
+    return jobs
 
+
+## @brief Gets number of pages based on an Indeed search result.
+#  @param url a string representing an Indeed url with valid search results.
+#  @return int which represents the numbers of pages of results from such single search.
 def getPages(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -82,6 +99,8 @@ def getPages(url):
     
     return pages
 
+## @brief Formats various indeed job search pages.
+#  @return a string representing the next page.
 def pageParser():
     driverLocation = "/usr/bin/chromedriver"
     driver = webdriver.Chrome(executable_path=driverLocation)
@@ -93,6 +112,8 @@ def pageParser():
         
         print(currUrl)
         
+    #placeholder return
+    return currUrl
 
 
 if __name__ == "__main__":
