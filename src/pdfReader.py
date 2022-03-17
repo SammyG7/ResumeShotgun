@@ -1,9 +1,9 @@
-## @file test.py
+## @file pdfReader.py
 #  @author Sam Gorman
 #  @brief PDF Interpretor
 #  @date Mar 17, 2022
 
-## @brief This class represents a {DF document  
+## @brief This class represents a PDF document  
 #  @details Assumes all inputs are of the correct type
 class PDF:
 

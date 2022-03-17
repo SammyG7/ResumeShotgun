@@ -1,0 +1,148 @@
+\hypertarget{menuMessages_8py}{}\section{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/menu\+Messages.py File Reference}
+\label{menuMessages_8py}\index{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/menu\+Messages.\+py@{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/menu\+Messages.\+py}}
+
+
+interface messages module  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menuMessages_8py_a21d7a404e60f733c720b2c02f3ae9256}\label{menuMessages_8py_a21d7a404e60f733c720b2c02f3ae9256}} 
+def \hyperlink{menuMessages_8py_a21d7a404e60f733c720b2c02f3ae9256}{menu\+Messages.\+display\+Menu\+Main} ()
+\begin{DoxyCompactList}\small\item\em Displays text for main menu options. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_a6ca95ed145c9b35bcd761137c2ee9b11}{menu\+Messages.\+display\+Menu\+Resume} (path)
+\begin{DoxyCompactList}\small\item\em Displays text for resume menu options. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{menuMessages_8py_a6c259edee9d9fc879639c94ca60f9e3a}\label{menuMessages_8py_a6c259edee9d9fc879639c94ca60f9e3a}} 
+def \hyperlink{menuMessages_8py_a6c259edee9d9fc879639c94ca60f9e3a}{menu\+Messages.\+display\+Menu\+Placeholder} ()
+\begin{DoxyCompactList}\small\item\em Displays text for personal info menu. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_a628c9f58ee9f191462a136999dc3392c}{menu\+Messages.\+display\+Menu\+Keywords} (keywords)
+\begin{DoxyCompactList}\small\item\em Displays text for keywords menu options. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{menuMessages_8py_a68885ebd858586dc0acd577741276428}\label{menuMessages_8py_a68885ebd858586dc0acd577741276428}} 
+def \hyperlink{menuMessages_8py_a68885ebd858586dc0acd577741276428}{menu\+Messages.\+display\+Menu\+Preferences} ()
+\begin{DoxyCompactList}\small\item\em Displays text for job preferences menu. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_a2e108e44692e6c0a5d08369c31729fed}{menu\+Messages.\+display\+Menu\+Sites} (site, site\+List)
+\begin{DoxyCompactList}\small\item\em Displays text for sites menu options. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_a35909e818da6f2df343113667c1773cc}{menu\+Messages.\+display\+Menu\+Placeholder} (menu=\char`\"{}??\char`\"{})
+\begin{DoxyCompactList}\small\item\em Displays text for unimplemented menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{menuMessages_8py_a4651f39c686a7c3c986e37d00e7c29d6}\label{menuMessages_8py_a4651f39c686a7c3c986e37d00e7c29d6}} 
+def \hyperlink{menuMessages_8py_a4651f39c686a7c3c986e37d00e7c29d6}{menu\+Messages.\+clear\+Screen} ()
+\begin{DoxyCompactList}\small\item\em Clears console screen. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_ac04631b0e9b258f5ea28c54af606815d}{menu\+Messages.\+wrapped\+String} (raw, width=30)
+\begin{DoxyCompactList}\small\item\em Adds newlines to a string or combines a list of values with newlines such that it does not exceed a given width. \end{DoxyCompactList}\item 
+def \hyperlink{menuMessages_8py_a27b2b0558cba9b02b7e3fdec12e229b3}{menu\+Messages.\+display\+Error} (error=\char`\"{}general\char`\"{})
+\begin{DoxyCompactList}\small\item\em Displays error messages. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{menuMessages_8py_a9c09f8be701ef48f1c46a11eda45c4eb}\label{menuMessages_8py_a9c09f8be701ef48f1c46a11eda45c4eb}} 
+def \hyperlink{menuMessages_8py_a9c09f8be701ef48f1c46a11eda45c4eb}{menu\+Messages.\+wait\+For\+User} ()
+\begin{DoxyCompactList}\small\item\em Prompts user to confirm before continuing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+interface messages module 
+
+\begin{DoxyAuthor}{Author}
+Gavin Jameson 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mar 17, 2022 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{menuMessages_8py_file_a27b2b0558cba9b02b7e3fdec12e229b3}\label{menuMessages_8py_file_a27b2b0558cba9b02b7e3fdec12e229b3}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!display\+Error@{display\+Error}}
+\index{display\+Error@{display\+Error}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{display\+Error()}{displayError()}}
+{\footnotesize\ttfamily def menu\+Messages.\+display\+Error (\begin{DoxyParamCaption}\item[{}]{error = {\ttfamily \char`\"{}general\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Displays error messages. 
+
+Error messages are separate from Python error messages; these messages do not and should not stop execution, they should merely let the user know that the program did not do what was expected of it for the reason given 
+\begin{DoxyParams}{Parameters}
+{\em error} & (optional) Error message type to display \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menuMessages_8py_file_a628c9f58ee9f191462a136999dc3392c}\label{menuMessages_8py_file_a628c9f58ee9f191462a136999dc3392c}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!display\+Menu\+Keywords@{display\+Menu\+Keywords}}
+\index{display\+Menu\+Keywords@{display\+Menu\+Keywords}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{display\+Menu\+Keywords()}{displayMenuKeywords()}}
+{\footnotesize\ttfamily def menu\+Messages.\+display\+Menu\+Keywords (\begin{DoxyParamCaption}\item[{}]{keywords }\end{DoxyParamCaption})}
+
+
+
+Displays text for keywords menu options. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em keywords} & List of strings of current keywords \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menuMessages_8py_file_a35909e818da6f2df343113667c1773cc}\label{menuMessages_8py_file_a35909e818da6f2df343113667c1773cc}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!display\+Menu\+Placeholder@{display\+Menu\+Placeholder}}
+\index{display\+Menu\+Placeholder@{display\+Menu\+Placeholder}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{display\+Menu\+Placeholder()}{displayMenuPlaceholder()}}
+{\footnotesize\ttfamily def menu\+Messages.\+display\+Menu\+Placeholder (\begin{DoxyParamCaption}\item[{}]{menu = {\ttfamily \char`\"{}??\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Displays text for unimplemented menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu} & (optional) String for menu location \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menuMessages_8py_file_a6ca95ed145c9b35bcd761137c2ee9b11}\label{menuMessages_8py_file_a6ca95ed145c9b35bcd761137c2ee9b11}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!display\+Menu\+Resume@{display\+Menu\+Resume}}
+\index{display\+Menu\+Resume@{display\+Menu\+Resume}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{display\+Menu\+Resume()}{displayMenuResume()}}
+{\footnotesize\ttfamily def menu\+Messages.\+display\+Menu\+Resume (\begin{DoxyParamCaption}\item[{}]{path }\end{DoxyParamCaption})}
+
+
+
+Displays text for resume menu options. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & String for current path to resume file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menuMessages_8py_file_a2e108e44692e6c0a5d08369c31729fed}\label{menuMessages_8py_file_a2e108e44692e6c0a5d08369c31729fed}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!display\+Menu\+Sites@{display\+Menu\+Sites}}
+\index{display\+Menu\+Sites@{display\+Menu\+Sites}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{display\+Menu\+Sites()}{displayMenuSites()}}
+{\footnotesize\ttfamily def menu\+Messages.\+display\+Menu\+Sites (\begin{DoxyParamCaption}\item[{}]{site,  }\item[{}]{site\+List }\end{DoxyParamCaption})}
+
+
+
+Displays text for sites menu options. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em site} & String indicating current site \\
+\hline
+{\em site\+List} & List of strings of names of available sites \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{menuMessages_8py_file_ac04631b0e9b258f5ea28c54af606815d}\label{menuMessages_8py_file_ac04631b0e9b258f5ea28c54af606815d}} 
+\index{menu\+Messages.\+py@{menu\+Messages.\+py}!wrapped\+String@{wrapped\+String}}
+\index{wrapped\+String@{wrapped\+String}!menu\+Messages.\+py@{menu\+Messages.\+py}}
+\subsubsection{\texorpdfstring{wrapped\+String()}{wrappedString()}}
+{\footnotesize\ttfamily def menu\+Messages.\+wrapped\+String (\begin{DoxyParamCaption}\item[{}]{raw,  }\item[{}]{width = {\ttfamily 30} }\end{DoxyParamCaption})}
+
+
+
+Adds newlines to a string or combines a list of values with newlines such that it does not exceed a given width. 
+
+Each new line is padded with a space for optimal asthetics, that space character IS included in the width 
+\begin{DoxyParams}{Parameters}
+{\em raw} & String or list to wrap \\
+\hline
+{\em width} & (optional) Integer for maximum width allowed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String with no line longer than the given width in characters (if possible) 
+\end{DoxyReturn}
