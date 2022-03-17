@@ -1,3 +1,8 @@
+## @file menuMessages.py
+#  @author Gavin Jameson
+#  @brief interface messages module
+#  @date Mar 17, 2022
+
 from os import name, system
 
 # Widths are 30 characters max
@@ -34,6 +39,10 @@ def displayMenuResume(path):
           " 0) Go back \n" +
           "\n")
 
+## @brief Displays text for personal info menu
+def displayMenuPlaceholder():
+    pass # TODO
+
 ## @brief Displays text for keywords menu options
 #  @param keywords List of strings of current keywords
 def displayMenuKeywords(keywords):
@@ -54,6 +63,10 @@ def displayMenuKeywords(keywords):
           "\n" +
           " 0) Go back \n" +
           "\n")
+
+## @brief Displays text for job preferences menu
+def displayMenuPreferences():
+    pass # TODO (remove?)
 
 ## @brief Displays text for sites menu options
 #  @param site String indicating current site
@@ -77,8 +90,10 @@ def displayMenuSites(site, siteList):
           " 0) Go back \n" +
           "\n")
 
+
+
 ## @brief Displays text for unimplemented menu
-#  @param menu (optional) String for menu location (default "??")
+#  @param menu (optional) String for menu location
 def displayMenuPlaceholder(menu = "??"):
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
@@ -101,7 +116,7 @@ def clearScreen():
 #  @details Each new line is padded with a space for optimal asthetics, that space character 
 #  IS included in the width
 #  @param raw String or list to wrap
-#  @param width (optional) integer for maximum width allowed
+#  @param width (optional) Integer for maximum width allowed
 #  @return String with no line longer than the given width in characters (if possible)
 def wrappedString(raw, width = 30):
     out = " "
@@ -135,7 +150,10 @@ def wrappedString(raw, width = 30):
                "that would happen if it didn't")
                 
 ## @brief Displays error messages
-#  @param error (optional) error message type to display
+#  @details Error messages are separate from Python error messages; these messages
+#  do not and should not stop execution, they should merely let the user know that
+#  the program did not do what was expected of it for the reason given
+#  @param error (optional) Error message type to display
 def displayError(error = "general"):
     msgs = {
         "input": "Invalid input selected.",
