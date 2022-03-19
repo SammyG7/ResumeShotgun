@@ -9,15 +9,15 @@
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/menu.\+py}, 
 		\hyperpage{35}
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/menu\+Messages.\+py}, 
-		\hyperpage{38}
+		\hyperpage{37}
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/pdf\+Reader.\+py}, 
-		\hyperpage{41}
+		\hyperpage{40}
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/sites.\+py}, 
-		\hyperpage{41}
+		\hyperpage{40}
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/test.\+py}, 
-		\hyperpage{43}
+		\hyperpage{42}
   \item {/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/user\+Profile.\+py}, 
-		\hyperpage{43}
+		\hyperpage{42}
   \item {\+\_\+\+\_\+init\+\_\+\+\_\+}
     \subitem {pdf\+Reader\+::\+P\+DF}, \hyperpage{9}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{14}
@@ -34,28 +34,23 @@
 
   \indexspace
 
-  \item {change\+Menu}
-    \subitem {menu.\+py}, \hyperpage{36}
-
-  \indexspace
-
   \item {D\+E\+F\+A\+U\+LT}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{23}
   \item {display\+Error}
-    \subitem {menu\+Messages.\+py}, \hyperpage{39}
+    \subitem {menu\+Messages.\+py}, \hyperpage{38}
   \item {display\+Menu\+Keywords}
-    \subitem {menu\+Messages.\+py}, \hyperpage{39}
+    \subitem {menu\+Messages.\+py}, \hyperpage{38}
   \item {display\+Menu\+Placeholder}
-    \subitem {menu\+Messages.\+py}, \hyperpage{39}
+    \subitem {menu\+Messages.\+py}, \hyperpage{38}
   \item {display\+Menu\+Resume}
-    \subitem {menu\+Messages.\+py}, \hyperpage{39}
+    \subitem {menu\+Messages.\+py}, \hyperpage{38}
   \item {display\+Menu\+Sites}
-    \subitem {menu\+Messages.\+py}, \hyperpage{40}
+    \subitem {menu\+Messages.\+py}, \hyperpage{39}
 
   \indexspace
 
   \item {G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}
-    \subitem {sites.\+py}, \hyperpage{42}
+    \subitem {sites.\+py}, \hyperpage{41}
   \item {get\+\_\+links\+\_\+glassdoor.\+py}
     \subitem {aggregate\+\_\+links}, \hyperpage{30}
     \subitem {get\+U\+R\+Ls}, \hyperpage{30}
@@ -73,7 +68,6 @@
   \item {get\+Grad\+Date}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{15}
   \item {get\+Keywords}
-    \subitem {menu.\+py}, \hyperpage{36}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{15}
   \item {get\+Last\+Name}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{15}
@@ -86,7 +80,6 @@
   \item {get\+Profile\+Dict}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{16}
   \item {get\+Resume\+Path}
-    \subitem {menu.\+py}, \hyperpage{36}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{17}
   \item {get\+Site}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{17}
@@ -116,8 +109,6 @@
 
   \item {lever}
     \subitem {apply.\+py}, \hyperpage{28}
-  \item {limit}
-    \subitem {menu.\+py}, \hyperpage{36}
   \item {load\+Profile}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{18}
   \item {login}
@@ -127,19 +118,14 @@
   \indexspace
 
   \item {menu.\+py}
-    \subitem {change\+Menu}, \hyperpage{36}
-    \subitem {get\+Keywords}, \hyperpage{36}
-    \subitem {get\+Resume\+Path}, \hyperpage{36}
-    \subitem {limit}, \hyperpage{36}
-    \subitem {prompt\+Input}, \hyperpage{37}
-    \subitem {run}, \hyperpage{37}
+    \subitem {run}, \hyperpage{35}
   \item {menu\+Messages.\+py}
-    \subitem {display\+Error}, \hyperpage{39}
-    \subitem {display\+Menu\+Keywords}, \hyperpage{39}
-    \subitem {display\+Menu\+Placeholder}, \hyperpage{39}
-    \subitem {display\+Menu\+Resume}, \hyperpage{39}
-    \subitem {display\+Menu\+Sites}, \hyperpage{40}
-    \subitem {wrapped\+String}, \hyperpage{40}
+    \subitem {display\+Error}, \hyperpage{38}
+    \subitem {display\+Menu\+Keywords}, \hyperpage{38}
+    \subitem {display\+Menu\+Placeholder}, \hyperpage{38}
+    \subitem {display\+Menu\+Resume}, \hyperpage{38}
+    \subitem {display\+Menu\+Sites}, \hyperpage{39}
+    \subitem {wrapped\+String}, \hyperpage{39}
   \item {merge}
     \subitem {pdf\+Reader\+::\+P\+DF}, \hyperpage{10}
 
@@ -160,18 +146,16 @@
     \subitem {split}, \hyperpage{10}
   \item {profile}
     \subitem {apply.\+py}, \hyperpage{29}
-  \item {prompt\+Input}
-    \subitem {menu.\+py}, \hyperpage{37}
 
   \indexspace
 
   \item {run}
-    \subitem {menu.\+py}, \hyperpage{37}
+    \subitem {menu.\+py}, \hyperpage{35}
 
   \indexspace
 
   \item {S\+I\+T\+E\+S\+L\+I\+ST}
-    \subitem {sites.\+py}, \hyperpage{42}
+    \subitem {sites.\+py}, \hyperpage{41}
   \item {save\+Profile}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{18}
   \item {search}
@@ -201,9 +185,9 @@
   \item {set\+University}
     \subitem {user\+Profile\+::user\+Profile}, \hyperpage{23}
   \item {sites.\+py}
-    \subitem {G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}, \hyperpage{42}
-    \subitem {S\+I\+T\+E\+S\+L\+I\+ST}, \hyperpage{42}
-    \subitem {user\+To\+U\+RL}, \hyperpage{42}
+    \subitem {G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}, \hyperpage{41}
+    \subitem {S\+I\+T\+E\+S\+L\+I\+ST}, \hyperpage{41}
+    \subitem {user\+To\+U\+RL}, \hyperpage{41}
   \item {split}
     \subitem {pdf\+Reader\+::\+P\+DF}, \hyperpage{10}
 
@@ -255,11 +239,11 @@
     \subitem {set\+Socials}, \hyperpage{22}
     \subitem {set\+University}, \hyperpage{23}
   \item {user\+To\+U\+RL}
-    \subitem {sites.\+py}, \hyperpage{42}
+    \subitem {sites.\+py}, \hyperpage{41}
 
   \indexspace
 
   \item {wrapped\+String}
-    \subitem {menu\+Messages.\+py}, \hyperpage{40}
+    \subitem {menu\+Messages.\+py}, \hyperpage{39}
 
 \end{theindex}

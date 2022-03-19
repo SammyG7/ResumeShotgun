@@ -8,16 +8,6 @@ Allows the user to easily view and set new values for a user profile.
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \hyperlink{menu_8py_a25c282d2809c430851696d3579a689c9}{menu.\+get\+Resume\+Path} ()
-\begin{DoxyCompactList}\small\item\em Gets location of resume. \end{DoxyCompactList}\item 
-def \hyperlink{menu_8py_ab863f774692aeece84e40e0732dc8f8e}{menu.\+get\+Keywords} ()
-\begin{DoxyCompactList}\small\item\em Gets keywords. \end{DoxyCompactList}\item 
-def \hyperlink{menu_8py_a232915ebe82a437109c6b10e16f16d34}{menu.\+change\+Menu} (new\+Menu=-\/2)
-\begin{DoxyCompactList}\small\item\em Changes state dictating what menu is shown. \end{DoxyCompactList}\item 
-def \hyperlink{menu_8py_a91772215914fcdead137b88e47fb4a13}{menu.\+limit} (value, mx=9, mn=1)
-\begin{DoxyCompactList}\small\item\em Processes integer inputs to only allow numbers within a given range; sets them to -\/1 if they are not. \end{DoxyCompactList}\item 
-def \hyperlink{menu_8py_a45d738ab02b72a4e9752e927385dcaa5}{menu.\+prompt\+Input} (force\+Int=True, multiple=False)
-\begin{DoxyCompactList}\small\item\em Prompts user for a menu selection and processes result. \end{DoxyCompactList}\item 
 def \hyperlink{menu_8py_a040b4ec226d870506b3dbe7bed02dbb0}{menu.\+run} (profile)
 \begin{DoxyCompactList}\small\item\em Runs menu, allowing user to tweak preferences. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -29,97 +19,11 @@ Allows the user to easily view and set new values for a user profile.
 Gavin Jameson 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-Mar 17, 2022 
+Mar 18, 2022 
 \end{DoxyDate}
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{menu_8py_file_a232915ebe82a437109c6b10e16f16d34}\label{menu_8py_file_a232915ebe82a437109c6b10e16f16d34}} 
-\index{menu.\+py@{menu.\+py}!change\+Menu@{change\+Menu}}
-\index{change\+Menu@{change\+Menu}!menu.\+py@{menu.\+py}}
-\subsubsection{\texorpdfstring{change\+Menu()}{changeMenu()}}
-{\footnotesize\ttfamily def menu.\+change\+Menu (\begin{DoxyParamCaption}\item[{}]{new\+Menu = {\ttfamily -\/2} }\end{DoxyParamCaption})}
-
-
-
-Changes state dictating what menu is shown. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em new\+Menu} & (optional) Integer for new menu state number (default does not change menu) \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if menu was updated (same menu page or not), False if invalid input was given 
-\end{DoxyReturn}
-\mbox{\Hypertarget{menu_8py_file_ab863f774692aeece84e40e0732dc8f8e}\label{menu_8py_file_ab863f774692aeece84e40e0732dc8f8e}} 
-\index{menu.\+py@{menu.\+py}!get\+Keywords@{get\+Keywords}}
-\index{get\+Keywords@{get\+Keywords}!menu.\+py@{menu.\+py}}
-\subsubsection{\texorpdfstring{get\+Keywords()}{getKeywords()}}
-{\footnotesize\ttfamily def menu.\+get\+Keywords (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Gets keywords. 
-
-\begin{DoxyReturn}{Returns}
-List of strings specified as keywords for searching 
-\end{DoxyReturn}
-\mbox{\Hypertarget{menu_8py_file_a25c282d2809c430851696d3579a689c9}\label{menu_8py_file_a25c282d2809c430851696d3579a689c9}} 
-\index{menu.\+py@{menu.\+py}!get\+Resume\+Path@{get\+Resume\+Path}}
-\index{get\+Resume\+Path@{get\+Resume\+Path}!menu.\+py@{menu.\+py}}
-\subsubsection{\texorpdfstring{get\+Resume\+Path()}{getResumePath()}}
-{\footnotesize\ttfamily def menu.\+get\+Resume\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Gets location of resume. 
-
-\begin{DoxyReturn}{Returns}
-String corresponding to location of resume file 
-\end{DoxyReturn}
-\mbox{\Hypertarget{menu_8py_file_a91772215914fcdead137b88e47fb4a13}\label{menu_8py_file_a91772215914fcdead137b88e47fb4a13}} 
-\index{menu.\+py@{menu.\+py}!limit@{limit}}
-\index{limit@{limit}!menu.\+py@{menu.\+py}}
-\subsubsection{\texorpdfstring{limit()}{limit()}}
-{\footnotesize\ttfamily def menu.\+limit (\begin{DoxyParamCaption}\item[{}]{value,  }\item[{}]{mx = {\ttfamily 9},  }\item[{}]{mn = {\ttfamily 1} }\end{DoxyParamCaption})}
-
-
-
-Processes integer inputs to only allow numbers within a given range; sets them to -\/1 if they are not. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em value} & Integer to process \\
-\hline
-{\em mx} & (optional) Maximum allowed integer \\
-\hline
-{\em mn} & (optional) Minimum allowed integer \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Integer indicating the original input if it is within the range, or -\/1 if it was not in the range 
-\end{DoxyReturn}
-\mbox{\Hypertarget{menu_8py_file_a45d738ab02b72a4e9752e927385dcaa5}\label{menu_8py_file_a45d738ab02b72a4e9752e927385dcaa5}} 
-\index{menu.\+py@{menu.\+py}!prompt\+Input@{prompt\+Input}}
-\index{prompt\+Input@{prompt\+Input}!menu.\+py@{menu.\+py}}
-\subsubsection{\texorpdfstring{prompt\+Input()}{promptInput()}}
-{\footnotesize\ttfamily def menu.\+prompt\+Input (\begin{DoxyParamCaption}\item[{}]{force\+Int = {\ttfamily True},  }\item[{}]{multiple = {\ttfamily False} }\end{DoxyParamCaption})}
-
-
-
-Prompts user for a menu selection and processes result. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em force\+Int} & (optional) Boolean True if the input(s) must be of type integer \\
-\hline
-{\em multiple} & (optional) Boolean True if multiple choices should be returned \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Integer for menu choice if one choice is desired, a list of integers if multiple are desired, and -\/1 if there is an error or no input 
-\end{DoxyReturn}
 \mbox{\Hypertarget{menu_8py_file_a040b4ec226d870506b3dbe7bed02dbb0}\label{menu_8py_file_a040b4ec226d870506b3dbe7bed02dbb0}} 
 \index{menu.\+py@{menu.\+py}!run@{run}}
 \index{run@{run}!menu.\+py@{menu.\+py}}

@@ -1,27 +1,14 @@
 ## @file menu.py
 #  @author Gavin Jameson
 #  @brief Allows the user to easily view and set new values for a user profile
-#  @date Mar 17, 2022
+#  @date Mar 18, 2022
 
 from menuMessages import *
 from sites import SITESLIST
 from time import sleep
 
-## @brief Gets location of resume
-#  @return String corresponding to location of resume file
-def getResumePath():
-    return resumePath
-
-## @brief Gets keywords
-#  @return List of strings specified as keywords for searching
-def getKeywords():
-    return keywords
-
 ## @brief Changes state dictating what menu is shown
-#  @param newMenu (optional) Integer for new menu state number (default does not change menu)
-#  @return True if menu was updated (same menu page or not), False if
-#  invalid input was given
-def changeMenu(newMenu = -2):
+def __changeMenu(newMenu = -2):
     if newMenu == -1:
         displayError("input")
         return False
@@ -34,14 +21,13 @@ def changeMenu(newMenu = -2):
         menu = newMenu
         return True
 
-## @brief Processes integer inputs to only allow numbers
-#  within a given range; sets them to -1 if they are not
-#  @param value Integer to process
-#  @param mx (optional) Maximum allowed integer
-#  @param mn (optional) Minimum allowed integer
-#  @return Integer indicating the original input if it is within
-#  the range, or -1 if it was not in the range
-def limit(value, mx = 9, mn = 1):
+## @brief Processes integer inputs to only allow numbers within a given range; 
+#  sets them to -1 if they are not
+#  @param value Inteegr to verify
+#  @param mx Maximum allowed integer
+#  @param mn Minimum allowed integer
+#  @return Integer equal to value if it is within mx and mn, otherwise -1
+def __limit(value, mx = 9, mn = 1):
     return value if value >= mn and value <= mx else -1
 
 ## @brief Prompts user for a menu selection and processes result
@@ -50,7 +36,7 @@ def limit(value, mx = 9, mn = 1):
 #  @return Integer for menu choice if one choice is desired, a list of
 #  integers if multiple are desired, and -1 if there is an error or no
 #  input
-def promptInput(forceInt = True, multiple = False):
+def __promptInput(forceInt = True, multiple = False):
     msg = wrappedString("Input choices separated by commas:") if multiple else wrappedString("Input choice:")
     userInput = input(msg)
     processedInput = []
@@ -78,7 +64,7 @@ def run(profile):
         ## Main
         if menu == 0:
             displayMenuMain()
-            while not changeMenu(limit(promptInput(), mx = 5, mn = 0)): pass
+            while not __changeMenu(__limit(__promptInput(), mx = 5, mn = 0)): pass
             ## only occurs when going "back" on main, aka exit
             if menu == 0: menu = -1
         ## Main/Resume
@@ -86,12 +72,12 @@ def run(profile):
             displayMenuResume(profile.getResumePath())
             updated = False
             while not updated:
-                choice = promptInput(forceInt = False)
+                choice = __promptInput(forceInt = False)
                 if choice == "0":
-                    changeMenu(0)
+                    __changeMenu(0)
                     updated = True
                 elif profile.setResumePath(choice):
-                    changeMenu()
+                    __changeMenu()
                     updated = True
                 else:
                     displayError("file")
@@ -99,23 +85,23 @@ def run(profile):
         elif menu == 2:
             displayMenuPlaceholder("Main/Personal")
             sleep(5)
-            changeMenu(0)
+            __changeMenu(0)
         ## Main/Keywords
         elif menu == 3:
             displayMenuKeywords(profile.getKeywords())
             updated = False
             while not updated:
-                choice = promptInput(forceInt = False, multiple = True)
+                choice = __promptInput(forceInt = False, multiple = True)
                 if len(choice) == 1 and choice[0] == "1":
                     profile.setKeywords([])
-                    changeMenu()
+                    __changeMenu()
                     updated = True
                 elif len(choice) == 1 and choice[0] == "0":
-                    changeMenu(0)
+                    __changeMenu(0)
                     updated = True
                 elif len(choice) > 0:
                     profile.setKeywords(choice, toggleMode = True)
-                    changeMenu()
+                    __changeMenu()
                     updated = True
                 else:
                     displayError("empty")
@@ -123,18 +109,18 @@ def run(profile):
         elif menu == 4:
             displayMenuPlaceholder("Main/Job")
             sleep(5)
-            changeMenu(0)
+            __changeMenu(0)
         ## Main/Sites
         elif menu == 5:
             displayMenuSites(profile.getSite(), SITESLIST)
             updated = False
             while not updated:
-                choice = promptInput()
+                choice = __promptInput()
                 if choice == 0:
-                    changeMenu(0)
+                    __changeMenu(0)
                     updated = True
                 elif profile.setSite(choice-1):
-                    changeMenu()
+                    __changeMenu()
                     updated = True
                 else:
                     displayError("input")
