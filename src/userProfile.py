@@ -77,29 +77,70 @@ class userProfile:
             profileFile.close()
             try:
                 ## keywords
-                try:
-                    self.__keywords = profile["keywords"]
-                except KeyError:
-                    if userPrompts:
-                        print(wS("Keywords can not be found in profile, using default value.") + "\n")
-                        waitForUser()
+                if "keywords" in profile: self.__keywords = profile["keywords"]
+                elif userPrompts:
+                    print(wS("Keywords can not be found in profile, using default value.") + "\n")
+                    waitForUser()
                 ## site
-                try:
-                    self.__site = profile["site"]
-                except KeyError:
-                    if userPrompts:
-                        print(wS("Site can not be found in profile, using default value.") + "\n")
-                        waitForUser()
+                if "site" in profile: self.__site = profile["site"]
+                elif userPrompts:
+                    print(wS("Site can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## firstName
+                if "firstName" in profile: self.__firstName = profile["firstName"]
+                elif userPrompts:
+                    print(wS("First name can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## lastName
+                if "lastName" in profile: self.__lastName = profile["lastName"]
+                elif userPrompts:
+                    print(wS("Last name can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## email
+                if "email" in profile: self.__email = profile["email"]
+                elif userPrompts:
+                    print(wS("Email can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## phone
+                if "phone" in profile: self.__phone = profile["phone"]
+                elif userPrompts:
+                    print(wS("Phone can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## organisation
+                if "organisation" in profile: self.__organisation = profile["organisation"]
+                elif userPrompts:
+                    print(wS("Organisation can not be found in profile, using default value.") + "\n")
+                    waitForUser()
                 ## resumePath
-                try:
+                if "resumePath" in profile:
                     if isfile(profile["resumePath"]): self.__resumePath = profile["resumePath"]
                     elif userPrompts:
-                        print(wS("Resume can not be accessed, using blank value.") + "\n")
+                        print(wS("Resume can not be accessed, using default value.") + "\n")
                         waitForUser()
-                except KeyError:
-                    if userPrompts:
-                        print(wS("Resume can not be found in profile, using default value.") + "\n")
-                        waitForUser()
+                elif userPrompts:
+                    print(wS("Resume can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## socials
+                if "socials" in profile: self.__socials = profile["socials"]
+                elif userPrompts:
+                    print(wS("Socials can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## location
+                if "location" in profile: self.__location = profile["location"]
+                elif userPrompts:
+                    print(wS("Location can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## gradDate
+                if "gradDate" in profile: self.__gradDate = profile["gradDate"]
+                elif userPrompts:
+                    print(wS("Graduation date can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## university
+                if "university" in profile: self.__university = profile["university"]
+                elif userPrompts:
+                    print(wS("University can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## -- FINISHED --
                 if userPrompts: 
                     print("Done! \n")
                     waitForUser()
@@ -246,8 +287,8 @@ class userProfile:
             for word in keywords:
                 if word.replace(" ", "") != "":
                     word = word.lower()
-                    try: self.__keywords.remove(word)
-                    except ValueError: self.__keywords.append(word)
+                    if word in self.getKeywords(): self.__keywords.remove(word)
+                    else: self.__keywords.append(word)
         else: 
             self.__keywords = keywords
 
@@ -256,41 +297,48 @@ class userProfile:
     #  @param site Integer inicating index of site to swap to
     #  @return Boolean True if the site was updated, False if not
     def setSite(self, site):
-        try: self.__site = SITESLIST[site]
-        except IndexError: return False
-        except TypeError: return False
-        return True
+        if site in self.getSite():
+            self.__site = SITESLIST[site]
+            return True
+        return False
 
     ## @brief Method sets first name
     #  @param name String indicating name
     def setFirstName(self, name):
-        pass # TODO
+        self.firstName = name
 
     ## @brief Method sets last name
     #  @param name String indicating name
     def setLastName(self, name):
-        pass # TODO
+        self.lastName = name
 
     ## @brief Method tries to set email
     #  @details Method will not change the value if the new input is invalid
     #  @param email String indicating email
-    #  @return Boolean True if email was updated (has top-level domain and "@"), False if not
+    #  @return Boolean True if email was updated, False if not
     def setEmail(self, email):
-        pass # TODO
+        if "@" in email and "." in email:
+            self.email = email
+            return True
+        return False
 
     ## @brief Method tries to set phone number
     #  @details Method will not change the value if the new input is invalid;
     #  accepts different formats including those with brackets or dashes; do not include
     #  country codes
     #  @param phone String of numbers indicating email
-    #  @return Boolean True if email was updated (exactly 10 numbers), False if not
+    #  @return Boolean True if email was updated, False if not
     def setPhone(self, phone):
-        pass # TODO
+        phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
+        if len(phone) == 10 and phone.isnumeric():
+            self.phone = phone
+            return True
+        return False
 
     ## @brief Method sets organisation
     #  @param org String indicating organisation name
     def setOrganisation(self, org):
-        pass # TODO
+        self.organisation = org
 
     ## @brief Method tries to set path to resume file
     #  @details Method also checks if file exists, and if it does not it will not change it
@@ -309,30 +357,48 @@ class userProfile:
 
     ## @brief Method sets social links
     #  @details When toggleMode = True, only the site name is required to remove an element
-    #  @param links A list of strings used as links
+    #  @param link A string representing a link
     #  @param toggleMode (optional) If true, instead of overwriting the class varible with 
     #  the parameter, it will add words to the class varable from the parameter that are not 
     #  there and remove ones that are
-    def setSocials(self, links, toggleMode = False):
-        pass # TODO
+    def setSocials(self, link, toggleMode = False):
+        if toggleMode:
+            if link.replace(" ", "") != "":
+                removed = False
+                for soc in self.getSocials():
+                    if link in soc:
+                        self.__socials.remove(soc)
+                        removed = True
+                if not removed: self.__socials.append(link)
+        else: 
+            self.__socials = socials
 
     ## @brief Method sets location
     #  @details If 2 inputs received, it will be stored as a length 3 with a blank value
     #  between the two inputted values so indexing always access the same
-    #  kind of location (i.e. country)
+    #  kind of location (i.e. country at 2)
     #  @param loc A length 2 or 3 list of strings indicating locations in the form
     #  [city, state/province, country] or [city, country]
+    #  @return Boolean True if location was updated, False if not
     def setLocation(self, loc):
-        pass # TODO
+        if len(loc) == 2: self.__location = (loc[0], "", loc[1])
+        elif len(loc) == 3: self.__location = (loc[0], loc[1], loc[2])
+        else: return False
+        return True            
 
     ## @brief Method tries to set grad date
-    #  @param grad A length 2 list of integers in the form [grad month, grad year]
-    #  @return Boolean True if date was updated (grad month number must be from 1-12), False if not
+    #  @param grad A length 2 list of strings indicating integers in the form [grad month, grad year]
+    #  @return Boolean True if date was updated, False if not
     def setGradDate(self, grad):
-        pass # TODO
+        if len(grad) == 2 and grad[0].isnumeric() and grad[1].isnumeric() and \
+        int(grad[0]) > 0 and int(grad[0]) < 13:
+            self.__gradDate = (int(grad[0]), int(grad[1]))
+            return True
+        return False
+                
     
     ## @brief Method sets university
     #  @param name String indicating university name
     def setUniversity(self, name):
-        pass # TODO
+        self.__university = name
 
