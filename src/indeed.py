@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from Job import Job
 
 from bs4 import BeautifulSoup
 
@@ -13,6 +14,7 @@ class Indeed:
     #Search Info
     jobs = []
     links = []
+    ids = []
     url = ""
     keyword = ""
     location = ""
@@ -25,8 +27,8 @@ class Indeed:
     soup = ""
 
     #Selenium Driver Info
-    driverLocation = "/usr/bin/chromedriver"
-    driver = webdriver.Chrome(executable_path=driverLocation)
+    #driverLocation = "/usr/bin/chromedriver"
+    #driver = webdriver.Chrome(executable_path=driverLocation)
 
     ## @brief Constructs a job search using Indeed.
     #  @param keyword a string representing the job title/poistion that the user is interested in searching for.
@@ -34,9 +36,8 @@ class Indeed:
     def __init__(self, keyword, location):
         self.keyword = keyword
         self.location = location
-
-    def getItems(self):
-        return self.jobs.items()
+        self.driverLocation = "/usr/bin/chromedriver"
+        self.driver = webdriver.Chrome(executable_path=self.driverLocation)
 
     def updateCurrentPage(self, url):
         self.url = url
@@ -60,34 +61,45 @@ class Indeed:
         self.url = self.driver.current_url
         self.page = requests.get(self.url)
         self.soup = BeautifulSoup(self.page.content, "html.parser")
-
     
-    def getJobs(self):
+    ## @brief Find essential job info(title, company, link) and creates a Job class
+    #  @details Uses beautiful soup to search linearly down the page with two different 
+    #  methods but allign once search with the other properly
+    def getJob(self):
         
-        cards = self.soup.find_all("td",class_="resultContent")
+        #find html that contains all table results that contain the job title and company
+        infoCards = self.soup.find_all("td",class_="resultContent")
 
-        #search through job cards
-        for card in cards:
-            data = card.find_all("span")
-            #print(data)
+        #find html that contains href data
+        div = self.soup.find("div",class_="mosaic-provider-jobcards")
+        linkCards = div.find_all("a", href=True, id=True)
+
+        #search through both html list data
+        for info,links in zip(infoCards, linkCards):
+            j = Job()
+
+            data = info.find_all("span")
+
+            #create a temporary list of a specif cjob card's info
             job = []
 
             #traverse through span elements of ecah job card that contain the job info
             for item in data:
                 if item.text not in job and item.text != "new":
                     job.append(item.text)
-            self.jobs.append(job[:2])
+            j.setTitle(job[0])
+            j.setCompany(job[1])
 
-    ## @brief Traverses through the url to search and save jobs on a single page.
-    def getUrls(self):
+            jobLink = links['href']
 
-        div = self.soup.find("div",class_="mosaic-provider-jobcards")
-        cards = div.find_all("a", href=True)
-
-        for card in cards:
-            jobLink = card['href']
+            #check that job link is proper format
             if(jobLink[:8] == "/pagead/" or jobLink[:9] == "/company/" or jobLink[:4] == "/rc/"):
-                self.links.append("https://ca.indeed.com" + jobLink)
+                j.setLink("https://ca.indeed.com" + jobLink)
+
+            j.setTitle(job[0])
+            j.setCompany(job[1])
+
+            self.jobs.append(j)
 
     ## @brief Gets number of pages based on an Indeed search result.
     def getPages(self):
@@ -125,19 +137,28 @@ class Indeed:
     def run(self):
         try:
             self.search()
-            self.getJobs()
-            self.getUrls()
+            self.getJob()
+            #self.getUrls()
             self.getPages()
             self.pageParser()
-            for i in range(len(self.nextPages)):
+            
+            for i in range(1,len(self.nextPages)):
                 self.updateCurrentPage(self.nextPages[i])
-                self.getJobs()
-            print(self.jobs)
+                self.getJob()
+            #print(self.jobs)
             print(len(self.jobs))
+            j = 0
+            for i in range(len(self.jobs)):
+                print([self.jobs[i].title, self.jobs[i].link])
+                j += 1
+            print(j)
+            #print(self.links)
+            #print(self.ids)
         except:
             return "An error occured with the search"
     
     
 if __name__ == "__main__":
-    s1 = Indeed("Engineer", "Collingwood")
-    s1.run()
+    
+    s1 = Indeed("Engineer", "Huntsville, ON")
+    s1.run()  
