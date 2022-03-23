@@ -1,7 +1,7 @@
 ## @file userProfile.py
 #  @author Gavin Jameson
 #  @brief user profile module
-#  @date Mar 18, 2022
+#  @date Mar 17, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
@@ -297,7 +297,7 @@ class userProfile:
     #  @param site Integer inicating index of site to swap to
     #  @return Boolean True if the site was updated, False if not
     def setSite(self, site):
-        if site in self.getSite():
+        if 0 <= site < len(SITESLIST):
             self.__site = SITESLIST[site]
             return True
         return False

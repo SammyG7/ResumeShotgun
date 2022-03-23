@@ -56,7 +56,7 @@ def displayMenuPersonal():
           " 8) gradDate \n" +
           " 9) University \n" +
           "\n" +
-          " 0) Save and Start \n" +
+          " 0) Go back \n" +
           "\n")
 
 ## @brief Displays text for keywords menu options
