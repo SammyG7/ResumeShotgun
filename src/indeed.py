@@ -1,3 +1,9 @@
+## @file Indeed.py
+#  @author Jeremy Langner
+#  @brief Module that extracts job posting links from Indeed and returns the job title and company to the user.
+#  @date March 17, 2022
+
+
 import sys
 import time
 import requests
@@ -26,9 +32,6 @@ class Indeed:
     page = ""
     soup = ""
 
-    #Selenium Driver Info
-    #driverLocation = "/usr/bin/chromedriver"
-    #driver = webdriver.Chrome(executable_path=driverLocation)
 
     ## @brief Constructs a job search using Indeed.
     #  @param keyword a string representing the job title/poistion that the user is interested in searching for.
@@ -123,6 +126,7 @@ class Indeed:
 
         self.jobPages = pages
 
+    ## @brief Formats various indeed job search pages.
     def pageParser(self):
 
         self.driver.get(self.url)
@@ -134,6 +138,7 @@ class Indeed:
             currUrl = self.url + "&start=" + str(i)+ "0"
             self.nextPages.append(currUrl)
 
+    ## @brief Used to run various module functions.
     def run(self):
         try:
             self.search()
