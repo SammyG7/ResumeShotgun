@@ -1,0 +1,106 @@
+\hypertarget{classpdfReader_1_1PDF}{}\section{pdf\+Reader.\+P\+DF Class Reference}
+\label{classpdfReader_1_1PDF}\index{pdf\+Reader.\+P\+DF@{pdf\+Reader.\+P\+DF}}
+
+
+This class represents a \hyperlink{classpdfReader_1_1PDF}{P\+DF} document.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classpdfReader_1_1PDF_ad3a030d731fe9fdbdd25cbdf2811cfd9}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, path)
+\begin{DoxyCompactList}\small\item\em Constructor for \hyperlink{classpdfReader_1_1PDF}{P\+DF}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpdfReader_1_1PDF_a4fc2e001f7e9dc04f2a77b2f7988e7d9}\label{classpdfReader_1_1PDF_a4fc2e001f7e9dc04f2a77b2f7988e7d9}} 
+def \hyperlink{classpdfReader_1_1PDF_a4fc2e001f7e9dc04f2a77b2f7988e7d9}{display} (self)
+\begin{DoxyCompactList}\small\item\em Displays the document to the user in an interactive window. \end{DoxyCompactList}\item 
+def \hyperlink{classpdfReader_1_1PDF_adecd6d310fcbaf65067825dcb000c6e5}{search} (self, key)
+\begin{DoxyCompactList}\small\item\em Searches the \hyperlink{classpdfReader_1_1PDF}{P\+DF} for a specified keyword. \end{DoxyCompactList}\item 
+def \hyperlink{classpdfReader_1_1PDF_ae0c66e62a60c32cf66340a7f63b37706}{split} (self, page)
+\begin{DoxyCompactList}\small\item\em Splits the \hyperlink{classpdfReader_1_1PDF}{P\+DF} document into two seperate \hyperlink{classpdfReader_1_1PDF}{P\+DF} objects. \end{DoxyCompactList}\item 
+def \hyperlink{classpdfReader_1_1PDF_a64f25f9ee8d33642377bcec567898a23}{merge} (self, pdf)
+\begin{DoxyCompactList}\small\item\em Merges two \hyperlink{classpdfReader_1_1PDF}{P\+DF} objects into a single object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class represents a \hyperlink{classpdfReader_1_1PDF}{P\+DF} document. 
+
+Assumes all inputs are of the correct type 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classpdfReader_1_1PDF_ad3a030d731fe9fdbdd25cbdf2811cfd9}\label{classpdfReader_1_1PDF_ad3a030d731fe9fdbdd25cbdf2811cfd9}} 
+\index{pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def pdf\+Reader.\+P\+D\+F.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path }\end{DoxyParamCaption})}
+
+
+
+Constructor for \hyperlink{classpdfReader_1_1PDF}{P\+DF}. 
+
+Defines a \hyperlink{classpdfReader_1_1PDF}{P\+DF} based on a file path 
+\begin{DoxyParams}{Parameters}
+{\em path} & String value which describes the file path to the desired document \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpdfReader_1_1PDF_a64f25f9ee8d33642377bcec567898a23}\label{classpdfReader_1_1PDF_a64f25f9ee8d33642377bcec567898a23}} 
+\index{pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}!merge@{merge}}
+\index{merge@{merge}!pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}}
+\subsubsection{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily def pdf\+Reader.\+P\+D\+F.\+merge (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pdf }\end{DoxyParamCaption})}
+
+
+
+Merges two \hyperlink{classpdfReader_1_1PDF}{P\+DF} objects into a single object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pdf} & \hyperlink{classpdfReader_1_1PDF}{P\+DF} object that will be merged with current \hyperlink{classpdfReader_1_1PDF}{P\+DF} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classpdfReader_1_1PDF}{P\+DF} object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpdfReader_1_1PDF_adecd6d310fcbaf65067825dcb000c6e5}\label{classpdfReader_1_1PDF_adecd6d310fcbaf65067825dcb000c6e5}} 
+\index{pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}!search@{search}}
+\index{search@{search}!pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}}
+\subsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily def pdf\+Reader.\+P\+D\+F.\+search (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{key }\end{DoxyParamCaption})}
+
+
+
+Searches the \hyperlink{classpdfReader_1_1PDF}{P\+DF} for a specified keyword. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & String value which is searched for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean value based on whether or not the key could be found 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpdfReader_1_1PDF_ae0c66e62a60c32cf66340a7f63b37706}\label{classpdfReader_1_1PDF_ae0c66e62a60c32cf66340a7f63b37706}} 
+\index{pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}!split@{split}}
+\index{split@{split}!pdf\+Reader\+::\+P\+DF@{pdf\+Reader\+::\+P\+DF}}
+\subsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily def pdf\+Reader.\+P\+D\+F.\+split (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{page }\end{DoxyParamCaption})}
+
+
+
+Splits the \hyperlink{classpdfReader_1_1PDF}{P\+DF} document into two seperate \hyperlink{classpdfReader_1_1PDF}{P\+DF} objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em page} & Integer value defining at which page the \hyperlink{classpdfReader_1_1PDF}{P\+DF} should be split \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple of \hyperlink{classpdfReader_1_1PDF}{P\+DF} objects 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/\hyperlink{pdfReader_8py}{pdf\+Reader.\+py}\end{DoxyCompactItemize}

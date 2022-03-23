@@ -1,6 +1,13 @@
+## @file menuMessages.py
+#  @author Gavin Jameson
+#  @brief interface messages module
+#  @date Mar 17, 2022
+
 from os import name, system
 
 # Widths are 30 characters max
+# displayMenu ... is manually enforced,
+# other messages use wrappedString
 
 ## @brief Displays text for main menu options
 def displayMenuMain():
@@ -11,8 +18,7 @@ def displayMenuMain():
           " 1) Upload Resume \n" +
           " 2) Personal Info \n" +
           " 3) Keywords \n" +
-          " 4) Job preferences \n" +
-          " 5) Sites \n" +
+          " 4) Sites \n" +
           "\n" +
           " 0) Save and Start \n" +
           "\n")
@@ -30,6 +36,42 @@ def displayMenuResume(path):
           "\n" +
           wrappedString("To select a new resume, " +
                         "input the path to the pdf.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for personal info menu options
+def displayMenuPersonal():
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal              \n" +
+          "==============================\n" +
+          " 1) First Name \n" +
+          " 2) Last Name \n" +
+          " 3) Email \n" +
+          " 4) Phone \n" +
+          " 5) Organisation \n" +
+          " 6) Socials \n" +
+          " 7) Location \n" +
+          " 8) gradDate \n" +
+          " 9) University \n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for first name menu (profile submenu) options
+#  @param path String for current path to resume file
+def displayMenuFirstName(name):
+    if name == "": name = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/First        \n" +
+          "==============================\n" +
+          " Current first name: \n" +
+          " " + name + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the first name.") + "\n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -77,8 +119,10 @@ def displayMenuSites(site, siteList):
           " 0) Go back \n" +
           "\n")
 
+
+
 ## @brief Displays text for unimplemented menu
-#  @param menu (optional) String for menu location (default "??")
+#  @param menu (optional) String for menu location
 def displayMenuPlaceholder(menu = "??"):
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
@@ -101,7 +145,7 @@ def clearScreen():
 #  @details Each new line is padded with a space for optimal asthetics, that space character 
 #  IS included in the width
 #  @param raw String or list to wrap
-#  @param width (optional) integer for maximum width allowed
+#  @param width (optional) Integer for maximum width allowed
 #  @return String with no line longer than the given width in characters (if possible)
 def wrappedString(raw, width = 30):
     out = " "
@@ -135,7 +179,10 @@ def wrappedString(raw, width = 30):
                "that would happen if it didn't")
                 
 ## @brief Displays error messages
-#  @param error (optional) error message type to display
+#  @details Error messages are separate from Python error messages; these messages
+#  do not and should not stop execution, they should merely let the user know that
+#  the program did not do what was expected of it for the reason given
+#  @param error (optional) Error message type to display
 def displayError(error = "general"):
     msgs = {
         "input": "Invalid input selected.",

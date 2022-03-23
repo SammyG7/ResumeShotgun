@@ -1,0 +1,84 @@
+\hypertarget{sites_8py}{}\section{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/sites.py File Reference}
+\label{sites_8py}\index{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/sites.\+py@{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/sites.\+py}}
+
+
+sites \char`\"{}dictionary\char`\"{}  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{sites_8py_a4b34f352b686ec316b377b7c92fe8a09}{sites.\+user\+To\+U\+RL} (username, site)
+\begin{DoxyCompactList}\small\item\em Method converts website name and username to U\+RL. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \hyperlink{sites_8py_a1744d9a65a2915fa55ec1699994e9ecb}{sites.\+S\+I\+T\+E\+S\+L\+I\+ST} = \mbox{[}\char`\"{}glassdoor\char`\"{}, \char`\"{}indeed\char`\"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em List of strings indicating supported sites. \end{DoxyCompactList}\item 
+dictionary \hyperlink{sites_8py_a4deacdcb2edb63fa9a543cf94d264a3b}{sites.\+G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}
+\begin{DoxyCompactList}\small\item\em Dictionary to swap site name to correct file for scraping links. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+sites \char`\"{}dictionary\char`\"{} 
+
+\begin{DoxyAuthor}{Author}
+Gavin Jameson 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mar 2, 2022 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{sites_8py_file_a4b34f352b686ec316b377b7c92fe8a09}\label{sites_8py_file_a4b34f352b686ec316b377b7c92fe8a09}} 
+\index{sites.\+py@{sites.\+py}!user\+To\+U\+RL@{user\+To\+U\+RL}}
+\index{user\+To\+U\+RL@{user\+To\+U\+RL}!sites.\+py@{sites.\+py}}
+\subsubsection{\texorpdfstring{user\+To\+U\+R\+L()}{userToURL()}}
+{\footnotesize\ttfamily def sites.\+user\+To\+U\+RL (\begin{DoxyParamCaption}\item[{}]{username,  }\item[{}]{site }\end{DoxyParamCaption})}
+
+
+
+Method converts website name and username to U\+RL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & String indicating username on site \\
+\hline
+{\em site} & String indicating title of site \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String indicating U\+RL of user\textquotesingle{}s profile on the site 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{sites_8py_file_a4deacdcb2edb63fa9a543cf94d264a3b}\label{sites_8py_file_a4deacdcb2edb63fa9a543cf94d264a3b}} 
+\index{sites.\+py@{sites.\+py}!G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE@{G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}}
+\index{G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE@{G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}!sites.\+py@{sites.\+py}}
+\subsubsection{\texorpdfstring{G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}{GETLINKSFILE}}
+{\footnotesize\ttfamily dictionary sites.\+G\+E\+T\+L\+I\+N\+K\+S\+F\+I\+LE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 =  \{
+2     \textcolor{stringliteral}{"glassdoor"}: \textcolor{stringliteral}{"get\_links\_glassdoor.py"},
+3     \textcolor{stringliteral}{"indeed"}: \textcolor{stringliteral}{"get\_links\_indeed.py"}
+4 \}
+\end{DoxyCode}
+
+
+Dictionary to swap site name to correct file for scraping links. 
+
+\mbox{\Hypertarget{sites_8py_file_a1744d9a65a2915fa55ec1699994e9ecb}\label{sites_8py_file_a1744d9a65a2915fa55ec1699994e9ecb}} 
+\index{sites.\+py@{sites.\+py}!S\+I\+T\+E\+S\+L\+I\+ST@{S\+I\+T\+E\+S\+L\+I\+ST}}
+\index{S\+I\+T\+E\+S\+L\+I\+ST@{S\+I\+T\+E\+S\+L\+I\+ST}!sites.\+py@{sites.\+py}}
+\subsubsection{\texorpdfstring{S\+I\+T\+E\+S\+L\+I\+ST}{SITESLIST}}
+{\footnotesize\ttfamily list sites.\+S\+I\+T\+E\+S\+L\+I\+ST = \mbox{[}\char`\"{}glassdoor\char`\"{}, \char`\"{}indeed\char`\"{}\mbox{]}}
+
+
+
+List of strings indicating supported sites. 
+
+In order of implementation, arbitrarily chosen to be this way 
