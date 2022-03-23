@@ -5,6 +5,7 @@
 
 import unittest
 from userProfile import *
+import menu
 
 ## @brief Tests
 class templateTest(unittest.TestCase):
@@ -54,6 +55,15 @@ class userProfileTest(userProfileBase):
     def testBException(self):
         with self.assertRaises(IndexError):
             a = [][0]
+
+## @brief Allows manual tests for menu module
+class menuTest(userProfileBase):
+    
+    ## @brief Sets states for manual keyword menu testing
+    def testKeywords(self):
+        menu.run(self.profile)
+        self.assertEqual(input("RESULT --\n" +
+                               "Keywords tests: "), "y")
 
 if __name__ == '__main__':
     unittest.main()    
