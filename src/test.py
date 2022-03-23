@@ -60,14 +60,14 @@ class userProfileTest(userProfileBase):
 ## @brief Sends message about info needed for manual test
 #  and waits for confirmation
 #  @param subject String indicating information about testing
-def testBrief(subject):
+def __testBrief(subject):
     print("-- PLEASE CHECK --\n" + subject)
     waitForUser()
 
 ## @brief Interfaces with manual assertion of test
 #  @param subject String indicating information about testing
 #  @return Boolean True if tester indicated test passed, False if not
-def testResult(subject):
+def __testResult(subject):
     return "y" == input("-- RESULT --\n" + subject + "\n(y/n): ")
 
 ## @brief Allows manual tests for menu module
@@ -76,9 +76,9 @@ class menuTest(userProfileBase):
     ## @brief Sets states for manual keyword menu testing
     def testKeywords(self):
         subj = "Keywords menu, resetting, toggling"
-        testBrief(subj)
+        __testBrief(subj)
         menu.run(self.profile)
-        self.assertTrue(testResult(subj))
+        self.assertTrue(__testResult(subj))
 
 if __name__ == '__main__':
     unittest.main()    

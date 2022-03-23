@@ -86,7 +86,7 @@ def run(profile):
             displayMenuPersonal()
             updated = False
             while not updated:
-                choice = limit(promptInput(), mx = 9, mn = 0)
+                choice = __limit(__promptInput(), mx = 9, mn = 0)
                 if choice > 0: choice += 10
                 updated = __changeMenu(choice)
         ## Main/Keywords
@@ -125,51 +125,51 @@ def run(profile):
         ## Main/Personal/First
         elif menu == 11:
             displayMenuPlaceholder("Main/Personal/First")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Last
         elif menu == 12:
             displayMenuPlaceholder("Main/Personal/Last")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Email
         elif menu == 13:
             displayMenuPlaceholder("Main/Personal/Email")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Phone
         elif menu == 14:
             displayMenuPlaceholder("Main/Personal/Phone")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Organisation
         elif menu == 15:
             displayMenuPlaceholder("Main/Personal/Org")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Socials
         elif menu == 16:
             displayMenuPlaceholder("Main/Personal/Socials")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Location
         elif menu == 17:
             displayMenuPlaceholder("Main/Personal/Location")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Grad
         elif menu == 18:
             displayMenuPlaceholder("Main/Personal/Grad")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Uni
         elif menu == 19:
             displayMenuPlaceholder("Main/Personal/Uni")
-            time.sleep(3)
-            changeMenu(2)
+            sleep(3)
+            __changeMenu(2)
         ## Main/Personal/Uni
         else:
             displayMenuPlaceholder("FORBIDDEN MENU :O")
-            time.sleep(3)
-            changeMenu(0)
+            sleep(3)
+            __changeMenu(0)
 
