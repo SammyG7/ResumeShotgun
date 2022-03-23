@@ -5,6 +5,7 @@
 
 import unittest
 from userProfile import *
+from menuMessages import waitForUser
 import menu
 
 ## @brief Tests
@@ -56,14 +57,28 @@ class userProfileTest(userProfileBase):
         with self.assertRaises(IndexError):
             a = [][0]
 
+## @brief Sends message about info needed for manual test
+#  and waits for confirmation
+#  @param subject String indicating information about testing
+def testBrief(subject):
+    print("-- PLEASE CHECK --\n" + subject)
+    waitForUser()
+
+## @brief Interfaces with manual assertion of test
+#  @param subject String indicating information about testing
+#  @return Boolean True if tester indicated test passed, False if not
+def testResult(subject):
+    return "y" == input("-- RESULT --\n" + subject + "\n(y/n): ")
+
 ## @brief Allows manual tests for menu module
 class menuTest(userProfileBase):
     
     ## @brief Sets states for manual keyword menu testing
     def testKeywords(self):
+        subj = "Keywords menu, resetting, toggling"
+        testBrief(subj)
         menu.run(self.profile)
-        self.assertEqual(input("RESULT --\n" +
-                               "Keywords tests: "), "y")
+        self.assertTrue(testResult(subj))
 
 if __name__ == '__main__':
     unittest.main()    
