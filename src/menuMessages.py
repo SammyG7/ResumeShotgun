@@ -16,8 +16,7 @@ def displayMenuMain():
           " 1) Upload Resume \n" +
           " 2) Personal Info \n" +
           " 3) Keywords \n" +
-          " 4) Job preferences \n" +
-          " 5) Sites \n" +
+          " 4) Sites \n" +
           "\n" +
           " 0) Save and Start \n" +
           "\n")
@@ -63,10 +62,6 @@ def displayMenuKeywords(keywords):
           "\n" +
           " 0) Go back \n" +
           "\n")
-
-## @brief Displays text for job preferences menu
-def displayMenuPreferences():
-    pass # TODO (remove?)
 
 ## @brief Displays text for sites menu options
 #  @param site String indicating current site
