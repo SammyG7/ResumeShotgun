@@ -119,13 +119,8 @@ def run(profile):
                     updated = True
                 else:
                     displayError("empty")
-        ## Main/Job
-        elif menu == 4:
-            displayMenuPlaceholder("Main/Job")
-            sleep(5)
-            changeMenu(0)
         ## Main/Sites
-        elif menu == 5:
+        elif menu == 4:
             displayMenuSites(profile.getSite(), SITESLIST)
             updated = False
             while not updated:

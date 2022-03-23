@@ -6,6 +6,8 @@
 from os import name, system
 
 # Widths are 30 characters max
+# displayMenu ... is manually enforced,
+# other messages use wrappedString
 
 ## @brief Displays text for main menu options
 def displayMenuMain():
