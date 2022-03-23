@@ -305,12 +305,12 @@ class userProfile:
     ## @brief Method sets first name
     #  @param name String indicating name
     def setFirstName(self, name):
-        self.firstName = name
+        self.__firstName = name
 
     ## @brief Method sets last name
     #  @param name String indicating name
     def setLastName(self, name):
-        self.lastName = name
+        self.__lastName = name
 
     ## @brief Method tries to set email
     #  @details Method will not change the value if the new input is invalid
@@ -318,7 +318,7 @@ class userProfile:
     #  @return Boolean True if email was updated, False if not
     def setEmail(self, email):
         if "@" in email and "." in email:
-            self.email = email
+            self.__email = email
             return True
         return False
 
@@ -331,14 +331,14 @@ class userProfile:
     def setPhone(self, phone):
         phone = phone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "")
         if len(phone) == 10 and phone.isnumeric():
-            self.phone = phone
+            self.__phone = phone
             return True
         return False
 
     ## @brief Method sets organisation
     #  @param org String indicating organisation name
     def setOrganisation(self, org):
-        self.organisation = org
+        self.__organisation = org
 
     ## @brief Method tries to set path to resume file
     #  @details Method also checks if file exists, and if it does not it will not change it
