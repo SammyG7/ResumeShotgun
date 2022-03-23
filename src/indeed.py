@@ -19,7 +19,6 @@ class Indeed:
     #Search Info
     jobs = []
     links = []
-    ids = []
     url = ""
     keyword = ""
     location = ""
@@ -82,13 +81,14 @@ class Indeed:
 
             data = info.find_all("span")
 
-            #create a temporary list of a specif cjob card's info
+            #create a temporary list of a specifc job card's info
             job = []
 
             #traverse through span elements of ecah job card that contain the job info
             for item in data:
                 if item.text not in job and item.text != "new":
                     job.append(item.text)
+
             j.setTitle(job[0])
             j.setCompany(job[1])
 
@@ -97,9 +97,6 @@ class Indeed:
             #check that job link is proper format
             if(jobLink[:8] == "/pagead/" or jobLink[:9] == "/company/" or jobLink[:4] == "/rc/"):
                 j.setLink("https://ca.indeed.com" + jobLink)
-
-            j.setTitle(job[0])
-            j.setCompany(job[1])
 
             self.jobs.append(j)
 
@@ -142,27 +139,14 @@ class Indeed:
         try:
             self.search()
             self.getJob()
-            #self.getUrls()
             self.getPages()
             self.pageParser()
-            
-            for i in range(1,len(self.nextPages)):
-                self.updateCurrentPage(self.nextPages[i])
-                self.getJob()
-            #print(self.jobs)
-            print(len(self.jobs))
-            j = 0
-            for i in range(len(self.jobs)):
-                print([self.jobs[i].title, self.jobs[i].link])
-                j += 1
-            print(j)
-            #print(self.links)
-            #print(self.ids)
         except:
             return "An error occured with the search"
     
-    
+''' Uncomment to run
 if __name__ == "__main__":
     
     s1 = Indeed("Engineer", "Huntsville, ON")
     s1.run()  
+'''
