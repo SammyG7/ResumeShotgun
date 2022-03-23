@@ -1,7 +1,7 @@
 ## @file test.py
 #  @author Gavin Jameson
 #  @brief Testing for modules
-#  @date Mar 16, 2022
+#  @date Mar 23, 2022
 
 import unittest
 from userProfile import *
@@ -29,11 +29,11 @@ class userProfileBase(unittest.TestCase):
 
     ## @brief Runs before every test
     def setUp(self):
-        self.profile = userProfile()
+        self.profile = userProfile(userPrompts = False)
 
     ## @brief Fills in profile with non-default values
     def loadFull(self):
-        self.profile.loadProfile("test1.yaml")
+        self.profile.loadProfile(file = "test1.yaml")
 
     ## @brief Creates saved profile file for test purposes
     def makeFullProfile(self):
