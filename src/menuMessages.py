@@ -40,7 +40,7 @@ def displayMenuResume(path):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for personal info menu
+## @brief Displays text for personal info menu options
 def displayMenuPersonal():
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
@@ -55,6 +55,23 @@ def displayMenuPersonal():
           " 7) Location \n" +
           " 8) gradDate \n" +
           " 9) University \n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for first name menu (profile submenu) options
+#  @param path String for current path to resume file
+def displayMenuFirstName(name):
+    if name == "": name = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/First        \n" +
+          "==============================\n" +
+          " Current first name: \n" +
+          " " + name + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the first name.") + "\n" +
           "\n" +
           " 0) Go back \n" +
           "\n")

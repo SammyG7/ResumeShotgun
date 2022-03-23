@@ -124,9 +124,19 @@ def run(profile):
                     displayError("input")
         ## Main/Personal/First
         elif menu == 11:
-            displayMenuPlaceholder("Main/Personal/First")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuFirstName(profile.getFirstName())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setFirstName(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Last
         elif menu == 12:
             displayMenuPlaceholder("Main/Personal/Last")
@@ -172,4 +182,6 @@ def run(profile):
             displayMenuPlaceholder("FORBIDDEN MENU :O")
             sleep(3)
             __changeMenu(0)
+
+# missing things to add: QOL review all, see whats missing
 
