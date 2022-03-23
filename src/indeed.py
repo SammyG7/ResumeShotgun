@@ -6,164 +6,125 @@
 import sys
 import time
 import requests
+from unittest import result
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from Job import Job
+from selenium.webdriver.common.by import By
 
 from bs4 import BeautifulSoup
 
-class Indeed:
 
-    #Search Info
+
+#keyword and location from user input module
+keyword = ""
+location = ""
+
+#global constants
+pages = 0
+allJobs = []
+
+## @brief Enters in search parameters and returns url of results.
+#  @details Uses Selenium to send keys to Indeed.com
+#  @param keyword a string representing the job title/poistion that the user is interested in searching for.
+#  @param location a string representing the desired job location.
+#  @return string representing the url of the search results. 
+def search(keyword, location):
+    driverLocation = "/usr/bin/chromedriver"
+    driver = webdriver.Chrome(executable_path=driverLocation)
+
+    driver.get("https://ca.indeed.com/")
+    driver.find_element(By.ID,"text-input-what").send_keys(str(keyword))
+    time.sleep(.5)
+
+    driver.find_element(By.ID,"text-input-where").send_keys(Keys.CONTROL + "a")
+    driver.find_element(By.ID,"text-input-where").send_keys(Keys.DELETE)
+    driver.find_element(By.ID,"text-input-where").send_keys(str(location))
+    time.sleep(0.5)
+    driver.find_element(By.CLASS_NAME,"yosegi-InlineWhatWhere-primaryButton").click()
+
+    
+    return driver.current_url
+
+## @brief Traverses through the url to search and save jobs on a single page.
+#  @param url a string representing an Indeed url with valid search results.
+#  @return list containing tuples of job title and company.
+def getJobs(url):
+
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    
+    cards = soup.find_all("td",class_="resultContent")
     jobs = []
-    links = []
-    ids = []
-    url = ""
-    keyword = ""
-    location = ""
-    jobPages = 0
-    numJobs = 0
-    nextPages = []
+    for card in cards:
+        data = card.find_all("span")
+        #print(data)
+        job = []
+        for item in data:
+            if item.text not in job and item.text != "new":
+                job.append(item.text)
+        jobs.append(job[:2])
+    print(jobs)
 
-    #Soup Info
-    page = ""
-    soup = ""
+    return jobs
 
-    #Selenium Driver Info
-    #driverLocation = "/usr/bin/chromedriver"
-    #driver = webdriver.Chrome(executable_path=driverLocation)
 
-    ## @brief Constructs a job search using Indeed.
-    #  @param keyword a string representing the job title/poistion that the user is interested in searching for.
-    #  @param location a string representing the desired job location.
-    def __init__(self, keyword, location):
-        self.keyword = keyword
-        self.location = location
-        self.driverLocation = "/usr/bin/chromedriver"
-        self.driver = webdriver.Chrome(executable_path=self.driverLocation)
+## @brief Gets number of pages based on an Indeed search result.
+#  @param url a string representing an Indeed url with valid search results.
+#  @return int which represents the numbers of pages of results from such single search.
+def getPages(url):
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    def updateCurrentPage(self, url):
-        self.url = url
-        self.page = requests.get(self.url)
-        self.soup = BeautifulSoup(self.page.content, "html.parser")
+    totalPages = soup.find("div",id="searchCountPages")
 
-    ## @brief Enters in search parameters and returns url of results.
-    #  @details Uses Selenium to send keys to Indeed.com
-    def search(self):
-        
-        self.driver.get("https://ca.indeed.com/")
-        self.driver.find_element(By.ID,"text-input-what").send_keys(self.keyword)
-        time.sleep(.5)
+    numJobs = totalPages.text
+    flag = False
+    temp = ""
+    for i in range(len(numJobs)):
 
-        self.driver.find_element(By.ID,"text-input-where").send_keys(Keys.CONTROL + "a")
-        self.driver.find_element(By.ID,"text-input-where").send_keys(Keys.DELETE)
-        self.driver.find_element(By.ID,"text-input-where").send_keys(self.location)
-        time.sleep(0.5)
-        self.driver.find_element(By.CLASS_NAME,"yosegi-InlineWhatWhere-primaryButton").click()
-
-        self.url = self.driver.current_url
-        self.page = requests.get(self.url)
-        self.soup = BeautifulSoup(self.page.content, "html.parser")
+        if numJobs[i] == "f" and flag == False:
+            flag = True
+        elif flag and 48 <= ord(numJobs[i]) <= 57:
+            temp += numJobs[i]
     
-    ## @brief Find essential job info(title, company, link) and creates a Job class
-    #  @details Uses beautiful soup to search linearly down the page with two different 
-    #  methods but allign once search with the other properly
-    def getJob(self):
-        
-        #find html that contains all table results that contain the job title and company
-        infoCards = self.soup.find_all("td",class_="resultContent")
 
-        #find html that contains href data
-        div = self.soup.find("div",class_="mosaic-provider-jobcards")
-        linkCards = div.find_all("a", href=True, id=True)
+    pages = int(temp)
+    if pages%15 != 0:
+        pages = pages//15 + 1
 
-        #search through both html list data
-        for info,links in zip(infoCards, linkCards):
-            j = Job()
-
-            data = info.find_all("span")
-
-            #create a temporary list of a specif cjob card's info
-            job = []
-
-            #traverse through span elements of ecah job card that contain the job info
-            for item in data:
-                if item.text not in job and item.text != "new":
-                    job.append(item.text)
-            j.setTitle(job[0])
-            j.setCompany(job[1])
-
-            jobLink = links['href']
-
-            #check that job link is proper format
-            if(jobLink[:8] == "/pagead/" or jobLink[:9] == "/company/" or jobLink[:4] == "/rc/"):
-                j.setLink("https://ca.indeed.com" + jobLink)
-
-            j.setTitle(job[0])
-            j.setCompany(job[1])
-
-            self.jobs.append(j)
-
-    ## @brief Gets number of pages based on an Indeed search result.
-    def getPages(self):
-        totalPages = self.soup.find("div",id="searchCountPages")
-
-        numJobs = totalPages.text
-        flag = False
-        temp = ""
-        for i in range(len(numJobs)):
-
-            if numJobs[i] == "f" and flag == False:
-                flag = True
-            elif flag and 48 <= ord(numJobs[i]) <= 57:
-                temp += numJobs[i]
-        
-        self.numJobs = int(temp)
-
-        pages = self.numJobs//15
-        if self.numJobs%15 != 0:
-            pages = self.numJobs//15 + 1
-
-        self.jobPages = pages
-
-    def pageParser(self):
-
-        self.driver.get(self.url)
-
-        if self.url != '':
-            self.url = 'https://ca.indeed.com/jobs?q=' + self.keyword +'&l=' + self.location
-
-        for i in range(self.jobPages):
-            currUrl = self.url + "&start=" + str(i)+ "0"
-            self.nextPages.append(currUrl)
-
-    def run(self):
-        try:
-            self.search()
-            self.getJob()
-            #self.getUrls()
-            self.getPages()
-            self.pageParser()
-            
-            for i in range(1,len(self.nextPages)):
-                self.updateCurrentPage(self.nextPages[i])
-                self.getJob()
-            #print(self.jobs)
-            print(len(self.jobs))
-            j = 0
-            for i in range(len(self.jobs)):
-                print([self.jobs[i].title, self.jobs[i].link])
-                j += 1
-            print(j)
-            #print(self.links)
-            #print(self.ids)
-        except:
-            return "An error occured with the search"
     
-    
+    return pages
+
+## @brief Formats various indeed job search pages.
+#  @return a string representing the next page.
+def pageParser():
+    driverLocation = "/usr/bin/chromedriver"
+    driver = webdriver.Chrome(executable_path=driverLocation)
+    url = "https://ca.indeed.com/jobs?q=Engineer&l=barrie&vjk=f6f5b3957533926a"
+    driver.get(url)
+
+    for i in range(getPages("https://ca.indeed.com/jobs?q=Engineer&l=barrie&vjk=f6f5b3957533926a")):
+        currUrl = url[:-20] + "start=" + str(i)+ "0"
+        
+        print(currUrl)
+        
+    #placeholder return
+    return currUrl
+
+
 if __name__ == "__main__":
-    
-    s1 = Indeed("Engineer", "Huntsville, ON")
-    s1.run()  
+    #Search indeed based on a keyword and a location.
+    #search(sys.argv[1],sys.argv[2])
+
+    #get jobsed based on a passed url which is added to a list
+    #getJobs("https://ca.indeed.com/jobs?q=Engineer&l=Toronto%2CON&vjk=f6f5b3957533926a")
+
+    #Helper method to get the number of pages required
+    #getPages("https://ca.indeed.com/jobs?q=Engineer&l=Toronto%2CON&vjk=f6f5b3957533926a")
+
+    #Page parser to traverse indeed website
+    #pageParser()
