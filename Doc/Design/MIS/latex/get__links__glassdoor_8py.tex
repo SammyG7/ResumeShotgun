@@ -1,0 +1,126 @@
+\hypertarget{get__links__glassdoor_8py}{}\section{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/get\+\_\+links\+\_\+glassdoor.py File Reference}
+\label{get__links__glassdoor_8py}\index{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/get\+\_\+links\+\_\+glassdoor.\+py@{/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/get\+\_\+links\+\_\+glassdoor.\+py}}
+
+
+Module used for collecting links from the Glassdoor site.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{get__links__glassdoor_8py_aee0bfbbdba3064819c86ac09d649bb18}{get\+\_\+links\+\_\+glassdoor.\+login} (driver)
+\begin{DoxyCompactList}\small\item\em Helper method which gives the user time to log into Glassdoor. \end{DoxyCompactList}\item 
+def \hyperlink{get__links__glassdoor_8py_ac9eef23d8f733a0d7a6899ee21419af8}{get\+\_\+links\+\_\+glassdoor.\+go\+\_\+to\+\_\+listings} (driver)
+\begin{DoxyCompactList}\small\item\em Navigates to appropriate job listing page. \end{DoxyCompactList}\item 
+def \hyperlink{get__links__glassdoor_8py_a0ffde33896a5174208cfb1187f2a3618}{get\+\_\+links\+\_\+glassdoor.\+aggregate\+\_\+links} (driver)
+\begin{DoxyCompactList}\small\item\em Aggregates all url links in a set. \end{DoxyCompactList}\item 
+def \hyperlink{get__links__glassdoor_8py_afb0cec2f0ee750991141ee27a83eb2f4}{get\+\_\+links\+\_\+glassdoor.\+get\+U\+R\+Ls} ()
+\begin{DoxyCompactList}\small\item\em Main method of module which coordinates acquisition and handling of links. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{get__links__glassdoor_8py_a1ce2374f8b5370f8581a522a6ac3ef44}{get\+\_\+links\+\_\+glassdoor.\+P\+R\+E\+F\+E\+R\+E\+N\+C\+ES}
+\begin{DoxyCompactList}\small\item\em Global Variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module used for collecting links from the Glassdoor site. 
+
+\begin{DoxyAuthor}{Author}
+Jeremy Langner 
+
+Sam Gorman 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mar 17, 2022 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{get__links__glassdoor_8py_file_a0ffde33896a5174208cfb1187f2a3618}\label{get__links__glassdoor_8py_file_a0ffde33896a5174208cfb1187f2a3618}} 
+\index{get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}!aggregate\+\_\+links@{aggregate\+\_\+links}}
+\index{aggregate\+\_\+links@{aggregate\+\_\+links}!get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}}
+\subsubsection{\texorpdfstring{aggregate\+\_\+links()}{aggregate\_links()}}
+{\footnotesize\ttfamily def get\+\_\+links\+\_\+glassdoor.\+aggregate\+\_\+links (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Aggregates all url links in a set. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & Webdriver for chrome which parses and interacts with the H\+T\+ML from a given website \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Set of strings defining all of the collected and cleaned links 
+\end{DoxyReturn}
+\mbox{\Hypertarget{get__links__glassdoor_8py_file_afb0cec2f0ee750991141ee27a83eb2f4}\label{get__links__glassdoor_8py_file_afb0cec2f0ee750991141ee27a83eb2f4}} 
+\index{get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}!get\+U\+R\+Ls@{get\+U\+R\+Ls}}
+\index{get\+U\+R\+Ls@{get\+U\+R\+Ls}!get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}}
+\subsubsection{\texorpdfstring{get\+U\+R\+Ls()}{getURLs()}}
+{\footnotesize\ttfamily def get\+\_\+links\+\_\+glassdoor.\+get\+U\+R\+Ls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main method of module which coordinates acquisition and handling of links. 
+
+\begin{DoxyReturn}{Returns}
+Set of strings defining all of the collected links 
+\end{DoxyReturn}
+\mbox{\Hypertarget{get__links__glassdoor_8py_file_ac9eef23d8f733a0d7a6899ee21419af8}\label{get__links__glassdoor_8py_file_ac9eef23d8f733a0d7a6899ee21419af8}} 
+\index{get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}!go\+\_\+to\+\_\+listings@{go\+\_\+to\+\_\+listings}}
+\index{go\+\_\+to\+\_\+listings@{go\+\_\+to\+\_\+listings}!get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}}
+\subsubsection{\texorpdfstring{go\+\_\+to\+\_\+listings()}{go\_to\_listings()}}
+{\footnotesize\ttfamily def get\+\_\+links\+\_\+glassdoor.\+go\+\_\+to\+\_\+listings (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Navigates to appropriate job listing page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & Webdriver for chrome which parses and interacts with the H\+T\+ML from a given website \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean value to signal if process happened correctly or if an error occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{get__links__glassdoor_8py_file_aee0bfbbdba3064819c86ac09d649bb18}\label{get__links__glassdoor_8py_file_aee0bfbbdba3064819c86ac09d649bb18}} 
+\index{get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}!login@{login}}
+\index{login@{login}!get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily def get\+\_\+links\+\_\+glassdoor.\+login (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Helper method which gives the user time to log into Glassdoor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & Webdriver for chrome which parses and interacts with the H\+T\+ML from a given website \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean value of True to signal that login completed successfully 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{get__links__glassdoor_8py_file_a1ce2374f8b5370f8581a522a6ac3ef44}\label{get__links__glassdoor_8py_file_a1ce2374f8b5370f8581a522a6ac3ef44}} 
+\index{get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}!P\+R\+E\+F\+E\+R\+E\+N\+C\+ES@{P\+R\+E\+F\+E\+R\+E\+N\+C\+ES}}
+\index{P\+R\+E\+F\+E\+R\+E\+N\+C\+ES@{P\+R\+E\+F\+E\+R\+E\+N\+C\+ES}!get\+\_\+links\+\_\+glassdoor.\+py@{get\+\_\+links\+\_\+glassdoor.\+py}}
+\subsubsection{\texorpdfstring{P\+R\+E\+F\+E\+R\+E\+N\+C\+ES}{PREFERENCES}}
+{\footnotesize\ttfamily dictionary get\+\_\+links\+\_\+glassdoor.\+P\+R\+E\+F\+E\+R\+E\+N\+C\+ES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 =  \{
+2     \textcolor{stringliteral}{"position\_title"}: \textcolor{stringliteral}{"Software Engineer"},
+3     \textcolor{stringliteral}{"location"}: \textcolor{stringliteral}{"San Francisco, CA"}
+4 \}
+\end{DoxyCode}
+
+
+Global Variables. 
+

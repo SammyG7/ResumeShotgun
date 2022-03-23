@@ -1,7 +1,7 @@
 ## @file userProfile.py
 #  @author Gavin Jameson
 #  @brief user profile module
-#  @date Mar 17, 2022
+#  @date Mar 18, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
