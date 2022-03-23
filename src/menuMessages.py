@@ -41,8 +41,23 @@ def displayMenuResume(path):
           "\n")
 
 ## @brief Displays text for personal info menu
-def displayMenuPlaceholder():
-    pass # TODO
+def displayMenuPersonal():
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal              \n" +
+          "==============================\n" +
+          " 1) First Name \n" +
+          " 2) Last Name \n" +
+          " 3) Email \n" +
+          " 4) Phone \n" +
+          " 5) Organisation \n" +
+          " 6) Socials \n" +
+          " 7) Location \n" +
+          " 8) gradDate \n" +
+          " 9) University \n" +
+          "\n" +
+          " 0) Save and Start \n" +
+          "\n")
 
 ## @brief Displays text for keywords menu options
 #  @param keywords List of strings of current keywords

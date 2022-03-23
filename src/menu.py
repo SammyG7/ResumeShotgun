@@ -78,7 +78,7 @@ def run(profile):
         ## Main
         if menu == 0:
             displayMenuMain()
-            while not changeMenu(limit(promptInput(), mx = 5, mn = 0)): pass
+            while not changeMenu(limit(promptInput(), mx = 4, mn = 0)): pass
             ## only occurs when going "back" on main, aka exit
             if menu == 0: menu = -1
         ## Main/Resume
@@ -97,9 +97,12 @@ def run(profile):
                     displayError("file")
         ## Main/Personal
         elif menu == 2:
-            displayMenuPlaceholder("Main/Personal")
-            sleep(5)
-            changeMenu(0)
+            displayMenuPersonal()
+            updated = False
+            while not updated:
+                choice = limit(promptInput(), mx = 9, mn = 0)
+                if choice > 0: choice += 10
+                updated = changeMenu(choice)
         ## Main/Keywords
         elif menu == 3:
             displayMenuKeywords(profile.getKeywords())
@@ -133,4 +136,54 @@ def run(profile):
                     updated = True
                 else:
                     displayError("input")
+        ## Main/Personal/First
+        elif menu == 11:
+            displayMenuPlaceholder("Main/Personal/First")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Last
+        elif menu == 12:
+            displayMenuPlaceholder("Main/Personal/Last")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Email
+        elif menu == 13:
+            displayMenuPlaceholder("Main/Personal/Email")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Phone
+        elif menu == 14:
+            displayMenuPlaceholder("Main/Personal/Phone")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Organisation
+        elif menu == 15:
+            displayMenuPlaceholder("Main/Personal/Org")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Socials
+        elif menu == 16:
+            displayMenuPlaceholder("Main/Personal/Socials")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Location
+        elif menu == 17:
+            displayMenuPlaceholder("Main/Personal/Location")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Grad
+        elif menu == 18:
+            displayMenuPlaceholder("Main/Personal/Grad")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Uni
+        elif menu == 19:
+            displayMenuPlaceholder("Main/Personal/Uni")
+            time.sleep(3)
+            changeMenu(1)
+        ## Main/Personal/Uni
+        else:
+            displayMenuPlaceholder("FORBIDDEN MENU :O")
+            time.sleep(3)
+            changeMenu(0)
 
