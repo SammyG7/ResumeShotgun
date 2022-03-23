@@ -3,10 +3,6 @@
 #  @brief Module that extracts job posting links from Indeed and returns the job title and company to the user.
 #  @date March 17, 2022
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Jeremy
 import sys
 import time
 import requests
@@ -80,22 +76,11 @@ class Indeed:
         div = self.soup.find("div",class_="mosaic-provider-jobcards")
         linkCards = div.find_all("a", href=True, id=True)
 
-<<<<<<< HEAD
-## @brief Enters in search parameters and returns url of results.
-#  @details Uses Selenium to send keys to Indeed.com
-#  @param keyword a string representing the job title/poistion that the user is interested in searching for.
-#  @param location a string representing the desired job location.
-#  @return string representing the url of the search results. 
-def search(keyword, location):
-    driverLocation = "/usr/bin/chromedriver"
-    driver = webdriver.Chrome(executable_path=driverLocation)
-=======
         #search through both html list data
         for info,links in zip(infoCards, linkCards):
             j = Job()
 
             data = info.find_all("span")
->>>>>>> Jeremy
 
             #create a temporary list of a specif cjob card's info
             job = []
@@ -109,57 +94,12 @@ def search(keyword, location):
 
             jobLink = links['href']
 
-<<<<<<< HEAD
-## @brief Traverses through the url to search and save jobs on a single page.
-#  @param url a string representing an Indeed url with valid search results.
-#  @return list containing tuples of job title and company.
-def getJobs(url):
-
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    
-    cards = soup.find_all("td",class_="resultContent")
-    jobs = []
-    for card in cards:
-        data = card.find_all("span")
-        #print(data)
-        job = []
-        for item in data:
-            if item.text not in job and item.text != "new":
-                job.append(item.text)
-        jobs.append(job[:2])
-    print(jobs)
-
-    return jobs
-
-
-## @brief Gets number of pages based on an Indeed search result.
-#  @param url a string representing an Indeed url with valid search results.
-#  @return int which represents the numbers of pages of results from such single search.
-def getPages(url):
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-
-    totalPages = soup.find("div",id="searchCountPages")
-
-    numJobs = totalPages.text
-    flag = False
-    temp = ""
-    for i in range(len(numJobs)):
-
-        if numJobs[i] == "f" and flag == False:
-            flag = True
-        elif flag and 48 <= ord(numJobs[i]) <= 57:
-            temp += numJobs[i]
-    
-=======
             #check that job link is proper format
             if(jobLink[:8] == "/pagead/" or jobLink[:9] == "/company/" or jobLink[:4] == "/rc/"):
                 j.setLink("https://ca.indeed.com" + jobLink)
 
             j.setTitle(job[0])
             j.setCompany(job[1])
->>>>>>> Jeremy
 
             self.jobs.append(j)
 
@@ -167,32 +107,16 @@ def getPages(url):
     def getPages(self):
         totalPages = self.soup.find("div",id="searchCountPages")
 
-<<<<<<< HEAD
-## @brief Formats various indeed job search pages.
-#  @return a string representing the next page.
-def pageParser():
-    driverLocation = "/usr/bin/chromedriver"
-    driver = webdriver.Chrome(executable_path=driverLocation)
-    url = "https://ca.indeed.com/jobs?q=Engineer&l=barrie&vjk=f6f5b3957533926a"
-    driver.get(url)
-=======
         numJobs = totalPages.text
         flag = False
         temp = ""
         for i in range(len(numJobs)):
->>>>>>> Jeremy
 
             if numJobs[i] == "f" and flag == False:
                 flag = True
             elif flag and 48 <= ord(numJobs[i]) <= 57:
                 temp += numJobs[i]
         
-<<<<<<< HEAD
-    #placeholder return
-    return currUrl
-
-
-=======
         self.numJobs = int(temp)
 
         pages = self.numJobs//15
@@ -238,7 +162,6 @@ def pageParser():
             return "An error occured with the search"
     
     
->>>>>>> Jeremy
 if __name__ == "__main__":
     
     s1 = Indeed("Engineer", "Huntsville, ON")
