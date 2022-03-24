@@ -128,14 +128,36 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Last
         elif menu == 12:
-            displayMenuPlaceholder("Main/Personal/Last")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuLastName(profile.getLastName())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setLastName(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Email
         elif menu == 13:
-            displayMenuPlaceholder("Main/Personal/Email")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuEmail(profile.getEmail())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if "@" in choice and "." in choice:
+                        profile.setEmail(choice.strip())
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Phone
         elif menu == 14:
             displayMenuPlaceholder("Main/Personal/Phone")

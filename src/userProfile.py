@@ -271,6 +271,7 @@ class userProfile:
     def getProfileDict(self):
         profile = {
             "keywords": self.getKeywords(),
+            "jobTitle": self.getJobTitle(),
             "site": self.getSite(),
             "firstName": self.getFirstName(),
             "lastName": self.getLastName(),
@@ -305,6 +306,11 @@ class userProfile:
         else: 
             self.__keywords = keywords
 
+    ## @brief Method sets job title
+    #  @param name String indicating job title
+    def setJobTitle(self, title):
+        self.__jobTitle = title
+
     ## @brief Method tries to set active site for scraping
     #  @details Method will not change the active site if it does not map to one in the list
     #  @param site Integer inicating index of site to swap to
@@ -314,11 +320,6 @@ class userProfile:
             self.__site = SITESLIST[site]
             return True
         return False
-
-    ## @brief Method sets job title
-    #  @param name String indicating job title
-    def setJobTitle(self, title):
-        self.__jobTitle = title
 
     ## @brief Method sets first name
     #  @param name String indicating name
