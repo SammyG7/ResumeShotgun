@@ -6,6 +6,7 @@
 import unittest
 from userProfile import *
 from menuMessages import waitForUser
+import indeed
 import menu
 
 ## @brief Tests
