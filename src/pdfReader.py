@@ -19,7 +19,9 @@ class pdfReader:
         self.app = wx.App()
         self.doc = None
         self.links = []
-        self.expectedlinks = {}
+        self.expectedinfo = {}
+        self.expectedinfo["links"] = {}
+        self.expectedinfo["languages"] = {}
         
         try: # Try instead of if for invalid paths
             self.plaintext = self.getText()
@@ -64,11 +66,11 @@ class pdfReader:
     #  @return String on plaintext
     def getText(self):
         text = ''
-        
         with fitz.open(self.path) as doc:
             for page in doc:
                 text+= page.get_text()
 
+        print(text)
         return text
         #print(text)
         #print("Musk" in text)
@@ -107,9 +109,41 @@ class pdfReader:
     def setKnownLinks(self):
         for link in self.links:
             if "github" in link:
-                self.expectedlinks["git"] = link
+                self.expectedinfo["links"]["git"] = link
             elif "linkedin" in link:
-                self.expectedlinks["linkedin"] = link
+                self.expectedinfo["links"]["linkedin"] = link
+
+    def setKnownLanguages(self):
+        if "python" in self.plaintext or "Python" in self.plaintext:
+            self.expectedinfo["languages"]["python"] = True
+        else:
+            self.expectedinfo["languages"]["python"] = False
+            
+        if "java" in self.plaintext or "Java" in self.plaintext:
+            self.expectedinfo["languages"]["java"] = True
+        else:
+            self.expectedinfo["languages"]["Java"] = False
+
+        if "go" in self.plaintext or "Go" in self.plaintext:
+            self.expectedinfo["languages"]["go"] = True
+        else:
+            self.expectedinfo["languages"]["go"] = False
+
+        if "c++" in self.plaintext or "C++" in self.plaintext:
+            self.expectedinfo["languages"]["c++"] = True
+        else:
+            self.expectedinfo["languages"]["c++"] = False
+
+        if "javascript" in self.plaintext or "JavaScript" in self.plaintext:
+            self.expectedinfo["languages"]["javascript"] = True
+        else:
+            self.expectedinfo["languages"]["javascript"] = False
+
+## Test
+p = pdfReader("Resumes/SamResume.pdf")
+print(p.plaintext)
+p.setKnownLanguages()
+print(p.expectedinfo)
                 
         
 
