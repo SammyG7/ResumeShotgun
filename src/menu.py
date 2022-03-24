@@ -109,25 +109,14 @@ def run(profile):
                 choice = __limit(__promptInput(), mx = 9, mn = 0)
                 if choice > 0: choice += 10
                 updated = __changeMenu(choice)
-        ## Main/Keywords
+        ## Main/Jobs
         elif menu == 3:
-            displayMenuKeywords(profile.getKeywords())
+            displayMenuJobs()
             updated = False
             while not updated:
-                choice = __promptInput(forceInt = False, multiple = True)
-                if len(choice) == 1 and choice[0] == "1":
-                    profile.setKeywords([])
-                    __changeMenu()
-                    updated = True
-                elif len(choice) == 1 and choice[0] == "0":
-                    __changeMenu(0)
-                    updated = True
-                elif len(choice) > 0:
-                    profile.setKeywords(choice, toggleMode = True)
-                    __changeMenu()
-                    updated = True
-                else:
-                    displayError("empty")
+                choice = __limit(__promptInput(), mx = 2, mn = 0)
+                if choice > 0: choice += 20
+                updated = __changeMenu(choice)
         ## Main/Sites
         elif menu == 4:
             displayMenuSites(profile.getSite(), SITESLIST)
@@ -159,14 +148,36 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Last
         elif menu == 12:
-            displayMenuPlaceholder("Main/Personal/Last")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuLastName(profile.getLastName())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setLastName(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Email
         elif menu == 13:
-            displayMenuPlaceholder("Main/Personal/Email")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuEmail(profile.getEmail())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if "@" in choice and "." in choice:
+                        profile.setEmail(choice.strip())
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Phone
         elif menu == 14:
             displayMenuPlaceholder("Main/Personal/Phone")
@@ -197,7 +208,41 @@ def run(profile):
             displayMenuPlaceholder("Main/Personal/Uni")
             sleep(3)
             __changeMenu(2)
-        ## Main/Personal/Uni
+        ## Main/Jobs/Title
+        elif menu == 21:
+            displayMenuJobTitle(profile.getJobTitle())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(3)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setJobTitle(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
+        ## Main/Jobs/Keywords
+        elif menu == 22:
+            displayMenuKeywords(profile.getKeywords())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "1":
+                    profile.setKeywords([])
+                    __changeMenu()
+                    updated = True
+                elif len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(3)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setKeywords(choice, toggleMode = True)
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
+        ## ERROR
         else:
             displayMenuPlaceholder("FORBIDDEN MENU :O")
             sleep(3)

@@ -17,7 +17,7 @@ def displayMenuMain():
           "==============================\n" +
           " 1) Upload Resume \n" +
           " 2) Personal Info \n" +
-          " 3) Keywords \n" +
+          " 3) Job Preferences \n" +
           " 4) Sites \n" +
           "\n" +
           " 0) Save and Start \n" +
@@ -62,7 +62,7 @@ def displayMenuPersonal():
           "\n")
 
 ## @brief Displays text for first name menu (profile submenu) options
-#  @param path String for current path to resume file
+#  @param path String for first name
 def displayMenuFirstName(name):
     if name == "": name = "N/A"
     print("==============================\n" +
@@ -78,13 +78,76 @@ def displayMenuFirstName(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for keywords menu options
+## @brief Displays text for last name menu (profile submenu) options
+#  @param path String for last name
+def displayMenuLastName(name):
+    if name == "": name = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/Last         \n" +
+          "==============================\n" +
+          " Current last name: \n" +
+          " " + name + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the last name.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for email menu (profile submenu) options
+#  @param path String for email
+def displayMenuEmail(email):
+    if email == "": email = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/Email        \n" +
+          "==============================\n" +
+          " Current email: \n" +
+          " " + email + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the email.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for personal jobs menu options
+def displayMenuJobs():
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Jobs                  \n" +
+          "==============================\n" +
+          " 1) Job Title \n" +
+          " 2) Keywords \n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for title menu (jobs submenu) options
+#  @param path String for current path to resume file
+def displayMenuJobTitle(title):
+    if title == "": title = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Jobs/Title        \n" +
+          "==============================\n" +
+          " Current job title: \n" +
+          " " + title + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the job title.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for keywords menu (jobs submenu) options
 #  @param keywords List of strings of current keywords
 def displayMenuKeywords(keywords):
     if len(keywords) == 0: keywords = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
-          " > Main/Keywords              \n" +
+          " > Main/Jobs/Keywords              \n" +
           "==============================\n" +
           " Current keywords: \n" +
           wrappedString(keywords) + "\n" +
