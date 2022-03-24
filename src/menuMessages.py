@@ -37,6 +37,8 @@ def displayMenuResume(path):
           wrappedString("To select a new resume, " +
                         "input the path to the pdf.") + "\n" +
           "\n" +
+          " 1) Manually Choose File \n" +
+          "\n" +
           " 0) Go back \n" +
           "\n")
 
