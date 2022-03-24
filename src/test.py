@@ -6,7 +6,7 @@
 import unittest
 from userProfile import *
 from menuMessages import waitForUser
-import indeed
+from indeed import Indeed
 import menu
 
 ## @brief Tests
@@ -81,5 +81,51 @@ class menuTest(userProfileBase):
         menu.run(self.profile)
         self.assertTrue(__testResult(subj))
 
+class indeedTest(unittest.TestCase):
+
+    ## @brief Tests for valid input but no results
+    def test_noResults(self):
+        search = Indeed("foo", "bar")
+        search.getJob()
+        size = len(search.jobs)
+        self.assertEqual(0, size)
+
+
+    ## @brief Tests for an invalid keyword
+    def test_invalidSearch1(self):
+        try:
+            Indeed(123,"bar")
+        except TypeError:
+            self.assertTrue(True)
+
+    ## @brief Tests for an invalid location
+    def test_invalidSearch2(self):
+        try:
+            Indeed("Engineer",321)
+        except TypeError:
+            self.assertTrue(True)
+
+    ## @brief Tests for an valid keyword and location with all results on single page
+    def test_getJobsSinglePage(self):
+        s2 = Indeed("Engineer", "Huntsville")
+        s2.getJob()
+        size2 = len(s2.jobs)
+        self.assertEqual(15, size2)
+    
+    ## @brief Tests for an valid keyword and location with all results multiple pages
+    def test_getJobsSinglePage(self):
+        s3 = Indeed("Engineer", "Collingwood")
+        s3.run()
+        size3 = len(s3.jobs)
+        self.assertEqual(45, size3)       
+
+    ## @brief Tests for an valid keyword and location with all results multiple pages
+    def test_getJobsMultiplePages(self):
+        s4 = Indeed("Engineer", "Collingwood")
+        s4.run()
+        size4 = len(s4.jobs)
+        self.assertEqual(45, size4)
+
+    pass
 if __name__ == '__main__':
     unittest.main()    
