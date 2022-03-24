@@ -20,6 +20,7 @@ class userProfile:
     #  @details Tuple; index 0 is value, index 1 is if it requires changing
     DEFAULT = {
             "keywords": ([], False),
+            "jobTitle": ("", True),
             "site": ("glassdoor", False),
             "firstName": ("", True),
             "lastName": ("", True),
@@ -40,6 +41,8 @@ class userProfile:
     def __init__(self, userPrompts = True):
         ## @brief Words used in searches to help locate better fitting jobs
         self.__keywords = self.DEFAULT["keywords"][0]
+        ## @brief Title of target job position
+        self.__jobTitle = self.DEFAULT["jobTitle"][0]
         ## @brief The site that will be scraped for URLs
         self.__site = self.DEFAULT["site"][0]
         ## @brief User's first name
@@ -80,6 +83,11 @@ class userProfile:
                 if "keywords" in profile: self.__keywords = profile["keywords"]
                 elif userPrompts:
                     print(wS("Keywords can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## jobTitle
+                if "jobTitle" in profile: self.__jobTitle = profile["jobTitle"]
+                elif userPrompts:
+                    print(wS("Job title can not be found in profile, using default value.") + "\n")
                     waitForUser()
                 ## site
                 if "site" in profile: self.__site = profile["site"]
@@ -197,6 +205,11 @@ class userProfile:
     def getKeywords(self):
         return self.__keywords
 
+    ## @brief Method gets job title to use in searching
+    #  @return String indicating job title
+    def getJobTitle(self):
+        return self.__jobTitle
+
     ## @brief Method gets site that will be scraped
     #  @return String indicating name of site
     def getSite(self):
@@ -301,6 +314,11 @@ class userProfile:
             self.__site = SITESLIST[site]
             return True
         return False
+
+    ## @brief Method sets job title
+    #  @param name String indicating job title
+    def setJobTitle(self, title):
+        self.__jobTitle = title
 
     ## @brief Method sets first name
     #  @param name String indicating name
