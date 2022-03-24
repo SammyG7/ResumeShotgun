@@ -58,6 +58,8 @@ class pdfReader:
         self.TextToPage = wx.TextCtrl(self, wx.ID_ANY, u"1", defPos, wx.Size(40, -1), 
                              wx.TE_RIGHT|wx.TE_PROCESS_ENTER)
 
+        self.doc.close()
+
     ## @brief Transforms the pdf to plaintext
     #  @return String on plaintext
     def getText(self):
@@ -110,35 +112,6 @@ class pdfReader:
                 self.expectedlinks["linkedin"] = link
                 
         
-
-
-'''
-p1 = pdfReader("Test")
-p2 = pdfReader()
-
-print(p1.getPath())
-print(p2.getPath())
-
-p2.browse()
-
-print(p2.getPath())
-#p2.showPDF()
-
-p2.getText();
-
-
-p = pdfReader("Resumes/resume.pdf")
-print(p.plaintext)
-
-print(re.findall("htt.*\S|www.*|\S*usk", p.plaintext)) #\[[^\s]*\s
-#print(re.findall("www.*", p.plaintext))
-
-
-p = pdfReader("Resumes/SamResume.pdf")
-print(p.plaintext)
-print(p.links)
-print(p.expectedlinks)
-'''
 
 
 

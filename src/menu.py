@@ -6,6 +6,8 @@
 from menuMessages import *
 from sites import SITESLIST
 from time import sleep
+import wx
+from pdfReader import *
 
 ## @brief Changes state dictating what menu is shown
 def __changeMenu(newMenu = -2):
@@ -51,12 +53,27 @@ def __promptInput(forceInt = True, multiple = False):
     else:
         return -1
 
+## @brief Creates window to browse for file
+def __browse():
+    app = wx.App()
+    
+    ## Create Dialog
+    dlg = wx.FileDialog(None, message = "Choose Resume",
+                wildcard = "*.pdf", style=wx.FD_OPEN|wx.FD_CHANGE_DIR)
+
+    ## Pull Up Window
+    dlg.ShowModal()
+
+    return dlg.GetPath()
+    
+
 ## @brief Runs menu, allowing user to tweak preferences
 #  @param profile userProfile object to manipulate
 def run(profile):
     
     global menu
     menu = 0
+    #resume = pdfReader(profile.getResumePath)
     
     clearScreen()
     
@@ -75,6 +92,9 @@ def run(profile):
                 choice = __promptInput(forceInt = False)
                 if choice == "0":
                     __changeMenu(0)
+                    updated = True
+                elif choice == "1": # Manual Browse Window
+                    profile.setResumePath(__browse())
                     updated = True
                 elif profile.setResumePath(choice):
                     __changeMenu()
