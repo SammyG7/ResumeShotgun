@@ -70,10 +70,10 @@ def run(profile): ## Pull in driver as param
     # profile.getAutoLogin()
     #success = login(driver)
 
-    linkbot = Indeed()
+    linkbot = Indeed("software", "hamilton")
     time.sleep(100)
 
-run()
+run(1)
 
 
     
