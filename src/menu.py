@@ -73,9 +73,12 @@ def run(profile):
     
     global menu
     menu = 0
-    #resume = pdfReader(profile.getResumePath)
+    #resume = pdfReader(profile.getResumePath())
     
     clearScreen()
+
+    #print(resume.path)
+    print(profile)
     
     while menu >= 0:
         ## Main
@@ -96,6 +99,9 @@ def run(profile):
                 elif choice == "1": # Manual Browse Window
                     profile.setResumePath(__browse())
                     updated = True
+                elif choice == "2": # Dsiplay Current Resume
+                    # Implement Display Resume
+                    pass
                 elif profile.setResumePath(choice):
                     __changeMenu()
                     updated = True
@@ -109,12 +115,12 @@ def run(profile):
                 choice = __limit(__promptInput(), mx = 9, mn = 0)
                 if choice > 0: choice += 10
                 updated = __changeMenu(choice)
-        ## Main/Jobs
+        ## Main/Search
         elif menu == 3:
-            displayMenuJobs()
+            displayMenuSearch()
             updated = False
             while not updated:
-                choice = __limit(__promptInput(), mx = 2, mn = 0)
+                choice = __limit(__promptInput(), mx = 3, mn = 0)
                 if choice > 0: choice += 20
                 updated = __changeMenu(choice)
         ## Main/Sites
@@ -208,7 +214,7 @@ def run(profile):
             displayMenuPlaceholder("Main/Personal/Uni")
             sleep(3)
             __changeMenu(2)
-        ## Main/Jobs/Title
+        ## Main/Search/Title
         elif menu == 21:
             displayMenuJobTitle(profile.getJobTitle())
             updated = False
@@ -223,7 +229,7 @@ def run(profile):
                     updated = True
                 else:
                     displayError("empty")
-        ## Main/Jobs/Keywords
+        ## Main/Search/Keywords
         elif menu == 22:
             displayMenuKeywords(profile.getKeywords())
             updated = False
@@ -242,6 +248,10 @@ def run(profile):
                     updated = True
                 else:
                     displayError("empty")
+        ## Auto Login
+        elif menu == 23:
+            # Implement Auto Login
+            pass
         ## ERROR
         else:
             displayMenuPlaceholder("FORBIDDEN MENU :O")

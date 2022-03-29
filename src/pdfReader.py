@@ -109,9 +109,16 @@ class pdfReader:
     def setKnownLinks(self):
         for link in self.links:
             if "github" in link:
-                self.expectedinfo["links"]["git"] = link
-            elif "linkedin" in link:
-                self.expectedinfo["links"]["linkedin"] = link
+                self.expectedinfo["links"]["git"] = True
+            else:
+                self.expectedinfo["links"]["git"] = False
+            if "linkedin" in link:
+                self.expectedinfo["links"]["linkedin"] = True
+            else:
+                self.expectedinfo["links"]["linkedin"] = False
+
+        # Email
+        # 
 
     def setKnownLanguages(self):
         if "python" in self.plaintext or "Python" in self.plaintext:
@@ -144,6 +151,13 @@ p = pdfReader("Resumes/SamResume.pdf")
 print(p.plaintext)
 p.setKnownLanguages()
 print(p.expectedinfo)
+
+## Auto Cover Letter
+# Template cover letter with insert company, insert location, etc
+# 
+#
+#
+#
                 
         
 

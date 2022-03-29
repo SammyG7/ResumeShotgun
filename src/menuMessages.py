@@ -17,7 +17,7 @@ def displayMenuMain():
           "==============================\n" +
           " 1) Upload Resume \n" +
           " 2) Personal Info \n" +
-          " 3) Job Preferences \n" +
+          " 3) Search Preferences \n" +
           " 4) Sites \n" +
           "\n" +
           " 0) Save and Start \n" +
@@ -38,6 +38,7 @@ def displayMenuResume(path):
                         "input the path to the pdf.") + "\n" +
           "\n" +
           " 1) Manually Choose File \n" +
+          " 2) Display Resume \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -113,13 +114,14 @@ def displayMenuEmail(email):
           "\n")
 
 ## @brief Displays text for personal jobs menu options
-def displayMenuJobs():
+def displayMenuSearch():
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
-          " > Main/Jobs                  \n" +
+          " > Main/Search                  \n" +
           "==============================\n" +
           " 1) Job Title \n" +
           " 2) Keywords \n" +
+          " 3) Auto-Login \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -130,7 +132,7 @@ def displayMenuJobTitle(title):
     if title == "": title = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
-          " > Main/Jobs/Title        \n" +
+          " > Main/Search/Title          \n" +
           "==============================\n" +
           " Current job title: \n" +
           " " + title + "\n" +
@@ -147,7 +149,7 @@ def displayMenuKeywords(keywords):
     if len(keywords) == 0: keywords = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
-          " > Main/Jobs/Keywords              \n" +
+          " > Main/Search/Keywords       \n" +
           "==============================\n" +
           " Current keywords: \n" +
           wrappedString(keywords) + "\n" +
