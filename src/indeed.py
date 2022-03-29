@@ -159,10 +159,19 @@ class Indeed:
             self.getJob()
             self.getPages()
             self.pageParser()
+            for i in range(1, len(self.nextPages)):
+                self.updateCurrentPage(self.nextPages[i])
+                self.getJob()
+            self.closeConnection()
+
         except:
             return "An error occured with the search"
 
+    def closeConnection(self):
+        self.page.close()
+
     def clear(self):
+        self.page.close()
         self.jobs = []
         self.links = []
         self.url = ""
@@ -175,19 +184,31 @@ class Indeed:
         #Soup Info
         self.page = ""
         self.soup = ""
+
+    def returnAllJobs(self):
+        info = []
+        for i in range(len(self.jobs)):
+            info.append([self.jobs[i].title, self.jobs[i].company, self.jobs[i].link])
+        return info
+
+    def returnLinks(self):
+        links = []
+        for i in range(len(self.jobs)):
+            links.append(self.jobs[i].link)
+        return links
     
 ''' Uncomment to run'''
 if __name__ == "__main__":
     
-    s1 = Indeed("Engineer", "Huntsville")
-    s1.getJob()
+    s1 = Indeed("Software Engineer", "Barrie")
+    s1.run()
     print(len(s1.jobs))
-    s1.clear()
+    print(s1.returnLinks())
+    #for i in range(len(s1.jobs)):
+    #    print([s1.jobs[i].title, s1.jobs[i].company, s1.jobs[i].link])
 
-    s2 = Indeed("Engineer", "Collingwood")
-    s2.getJob()
-    print(len(s2.jobs))
-    s2.clear()
+    #s1.clear()
+
     #s1.search()
     #s1.getPages()
     #s1.pageParser()  

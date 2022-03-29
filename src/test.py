@@ -117,6 +117,7 @@ class indeedTest(unittest.TestCase):
         s3 = Indeed("Engineer", "Collingwood")
         s3.run()
         size3 = len(s3.jobs)
+        s3.closeConnection()
         self.assertEqual(45, size3)       
 
     ## @brief Tests for an valid keyword and location with all results multiple pages
@@ -124,6 +125,7 @@ class indeedTest(unittest.TestCase):
         s4 = Indeed("Engineer", "Collingwood")
         s4.run()
         size4 = len(s4.jobs)
+        s4.closeConnection()
         self.assertEqual(45, size4)
 
     pass
