@@ -204,6 +204,7 @@ if __name__ == "__main__":
     s1.run()
     print(len(s1.jobs))
     print(s1.returnLinks())
+    #hehe
     #for i in range(len(s1.jobs)):
     #    print([s1.jobs[i].title, s1.jobs[i].company, s1.jobs[i].link])
 
