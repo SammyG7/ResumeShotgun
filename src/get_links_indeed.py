@@ -19,6 +19,7 @@ import urllib.request
 import re
 
 import time # to sleep
+from indeed import *
 
 # fill this in with your job preferences!
 ##PREFERENCES = {
@@ -62,10 +63,18 @@ def navigateToLogin(driver):
     nextbutton.click()
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
-def getURLs():
-    # 'main' method to iterate through all pages and aggregate URLs
-
+def run(profile): ## Pull in driver as param
     driver = webdriver.Chrome(executable_path='./chromedriver')
-    success = login(driver)
+
+    # Check for login info
+    # profile.getAutoLogin()
+    #success = login(driver)
+
+    linkbot = Indeed()
     time.sleep(100)
+
+run()
+
+
+    
 

@@ -2,3 +2,6 @@ Required Libraries:
 
 wxpython 
 pymu
+requests
+selenium
+pyyaml
