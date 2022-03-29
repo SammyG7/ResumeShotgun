@@ -161,6 +161,20 @@ def lever(driver):
     driver.find_element_by_name('resume').send_keys(os.getcwd()+"/resume.pdf")
     driver.find_element_by_class_name('template-btn-submit').click()
 
+def indeed(driver):
+    firstName = "Alice"
+    lastName = "Bob"
+    phone = "555 567 432"
+
+    # indeed job page
+    applyBtn = driver.find_element_by_class_name('jobsearch-IndeedApplyButton-newDesign')
+    if applyBtn.text != "Apply now":
+        return "Error! Cannot apply on indeed"
+    applyBtn.click()
+
+    #ready to take next step?
+
+
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
