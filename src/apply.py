@@ -13,7 +13,7 @@ import os
 import time 
 import get_links_glassdoor
 import get_links_indeed
-import menu
+#import menu
 import random
 from userProfile import *
 
@@ -162,8 +162,20 @@ def lever(driver):
     driver.find_element_by_name('resume').send_keys(os.getcwd()+"/resume.pdf")
     driver.find_element_by_class_name('template-btn-submit').click()
 
+## @brief Fills in website text boxes with user information and submits resume for Indeed native application
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
 def indeed(driver):
     
+    # determine if user is logged in first
+    # if so continue otherwise log in
+    # return to apply page
+
+    checkSignIn = driver.find_element_by_xpath("//*[@id='gnav-main-container']/div/div/div[2]/div[2]/div[1]/a")
+
+    if checkSignIn.text == "Sign in":
+        #Initial login from get_links_indeed
+        pass
+
     applyBtn = driver.find_element_by_xpath("//*[@id='indeedApplyButton']/div/span")
 
     print(applyBtn.text)
@@ -174,39 +186,54 @@ def indeed(driver):
         driver.find_element_by_xpath("//*[@id='indeedApplyButton']").click()
         print("worked")
     time.sleep(round(random.uniform(0.1,0.75), 4))
-        #<input aria-invalid="false" id="ifl-InputFormField-3" name="__email" aria-required="true" autocomplete="email" autocorrect="off" autocapitalize="none" class="css-anc3lu e1jgz0i3" value="">
+
     try:
         # Email page
-        emailInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
-        emailInput.send_keys(email)
-        driver.find_element_by_xpath("//*[@id='emailform']/button").click()
-        time.sleep(round(random.uniform(0.1,0.75), 4))
+        try:
+            emailInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
+            emailInput.send_keys(JOB_APP["email"])
+            driver.find_element_by_xpath("//*[@id='emailform']/button").click()
+            time.sleep(round(random.uniform(0.1,0.75), 4))
+        except:
+            print("Error on email input")
 
         # Password page
-        passwordInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
-        passwordInput.send_keys(password)
-        time.sleep(round(random.uniform(0.1,0.75), 4))
-        driver.find_element_by_xpath("//*[@id='loginform']/button").click()
-        time.sleep(round(random.uniform(0.1,0.75), 4))
+        try:
+            passwordInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
+            passwordInput.send_keys(JOB_APP["password"])
+            time.sleep(round(random.uniform(0.1,0.75), 4))
+            driver.find_element_by_xpath("//*[@id='loginform']/button").click()
+            time.sleep(round(random.uniform(0.1,0.75), 4))
+        except:
+            print("Error on password input")
 
         # Information page
-        nameInput = driver.find_element_by_xpath("//*[@id='input-firstName']")
-        nameInput.send_keys(fName)
-        nameInput = driver.find_element_by_xpath("//*[@id='input-lastName']")
-        nameInput.send_keys(lName)
-        nameInput = driver.find_element_by_xpath("//*[@id='input-phoneNumber']")
-        nameInput.send_keys(phoneNum)
-        time.sleep(round(random.uniform(0.1,0.75), 4))
+        try:
+            nameInput = driver.find_element_by_xpath("//*[@id='input-firstName']")
+            nameInput.send_keys(JOB_APP["first_name"])
+            nameInput = driver.find_element_by_xpath("//*[@id='input-lastName']")
+            nameInput.send_keys(JOB_APP["last_name"])
+            nameInput = driver.find_element_by_xpath("//*[@id='input-phoneNumber']")
+            nameInput.send_keys(JOB_APP["phone"])
+            time.sleep(round(random.uniform(0.1,0.75), 4))
+        except:
+            print("Error on information page input")
 
         # Upload resume
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
-        #UPLOAD FILE
+        try:
+            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
+            #UPLOAD FILE
+            #select first resume file from below
+            driver.find_element_by_xpath("//*[@id='resume-display-buttonHeader']/div[2]/span[2]").click
+        except:
+            print("Error on resume upload")
 
         # Optional job experience filling out
         driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
         driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
         driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-    
+        time.sleep(round(random.uniform(0.1,0.75), 4))
+
         # Cover letter upload
         coverLetter = True
         if coverLetter:
@@ -216,21 +243,28 @@ def indeed(driver):
             driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
         
         # Finish application
+        time.sleep(round(random.uniform(0.1,0.75), 4))
         driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
     
         # Confirm applicaiton
+        time.sleep(round(random.uniform(0.1,0.75), 4))
         driver.find_element_by_xpath("//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
 
     except:
         print("Error")
         return
-    #driver.close()
 
 
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
 
+    # For manual testing purposes
+    driver = webdriver.Chrome("/usr/bin/chromedriver")
+    driver.get("https://ca.indeed.com/viewjob?jk=b15dcf2907f5ddf4&q=Software%20Engineer&l=Barrie&tk=1fvavqq4a30a3001&from=web,iaBackPress&advn=2912271563717958&adid=385421406&pub=4a1b367933fd867b19b072952f68dceb&vjs=3")
+
+    #indeed(driver)
+    '''
     profile = userProfile()
     profile.loadProfile()
     menu.run(profile)
@@ -271,5 +305,7 @@ if __name__ == '__main__':
             continue
 
         time.sleep(1)
+    '''
 
     driver.close()
+
