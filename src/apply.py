@@ -14,6 +14,7 @@ import time
 import get_links_glassdoor
 import get_links_indeed
 import menu
+import random
 from userProfile import *
 
 ## Global Variables
@@ -162,17 +163,68 @@ def lever(driver):
     driver.find_element_by_class_name('template-btn-submit').click()
 
 def indeed(driver):
-    firstName = "Alice"
-    lastName = "Bob"
-    phone = "555 567 432"
+    
+    applyBtn = driver.find_element_by_xpath("//*[@id='indeedApplyButton']/div/span")
 
-    # indeed job page
-    applyBtn = driver.find_element_by_class_name('jobsearch-IndeedApplyButton-newDesign')
+    print(applyBtn.text)
+    
     if applyBtn.text != "Apply now":
-        return "Error! Cannot apply on indeed"
-    applyBtn.click()
+        print("Error! Cannot apply on indeed")
+    else:
+        driver.find_element_by_xpath("//*[@id='indeedApplyButton']").click()
+        print("worked")
+    time.sleep(round(random.uniform(0.1,0.75), 4))
+        #<input aria-invalid="false" id="ifl-InputFormField-3" name="__email" aria-required="true" autocomplete="email" autocorrect="off" autocapitalize="none" class="css-anc3lu e1jgz0i3" value="">
+    try:
+        # Email page
+        emailInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
+        emailInput.send_keys(email)
+        driver.find_element_by_xpath("//*[@id='emailform']/button").click()
+        time.sleep(round(random.uniform(0.1,0.75), 4))
 
-    #ready to take next step?
+        # Password page
+        passwordInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
+        passwordInput.send_keys(password)
+        time.sleep(round(random.uniform(0.1,0.75), 4))
+        driver.find_element_by_xpath("//*[@id='loginform']/button").click()
+        time.sleep(round(random.uniform(0.1,0.75), 4))
+
+        # Information page
+        nameInput = driver.find_element_by_xpath("//*[@id='input-firstName']")
+        nameInput.send_keys(fName)
+        nameInput = driver.find_element_by_xpath("//*[@id='input-lastName']")
+        nameInput.send_keys(lName)
+        nameInput = driver.find_element_by_xpath("//*[@id='input-phoneNumber']")
+        nameInput.send_keys(phoneNum)
+        time.sleep(round(random.uniform(0.1,0.75), 4))
+
+        # Upload resume
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
+        #UPLOAD FILE
+
+        # Optional job experience filling out
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+    
+        # Cover letter upload
+        coverLetter = True
+        if coverLetter:
+            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/span[2]").click()
+            #UPLOAD FILE
+        else:
+            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
+        
+        # Finish application
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
+    
+        # Confirm applicaiton
+        driver.find_element_by_xpath("//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+
+    except:
+        print("Error")
+        return
+    #driver.close()
 
 
 ## @brief Initial function run upon execution of program
