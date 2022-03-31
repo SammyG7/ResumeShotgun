@@ -1,10 +1,11 @@
 ## @file userProfile.py
 #  @author Gavin Jameson
 #  @brief user profile module
-#  @date Mar 17, 2022
+#  @date Mar 31, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
+from pDef import DEFAULT
 from os import getcwd
 from os.path import isfile, join
 from yaml import load, dump
@@ -16,58 +17,39 @@ except ImportError:
 ## @brief This class represents the preferences of a user for job searching 
 class userProfile:
 
-    ## @brief Dictionary of default variable states and if they need updating for use
-    #  @details Tuple; index 0 is value, index 1 is if it requires changing
-    DEFAULT = {
-            "keywords": ([], False),
-            "jobTitle": ("", True),
-            "site": ("glassdoor", False),
-            "firstName": ("", True),
-            "lastName": ("", True),
-            "email": ("", True),
-            "phone": ("", True),
-            "organisation": ("", False),
-            "resumePath": ("", True),
-            "socials": ([], False),
-            "location": ((), True),
-            "gradDate": ((), False),
-            "university": ("", False),
-            "autoLogin": (None, False) # not a boolean so changes can be detected, getter converts blank to False
-        }
-
     ## @brief Constructor for userProfile
     #  @details Sets default values for profile
     #  @param userPrompts (optional) Boolean default class value for if user
     #  should require confirmations when performing tasks like saving/loading
     def __init__(self, userPrompts = True):
         ## @brief Words used in searches to help locate better fitting jobs
-        self.__keywords = self.DEFAULT["keywords"][0]
+        self.__keywords = DEFAULT["keywords"][0]
         ## @brief Title of target job position
-        self.__jobTitle = self.DEFAULT["jobTitle"][0]
+        self.__jobTitle = DEFAULT["jobTitle"][0]
         ## @brief The site that will be scraped for URLs
-        self.__site = self.DEFAULT["site"][0]
+        self.__site = DEFAULT["site"][0]
         ## @brief User's first name
-        self.__firstName = self.DEFAULT["firstName"][0]
+        self.__firstName = DEFAULT["firstName"][0]
         ## @brief User's last name
-        self.__lastName = self.DEFAULT["lastName"][0]
+        self.__lastName = DEFAULT["lastName"][0]
         ## @brief User's email address
-        self.__email = self.DEFAULT["email"][0]
+        self.__email = DEFAULT["email"][0]
         ## @brief User's phone number
-        self.__phone = self.DEFAULT["phone"][0]
+        self.__phone = DEFAULT["phone"][0]
         ## @brief User's current workplace/affiliation
-        self.__organisation = self.DEFAULT["organisation"][0]
+        self.__organisation = DEFAULT["organisation"][0]
         ## @brief Path to resume file
-        self.__resumePath = self.DEFAULT["resumePath"][0]
+        self.__resumePath = DEFAULT["resumePath"][0]
         ## @brief List of links to user's social media pages
-        self.__socials = self.DEFAULT["socials"][0]
+        self.__socials = DEFAULT["socials"][0]
         ## @brief User's area of residence
-        self.__location = self.DEFAULT["location"][0]
+        self.__location = DEFAULT["location"][0]
         ## @brief User's date of graudation from their program
-        self.__gradDate = self.DEFAULT["gradDate"][0]
+        self.__gradDate = DEFAULT["gradDate"][0]
         ## @brief User's university
-        self.__university = self.DEFAULT["university"][0]
+        self.__university = DEFAULT["university"][0]
         ## @brief Whether or not the program should automatically log into sites
-        self.__autoLogin = self.DEFAULT["autoLogin"][0]
+        self.__autoLogin = DEFAULT["autoLogin"][0]
         ## @brief Default value of whether or not confirmation messages should be shown
         self.__userPrompts = userPrompts
 
@@ -191,8 +173,8 @@ class userProfile:
         if userPrompts == "": userPrompts = self.__userPrompts
         currentProfile = self.getProfileDict()
         msg = " "
-        for key in self.DEFAULT:
-            elem = self.DEFAULT[key]
+        for key in DEFAULT:
+            elem = DEFAULT[key]
             if elem[1] and elem[0] == currentProfile[key]:
                 msg += key + ", "
         if msg == " ":
@@ -279,7 +261,7 @@ class userProfile:
     #  @return String indicating name of university
     def getAutoLogin(self, convert = True):
         if convert:
-            return False if self.__autoLogin == self.DEFAULT["autoLogin"][0] else self.__autoLogin
+            return False if self.__autoLogin == DEFAULT["autoLogin"][0] else self.__autoLogin
         return self.__autoLogin
 
     ## @brief Method gets all values stored in profile
@@ -407,7 +389,7 @@ class userProfile:
                         removed = True
                 if not removed: self.__socials.append(link)
         else: 
-            self.__socials = socials
+            self.__socials = [link]
 
     ## @brief Method sets location
     #  @details If 2 inputs received, it will be stored as a length 3 with a blank value
@@ -440,6 +422,6 @@ class userProfile:
     
     ## @brief Method sets auto login setting
     #  @param val Boolean indicating if auto login should be done
-    def setUAutoLogin(self, val):
+    def setAutoLogin(self, val):
         self.__autoLogin = val
 

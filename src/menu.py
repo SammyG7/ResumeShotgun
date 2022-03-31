@@ -1,7 +1,8 @@
 ## @file menu.py
 #  @author Gavin Jameson
+#  @author Sam Gorman
 #  @brief Allows the user to easily view and set new values for a user profile
-#  @date Mar 18, 2022
+#  @date Mar 31, 2022
 
 from menuMessages import *
 from sites import SITESLIST
@@ -79,7 +80,7 @@ def run(profile):
     clearScreen()
 
     #print(resume.path)
-    print(profile)
+    #print(profile)
     
     while menu >= 0:
         ## Main
@@ -99,10 +100,11 @@ def run(profile):
                     updated = True
                 elif choice == "1": # Manual Browse Window
                     profile.setResumePath(__browse())
+                    __changeMenu()
                     updated = True
                 elif choice == "2": # Dsiplay Current Resume
                     # Implement Display Resume
-                    pass
+                    displayError("missing")
                 elif profile.setResumePath(choice):
                     __changeMenu()
                     updated = True
@@ -187,9 +189,18 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Phone
         elif menu == 14:
-            displayMenuPlaceholder("Main/Personal/Phone")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuPhone(profile.getPhone())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif profile.setPhone(choice):
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("input")
         ## Main/Personal/Organisation
         elif menu == 15:
             displayMenuPlaceholder("Main/Personal/Org")
@@ -249,9 +260,9 @@ def run(profile):
                     updated = True
                 else:
                     displayError("empty")
-        ## Auto Login
+        ## Main/Search/Auto-Login
         elif menu == 23:
-            displayMenuSites(profile.getAutoLogin(), SITESLIST)
+            displayMenuAutoLogin(profile.getAutoLogin(convert = False))
             updated = False
             while not updated:
                 choice = __promptInput()

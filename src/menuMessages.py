@@ -1,9 +1,11 @@
 ## @file menuMessages.py
 #  @author Gavin Jameson
-#  @brief interface messages module
-#  @date Mar 17, 2022
+#  @author Sam Gorman
+#  @brief interface messages for menu
+#  @date Mar 31, 2022
 
 from os import name, system
+from pDef import DEFAULT
 
 # Widths are 30 characters max
 # displayMenu ... is manually enforced,
@@ -26,7 +28,7 @@ def displayMenuMain():
 ## @brief Displays text for resume menu options
 #  @param path String for current path to resume file
 def displayMenuResume(path):
-    if path == "": path = "N/A"
+    if path == DEFAULT["resumePath"][0]: path = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Resume                \n" +
@@ -35,7 +37,8 @@ def displayMenuResume(path):
           " " + path + "\n" +
           "\n" +
           wrappedString("To select a new resume, " +
-                        "input the path to the pdf.") + "\n" +
+                        "input the path to the pdf or " +
+                        "select an option below.") + "\n" +
           "\n" +
           " 1) Manually Choose File \n" +
           " 2) Display Resume \n" +
@@ -65,7 +68,7 @@ def displayMenuPersonal():
 ## @brief Displays text for first name menu (profile submenu) options
 #  @param path String for first name
 def displayMenuFirstName(name):
-    if name == "": name = "N/A"
+    if name == DEFAULT["firstName"][0]: name = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Personal/First        \n" +
@@ -82,7 +85,7 @@ def displayMenuFirstName(name):
 ## @brief Displays text for last name menu (profile submenu) options
 #  @param path String for last name
 def displayMenuLastName(name):
-    if name == "": name = "N/A"
+    if name == DEFAULT["lastName"][0]: name = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Personal/Last         \n" +
@@ -99,7 +102,7 @@ def displayMenuLastName(name):
 ## @brief Displays text for email menu (profile submenu) options
 #  @param path String for email
 def displayMenuEmail(email):
-    if email == "": email = "N/A"
+    if email == DEFAULT["email"][0]: email = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Personal/Email        \n" +
@@ -109,6 +112,24 @@ def displayMenuEmail(email):
           "\n" +
           wrappedString("Input text to " +
                         "update the email.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for phone menu (profile submenu) options
+#  @param path String for phone number
+def displayMenuPhone(phone):
+    if phone == DEFAULT["phone"][0]: phone = "N/A"
+    else: phone = phone[0:3] + " " + phone[3:6] + " " + phone[6:]
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/Phone        \n" +
+          "==============================\n" +
+          " Current phone: \n" +
+          " " + phone + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the phone number.") + "\n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -126,10 +147,10 @@ def displayMenuSearch():
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for title menu (search submenu) options
+## @brief Displays text for job title menu (search submenu) options
 #  @param path String for current path to resume file
 def displayMenuJobTitle(title):
-    if title == "": title = "N/A"
+    if title == DEFAULT["jobTitle"][0]: title = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Search/Title          \n" +
@@ -146,7 +167,7 @@ def displayMenuJobTitle(title):
 ## @brief Displays text for keywords menu (search submenu) options
 #  @param keywords List of strings of current keywords
 def displayMenuKeywords(keywords):
-    if len(keywords) == 0: keywords = "N/A"
+    if keywords == DEFAULT["keywords"][0]: keywords = "N/A"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Search/Keywords       \n" +
@@ -167,13 +188,14 @@ def displayMenuKeywords(keywords):
 ## @brief Displays text for auto login menu (search submenu) options
 #  @param site Boolean indicating current setting
 def displayMenuAutoLogin(setting):
-    setting = wrappedString("Use auto-login" if setting else "Do not use auto-login")
+    if setting == DEFAULT["autoLogin"][0]: setting = "N/A"
+    else: setting = "Use auto-login" if setting else "Do not use auto-login"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
           " > Main/Search/Auto-Login     \n" +
           "==============================\n" +
           " Current: \n" +
-          " " + setting + "\n" +
+          wrappedString(setting) + "\n" +
           "\n" +
           wrappedString("Input number corresponding to the option " +
                         "you want to use.") + "\n" +
@@ -275,6 +297,7 @@ def displayError(error = "general"):
         "input": "Invalid input selected.",
         "file": "File could not be accessed.",
         "empty": "No input provided.",
+        "missing": "This functionality does not exist.",
         "general": "Something went wrong. :o"
         }
     print(wrappedString("!! " + msgs[error]) + "\n")
