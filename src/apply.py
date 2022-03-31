@@ -31,8 +31,8 @@ URLS = [URL_g1, URL_l4, URL_l3, URL_l6, URL_l8, URL_l9]
 JOB_APP = {
     "first_name": "Foo",
     "last_name": "Bar",
-    "email": "test@test.com",
-    "phone": "123-456-7890",
+    "email": "3xa3tester@gmail.com",
+    "phone": "416-354-3383",
     "org": "Self-Employed",
     "resume": "resume.pdf",
     "resume_textfile": "resume_short.txt",
@@ -43,7 +43,8 @@ JOB_APP = {
     "location": "San Francisco, California, United States",
     "grad_month": '06',
     "grad_year": '2021',
-    "university": "MIT"
+    "university": "MIT",
+    "password": "3XA3Group5"
 }
 
 ## @brief Fills in website text boxes with user information and submits resume
@@ -170,11 +171,14 @@ def indeed(driver):
     # if so continue otherwise log in
     # return to apply page
 
+    '''
+    Check sign in ... leave for now
     checkSignIn = driver.find_element_by_xpath("//*[@id='gnav-main-container']/div/div/div[2]/div[2]/div[1]/a")
 
     if checkSignIn.text == "Sign in":
         #Initial login from get_links_indeed
         pass
+    '''
 
     applyBtn = driver.find_element_by_xpath("//*[@id='indeedApplyButton']/div/span")
 
@@ -248,7 +252,8 @@ def indeed(driver):
     
         # Confirm applicaiton
         time.sleep(round(random.uniform(0.1,0.75), 4))
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        # Uncomment below to confirm application
+        #driver.find_element_by_xpath("//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
 
     except:
         print("Error")
@@ -263,7 +268,7 @@ if __name__ == '__main__':
     driver = webdriver.Chrome("/usr/bin/chromedriver")
     driver.get("https://ca.indeed.com/viewjob?jk=b15dcf2907f5ddf4&q=Software%20Engineer&l=Barrie&tk=1fvavqq4a30a3001&from=web,iaBackPress&advn=2912271563717958&adid=385421406&pub=4a1b367933fd867b19b072952f68dceb&vjs=3")
 
-    #indeed(driver)
+    indeed(driver)
     '''
     profile = userProfile()
     profile.loadProfile()
