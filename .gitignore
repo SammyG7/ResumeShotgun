@@ -128,3 +128,7 @@ chromedriver.exe
 
 # YAML
 *.yaml
+!testprofile*.yaml
+
+# Debugging files
+debug.py
