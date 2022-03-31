@@ -54,7 +54,9 @@ def navigateToLogin(driver):
     driver.get("https://secure.indeed.com/account/login?hl=en_CA&amp;co=CA&amp;continue=https%3A%2F%2Fca.indeed.com%2Fjobs%3Fq%3Dmaterials%2Bengineer%26l%3DHamilton%252C%2BON%26ts%3D1646004111972%26pts%3D1641679429865%26rq%3D1%26rsIdx%3D1&amp;tmpl=desktop&amp;service=my&amp;from=gnav-util-jobsearch--jasx")
     email = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
     email.send_keys('3XA3Tester@gmail.com')
-    nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
+    #nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
+    nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
+    # css-157vc5a e8ju0x51
     nextbutton.click()
     time.sleep(1)
     password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
@@ -63,17 +65,18 @@ def navigateToLogin(driver):
     nextbutton.click()
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
-def run(profile): ## Pull in driver as param
-    driver = webdriver.Chrome(executable_path='./chromedriver')
+def run(driver, profile): ## Pull in driver as param
+    #driver = webdriver.Chrome(executable_path='./chromedriver')
 
     # Check for login info
     # profile.getAutoLogin()
-    #success = login(driver)
+    success = login(driver)
 
-    linkbot = Indeed("software", "hamilton")
-    time.sleep(100)
+    # linkbot = Indeed("software", "hamilton")
+    # time.sleep(100)
+    pass
 
-run(1)
+run(webdriver.Chrome('./chromedriver'), 1)
 
 
     
