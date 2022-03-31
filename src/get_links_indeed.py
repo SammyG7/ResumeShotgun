@@ -51,25 +51,28 @@ def navigateToLogin(driver):
     time.sleep(1)
     password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
     password.send_keys('3XA3Group5')
-    nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
+    # nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
+    nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
     nextbutton.click()
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
-    '''
+    
     ## Check for login info
-    if(profile.getAutoLogin()):
+    if(True or profile.getAutoLogin()):
         success = login(driver)
-    '''
+    
     driver.get('https://ca.indeed.com/')
+    '''
     time.sleep(60)
     print("Hello")
     linkbot = Indeed("engineer", "collingwood", driver)
     linkbot.run()
     return linkbot.returnLinks()
     # time.sleep(100)
+    '''
 
-#run(webdriver.Chrome('./chromedriver'), 1)
+run(webdriver.Chrome('./chromedriver'), 1)
 #//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button
 #//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button/div
 
