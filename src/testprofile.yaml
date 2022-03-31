@@ -1,0 +1,23 @@
+autoLogin: true
+email: jsmith@mail.com
+firstName: John
+gradDate: !!python/tuple
+- 9
+- 1969
+jobTitle: Engineer
+keywords:
+- java
+- python
+- self-deprecating humour
+lastName: Smith
+location: !!python/tuple
+- Sihtii
+- Provents
+- Kontree
+organisation: Bounty Hunter
+phone: '9053872701'
+resumePath: C:\git-projects\application_3xa3_l01_grp05\src\Resumes\thisisnotaresume.pdf
+site: indeed
+socials:
+- - imgs.xkcd.com/comics/circuit_diagram.png
+university: Space University
