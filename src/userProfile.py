@@ -31,7 +31,8 @@ class userProfile:
             "socials": ([], False),
             "location": ((), True),
             "gradDate": ((), False),
-            "university": ("", False)
+            "university": ("", False),
+            "autoLogin": (None, False) # not a boolean so changes can be detected, getter converts blank to False
         }
 
     ## @brief Constructor for userProfile
@@ -65,6 +66,8 @@ class userProfile:
         self.__gradDate = self.DEFAULT["gradDate"][0]
         ## @brief User's university
         self.__university = self.DEFAULT["university"][0]
+        ## @brief Whether or not the program should automatically log into sites
+        self.__autoLogin = self.DEFAULT["autoLogin"][0]
         ## @brief Default value of whether or not confirmation messages should be shown
         self.__userPrompts = userPrompts
 
@@ -147,6 +150,11 @@ class userProfile:
                 if "university" in profile: self.__university = profile["university"]
                 elif userPrompts:
                     print(wS("University can not be found in profile, using default value.") + "\n")
+                    waitForUser()
+                ## autoLogin
+                if "autoLogin" in profile: self.__autoLogin = profile["autoLogin"]
+                elif userPrompts:
+                    print(wS("Auto Login setting can not be found in profile, using default value.") + "\n")
                     waitForUser()
                 ## -- FINISHED --
                 if userPrompts: 
@@ -266,6 +274,14 @@ class userProfile:
     def getUniversity(self):
         return self.__university
 
+    ## @brief Method gets whether or not website logins should be automated
+    #  @param convert (optional) Boolean if blank value should be converted to False
+    #  @return String indicating name of university
+    def getAutoLogin(self, convert = True):
+        if convert:
+            return False if self.__autoLogin == self.DEFAULT["autoLogin"][0] else self.__autoLogin
+        return self.__autoLogin
+
     ## @brief Method gets all values stored in profile
     #  @return Dictionary with string keys matching values in profile
     def getProfileDict(self):
@@ -282,7 +298,8 @@ class userProfile:
             "socials": self.getSocials(),
             "location": self.getLocation(),
             "gradDate": self.getGradDate(),
-            "university": self.getUniversity()
+            "university": self.getUniversity(),
+            "autoLogin": self.getAutoLogin(convert = False)
         }
         return profile
 
@@ -420,4 +437,9 @@ class userProfile:
     #  @param name String indicating university name
     def setUniversity(self, name):
         self.__university = name
+    
+    ## @brief Method sets auto login setting
+    #  @param val Boolean indicating if auto login should be done
+    def setUAutoLogin(self, val):
+        self.__autoLogin = val
 
