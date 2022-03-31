@@ -136,7 +136,7 @@ def lever(driver):
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
     driver = webdriver.Chrome('./chromedriver')
-
+    '''
     profile = userProfile()
     profile.loadProfile()
     menu.run(profile)
@@ -148,7 +148,7 @@ if __name__ == '__main__':
         aggregatedURLs = get_links_glassdoor.getURLs()
     else:
         aggregatedURLs = get_links_indeed.getURLs(driver, profile)
-        
+    
     print(f'Job Listings: {aggregatedURLs}')
     print('\n')
     
@@ -175,5 +175,6 @@ if __name__ == '__main__':
             continue
 
         time.sleep(1)
-
+    '''
     driver.close()
+    
