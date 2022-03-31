@@ -34,14 +34,12 @@ class Indeed:
     ## @brief Constructs a job search using Indeed.
     #  @param keyword a string representing the job title/poistion that the user is interested in searching for.
     #  @param location a string representing the desired job location.
-    def __init__(self, keyword, location):
-        if type(keyword) != str or type(location) != str:
-            return -1
+    def __init__(self, keyword, location, driver = webdriver.Chrome('./chromedriver')):
         self.keyword = keyword
         self.location = location
-        self.driverLocation = "/usr/bin/chromedriver"
-        self.driver = webdriver.Chrome(executable_path=self.driverLocation)
-
+        #self.driverLocation = driver
+        #self.driver = webdriver.Chrome(executable_path=self.driverLocation)
+        self.driver = driver
     def updateCurrentPage(self, url):
         self.url = url
         self.page = requests.get(self.url)
@@ -69,20 +67,13 @@ class Indeed:
     #  @details Uses beautiful soup to search linearly down the page with two different 
     #  methods but allign once search with the other properly
     def getJob(self):
-        try:
-            self.driver.get(self.url)
-        except:
-            self.search()
         
         #find html that contains all table results that contain the job title and company
         infoCards = self.soup.find_all("td",class_="resultContent")
 
-        #find html that contains href data if it exists
-        try:
-            div = self.soup.find("div",class_="mosaic-provider-jobcards")
-            linkCards = div.find_all("a", href=True, id=True)
-        except:
-            return
+        #find html that contains href data
+        div = self.soup.find("div",class_="mosaic-provider-jobcards")
+        linkCards = div.find_all("a", href=True, id=True)
 
         #search through both html list data
         for info,links in zip(infoCards, linkCards):
@@ -111,13 +102,8 @@ class Indeed:
 
     ## @brief Gets number of pages based on an Indeed search result.
     def getPages(self):
-        try:
-            totalPages = self.soup.find("div",id="searchCountPages")
-        except:
-            self.search()
-
         totalPages = self.soup.find("div",id="searchCountPages")
-    
+
         numJobs = totalPages.text
         flag = False
         temp = ""
@@ -138,10 +124,6 @@ class Indeed:
 
     ## @brief Formats various indeed job search pages.
     def pageParser(self):
-        try:
-            self.driver.get(self.url)
-        except:
-            self.search()
 
         self.driver.get(self.url)
 
@@ -170,21 +152,6 @@ class Indeed:
     def closeConnection(self):
         self.page.close()
 
-    def clear(self):
-        self.page.close()
-        self.jobs = []
-        self.links = []
-        self.url = ""
-        self.keyword = ""
-        self.location = ""
-        self.jobPages = 0
-        self.numJobs = 0
-        self.nextPages = []
-
-        #Soup Info
-        self.page = ""
-        self.soup = ""
-
     def returnAllJobs(self):
         info = []
         for i in range(len(self.jobs)):
@@ -197,7 +164,7 @@ class Indeed:
             links.append(self.jobs[i].link)
         return links
     
-''' Uncomment to run'''
+''' Uncomment to run
 if __name__ == "__main__":
     
     s1 = Indeed("Software Engineer", "Barrie")
@@ -213,3 +180,8 @@ if __name__ == "__main__":
     #s1.search()
     #s1.getPages()
     #s1.pageParser()  
+=======
+    s1 = Indeed("Engineer", "Huntsville, ON")
+    s1.run()  
+'''
+
