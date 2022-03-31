@@ -3,7 +3,7 @@
 #  @brief Module that signs into Indeed website.
 #  @date March 17, 2022
 
-# selenium stup
+## Imports
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,22 +11,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-
-# to find links
 from bs4 import BeautifulSoup
 import json
 import urllib.request
 import re
-
-import time # to sleep
+import time 
 from indeed import *
-
-# fill this in with your job preferences!
-##PREFERENCES = {
-##    "position_title": "Software Engineer",
-##    "location": "San Francisco, CA"
-##}
-##
 
 ## @brief Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login.
 #  @param driver a Selenium object utilized to navigate the page.
@@ -65,12 +55,10 @@ def navigateToLogin(driver):
     nextbutton.click()
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
-def run(driver, profile): ## Pull in driver as param
-    #driver = webdriver.Chrome(executable_path='./chromedriver')
-
-    # Check for login info
-    # profile.getAutoLogin()
-    success = login(driver)
+def run(driver, profile):
+    ## Check for login info
+    if(profile.getAutoLogin()):
+        success = login(driver)
 
     # linkbot = Indeed("software", "hamilton")
     # time.sleep(100)
