@@ -30,8 +30,8 @@ URLS = [URL_g1, URL_l4, URL_l3, URL_l6, URL_l8, URL_l9]
 JOB_APP = {
     "first_name": "Foo",
     "last_name": "Bar",
-    "email": "test@test.com",
-    "phone": "123-456-7890",
+    "email": "3XA3Tester@gmail.com",
+    "phone": "9053872700",
     "org": "Self-Employed",
     "resume": "resume.pdf",
     "resume_textfile": "resume_short.txt",
@@ -190,6 +190,7 @@ def indeed(driver):
     time.sleep(round(random.uniform(0.1,0.75), 4))
 
     try:
+        '''
         # Email page
         try:
             emailInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
@@ -208,7 +209,7 @@ def indeed(driver):
             time.sleep(round(random.uniform(0.1,0.75), 4))
         except:
             print("Error on password input")
-
+        '''
         # Information page
         try:
             nameInput = driver.find_element_by_xpath("//*[@id='input-firstName']")
@@ -261,7 +262,13 @@ def indeed(driver):
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
     driver = webdriver.Chrome('./chromedriver')
+    profile = userProfile()
+    aggregatedURLs = get_links_indeed.run(driver, profile)
 
+    for link in aggregatedURLs:
+        indeed(driver.get(link))
+
+    '''
     profile = userProfile()
     profile.loadProfile()
     menu.run(profile)
@@ -300,5 +307,6 @@ if __name__ == '__main__':
             continue
 
         time.sleep(1)
+    '''
 
     driver.close()

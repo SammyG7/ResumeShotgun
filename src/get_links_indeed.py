@@ -56,15 +56,22 @@ def navigateToLogin(driver):
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
+    '''
     ## Check for login info
     if(profile.getAutoLogin()):
         success = login(driver)
-
-    # linkbot = Indeed("software", "hamilton")
+    '''
+    driver.get('https://ca.indeed.com/')
+    time.sleep(60)
+    print("Hello")
+    linkbot = Indeed("engineer", "collingwood", driver)
+    linkbot.run()
+    return linkbot.returnLinks()
     # time.sleep(100)
-    pass
 
-run(webdriver.Chrome('./chromedriver'), 1)
+#run(webdriver.Chrome('./chromedriver'), 1)
+#//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button
+#//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button/div
 
 
     

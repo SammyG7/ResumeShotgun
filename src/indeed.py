@@ -34,12 +34,12 @@ class Indeed:
     ## @brief Constructs a job search using Indeed.
     #  @param keyword a string representing the job title/poistion that the user is interested in searching for.
     #  @param location a string representing the desired job location.
-    def __init__(self, keyword, location, driver = './chromedriver'):
+    def __init__(self, keyword, location, driver = webdriver.Chrome('./chromedriver')):
         self.keyword = keyword
         self.location = location
-        self.driverLocation = driver
-        self.driver = webdriver.Chrome(executable_path=self.driverLocation)
-
+        #self.driverLocation = driver
+        #self.driver = webdriver.Chrome(executable_path=self.driverLocation)
+        self.driver = driver
     def updateCurrentPage(self, url):
         self.url = url
         self.page = requests.get(self.url)

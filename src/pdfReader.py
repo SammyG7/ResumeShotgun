@@ -147,10 +147,10 @@ class pdfReader:
             self.expectedinfo["languages"]["javascript"] = False
 
 ## Test
-p = pdfReader("Resumes/SamResume.pdf")
-print(p.plaintext)
-p.setKnownLanguages()
-print(p.expectedinfo)
+##p = pdfReader("Resumes/SamResume.pdf")
+##print(p.plaintext)
+##p.setKnownLanguages()
+##print(p.expectedinfo)
 
 ## Auto Cover Letter
 # Template cover letter with insert company, insert location, etc
