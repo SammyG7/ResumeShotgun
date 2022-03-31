@@ -54,6 +54,7 @@ def __promptInput(forceInt = True, multiple = False):
         return -1
 
 ## @brief Creates window to browse for file
+#  @return String indicating path to file selected
 def __browse():
     app = wx.App()
     
@@ -250,8 +251,23 @@ def run(profile):
                     displayError("empty")
         ## Auto Login
         elif menu == 23:
-            # Implement Auto Login
-            pass
+            displayMenuSites(profile.getAutoLogin(), SITESLIST)
+            updated = False
+            while not updated:
+                choice = __promptInput()
+                if choice == 0:
+                    __changeMenu(3)
+                    updated = True
+                elif choice == 1:
+                    profile.setAutoLogin(True)
+                    __changeMenu()
+                    updated = True
+                elif choice == 2:
+                    profile.setAutoLogin(False)
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("input")
         ## ERROR
         else:
             displayMenuPlaceholder("FORBIDDEN MENU :O")

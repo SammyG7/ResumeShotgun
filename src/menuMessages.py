@@ -113,7 +113,7 @@ def displayMenuEmail(email):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for personal jobs menu options
+## @brief Displays text for job search menu options
 def displayMenuSearch():
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
@@ -126,7 +126,7 @@ def displayMenuSearch():
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for title menu (jobs submenu) options
+## @brief Displays text for title menu (search submenu) options
 #  @param path String for current path to resume file
 def displayMenuJobTitle(title):
     if title == "": title = "N/A"
@@ -143,7 +143,7 @@ def displayMenuJobTitle(title):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for keywords menu (jobs submenu) options
+## @brief Displays text for keywords menu (search submenu) options
 #  @param keywords List of strings of current keywords
 def displayMenuKeywords(keywords):
     if len(keywords) == 0: keywords = "N/A"
@@ -160,6 +160,26 @@ def displayMenuKeywords(keywords):
                         "be removed.") + "\n" +
           "\n" +
           " 1) Clear all keywords \n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for auto login menu (search submenu) options
+#  @param site Boolean indicating current setting
+def displayMenuAutoLogin(setting):
+    setting = wrappedString("Use auto-login" if setting else "Do not use auto-login")
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Search/Auto-Login     \n" +
+          "==============================\n" +
+          " Current: \n" +
+          " " + setting + "\n" +
+          "\n" +
+          wrappedString("Input number corresponding to the option " +
+                        "you want to use.") + "\n" +
+          "\n" +
+          " 1) Use auto-login \n" +
+          " 2) Do not use auto-login \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
