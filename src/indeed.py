@@ -141,8 +141,28 @@ class Indeed:
             self.getJob()
             self.getPages()
             self.pageParser()
+            for i in range(1, len(self.nextPages)):
+                self.updateCurrentPage(self.nextPages[i])
+                self.getJob()
+            self.closeConnection()
+
         except:
             return "An error occured with the search"
+
+    def closeConnection(self):
+        self.page.close()
+
+    def returnAllJobs(self):
+        info = []
+        for i in range(len(self.jobs)):
+            info.append([self.jobs[i].title, self.jobs[i].company, self.jobs[i].link])
+        return info
+
+    def returnLinks(self):
+        links = []
+        for i in range(len(self.jobs)):
+            links.append(self.jobs[i].link)
+        return links
     
 ''' Uncomment to run
 if __name__ == "__main__":
