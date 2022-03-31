@@ -263,6 +263,7 @@ def indeed(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
+    driver = webdriver.Chrome('./chromedriver')
 
     # For manual testing purposes
     driver = webdriver.Chrome("/usr/bin/chromedriver")
@@ -280,12 +281,10 @@ if __name__ == '__main__':
     if(site == "glassdoor"):
         aggregatedURLs = get_links_glassdoor.getURLs()
     else:
-        aggregatedURLs = get_links_indeed.getURLs()
+        aggregatedURLs = get_links_indeed.getURLs(driver, profile)
         
     print(f'Job Listings: {aggregatedURLs}')
     print('\n')
-
-    driver = webdriver.Chrome(executable_path='./chromedriver')
     
     for url in aggregatedURLs:
         print('\n')
