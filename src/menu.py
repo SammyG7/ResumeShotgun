@@ -233,9 +233,19 @@ def run(profile):
             __changeMenu(2)
         ## Main/Personal/Uni
         elif menu == 19:
-            displayMenuPlaceholder("Main/Personal/Uni")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuUniversity(profile.getUniversity())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setUniversity(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Search/Title
         elif menu == 21:
             displayMenuJobTitle(profile.getJobTitle())

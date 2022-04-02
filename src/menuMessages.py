@@ -151,6 +151,23 @@ def displayMenuOrganisation(name):
           " 0) Go back \n" +
           "\n")
 
+## @brief Displays text for university menu (profile submenu) options
+#  @param path String for university name
+def displayMenuUniversity(name):
+    if name == DEFAULT["university"][0]: name = "N/A"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/University   \n" +
+          "==============================\n" +
+          " Current university: \n" +
+          " " + name + "\n" +
+          "\n" +
+          wrappedString("Input text to " +
+                        "update the unversity.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
 ## @brief Displays text for job search menu options
 def displayMenuSearch():
     print("==============================\n" +
