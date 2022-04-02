@@ -1,0 +1,167 @@
+\hypertarget{classindeed_1_1Indeed}{}\section{indeed.\+Indeed Class Reference}
+\label{classindeed_1_1Indeed}\index{indeed.\+Indeed@{indeed.\+Indeed}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classindeed_1_1Indeed_a4bb7053b7c47c08884cf423ac5c27266}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, keyword, location, driver=webdriver.\+Chrome(\textquotesingle{}./chromedriver\textquotesingle{}))
+\begin{DoxyCompactList}\small\item\em Constructs a job search using \hyperlink{classindeed_1_1Indeed}{Indeed}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_ae8ebb740057615b8ecd77b9bd9378837}\label{classindeed_1_1Indeed_ae8ebb740057615b8ecd77b9bd9378837}} 
+def {\bfseries update\+Current\+Page} (self, url)
+\item 
+def \hyperlink{classindeed_1_1Indeed_a21ada3714f73ea0dc98c2ff0099ee286}{search} (self)
+\begin{DoxyCompactList}\small\item\em Enters in search parameters and returns url of results. \end{DoxyCompactList}\item 
+def \hyperlink{classindeed_1_1Indeed_a52d569fcd959a29e5a75a6f5fa2a9e4c}{get\+Job} (self)
+\begin{DoxyCompactList}\small\item\em Find essential job info(title, company, link) and creates a Job class. \end{DoxyCompactList}\item 
+def \hyperlink{classindeed_1_1Indeed_a8eb93c40c02d65313a51de249ef377d0}{get\+Pages} (self)
+\begin{DoxyCompactList}\small\item\em Gets number of pages based on an \hyperlink{classindeed_1_1Indeed}{Indeed} search result. \end{DoxyCompactList}\item 
+def \hyperlink{classindeed_1_1Indeed_ae460f5026455d12e9b50ceabc1a373dc}{page\+Parser} (self)
+\begin{DoxyCompactList}\small\item\em Formats various indeed job search pages. \end{DoxyCompactList}\item 
+def \hyperlink{classindeed_1_1Indeed_ab5b7de5f85902f3d22be6bc176bc5146}{run} (self)
+\begin{DoxyCompactList}\small\item\em Used to run various module functions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a64085dd12fad5231a197181b76863dcf}\label{classindeed_1_1Indeed_a64085dd12fad5231a197181b76863dcf}} 
+def {\bfseries close\+Connection} (self)
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a50f327d87fcbac76e4bb1ee5ee50770e}\label{classindeed_1_1Indeed_a50f327d87fcbac76e4bb1ee5ee50770e}} 
+def {\bfseries return\+All\+Jobs} (self)
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a378ae9d922a915960e44bca1e24095b5}\label{classindeed_1_1Indeed_a378ae9d922a915960e44bca1e24095b5}} 
+def {\bfseries return\+Links} (self)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a63312d10483344a3b90d9bfcd9ae49d9}\label{classindeed_1_1Indeed_a63312d10483344a3b90d9bfcd9ae49d9}} 
+{\bfseries keyword}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_ac5041a83f362a4197313e997eb723e13}\label{classindeed_1_1Indeed_ac5041a83f362a4197313e997eb723e13}} 
+{\bfseries location}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_ae5da0db7958124d067d2be2a8820694f}\label{classindeed_1_1Indeed_ae5da0db7958124d067d2be2a8820694f}} 
+{\bfseries driver}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_ad5da680b25d0e6c3bba153b31a4297a7}\label{classindeed_1_1Indeed_ad5da680b25d0e6c3bba153b31a4297a7}} 
+{\bfseries url}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a9e91077239458307d6d58d92c892dd68}\label{classindeed_1_1Indeed_a9e91077239458307d6d58d92c892dd68}} 
+{\bfseries page}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a5bfee75d4c88e686c9e12cf2a6673aaa}\label{classindeed_1_1Indeed_a5bfee75d4c88e686c9e12cf2a6673aaa}} 
+{\bfseries soup}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_aca5dd2546e05f93b8817a2c8260baf72}\label{classindeed_1_1Indeed_aca5dd2546e05f93b8817a2c8260baf72}} 
+{\bfseries num\+Jobs}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_afdfe329fa5d2a2b86c2aff7096dd0c60}\label{classindeed_1_1Indeed_afdfe329fa5d2a2b86c2aff7096dd0c60}} 
+{\bfseries job\+Pages}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a4ce3932a3cdc9e325a04f257954476f0}\label{classindeed_1_1Indeed_a4ce3932a3cdc9e325a04f257954476f0}} 
+list {\bfseries jobs} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a8fe8e3e57c1b3710fb44a6056d0ac725}\label{classindeed_1_1Indeed_a8fe8e3e57c1b3710fb44a6056d0ac725}} 
+list {\bfseries links} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_af81a582e300bbe2d7859a5eaddbf236b}\label{classindeed_1_1Indeed_af81a582e300bbe2d7859a5eaddbf236b}} 
+string {\bfseries url} = \char`\"{}\char`\"{}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_aa3636e98fb04e01599744b879d66435a}\label{classindeed_1_1Indeed_aa3636e98fb04e01599744b879d66435a}} 
+string {\bfseries keyword} = \char`\"{}\char`\"{}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_aa8fa887e129d84137726500e7a2c5623}\label{classindeed_1_1Indeed_aa8fa887e129d84137726500e7a2c5623}} 
+string {\bfseries location} = \char`\"{}\char`\"{}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a650fa6601825564f4f14bb8115c7972c}\label{classindeed_1_1Indeed_a650fa6601825564f4f14bb8115c7972c}} 
+int {\bfseries job\+Pages} = 0
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a1d8618a35a56cdf30dd7edd76c0728e3}\label{classindeed_1_1Indeed_a1d8618a35a56cdf30dd7edd76c0728e3}} 
+int {\bfseries num\+Jobs} = 0
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a0bd469941af9edc2166bbf815083de67}\label{classindeed_1_1Indeed_a0bd469941af9edc2166bbf815083de67}} 
+list {\bfseries next\+Pages} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_a00b40f014b3bd66c1735017a708e1500}\label{classindeed_1_1Indeed_a00b40f014b3bd66c1735017a708e1500}} 
+string {\bfseries page} = \char`\"{}\char`\"{}
+\item 
+\mbox{\Hypertarget{classindeed_1_1Indeed_af181aa95bfc49950cc9d10d440dc76e8}\label{classindeed_1_1Indeed_af181aa95bfc49950cc9d10d440dc76e8}} 
+string {\bfseries soup} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classindeed_1_1Indeed_a4bb7053b7c47c08884cf423ac5c27266}\label{classindeed_1_1Indeed_a4bb7053b7c47c08884cf423ac5c27266}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{keyword,  }\item[{}]{location,  }\item[{}]{driver = {\ttfamily webdriver.Chrome(\textquotesingle{}./chromedriver\textquotesingle{})} }\end{DoxyParamCaption})}
+
+
+
+Constructs a job search using \hyperlink{classindeed_1_1Indeed}{Indeed}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em keyword} & a string representing the job title/poistion that the user is interested in searching for. \\
+\hline
+{\em location} & a string representing the desired job location. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classindeed_1_1Indeed_a52d569fcd959a29e5a75a6f5fa2a9e4c}\label{classindeed_1_1Indeed_a52d569fcd959a29e5a75a6f5fa2a9e4c}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!get\+Job@{get\+Job}}
+\index{get\+Job@{get\+Job}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{get\+Job()}{getJob()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+get\+Job (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Find essential job info(title, company, link) and creates a Job class. 
+
+Uses beautiful soup to search linearly down the page with two different methods but allign once search with the other properly \mbox{\Hypertarget{classindeed_1_1Indeed_a8eb93c40c02d65313a51de249ef377d0}\label{classindeed_1_1Indeed_a8eb93c40c02d65313a51de249ef377d0}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!get\+Pages@{get\+Pages}}
+\index{get\+Pages@{get\+Pages}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{get\+Pages()}{getPages()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+get\+Pages (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Gets number of pages based on an \hyperlink{classindeed_1_1Indeed}{Indeed} search result. 
+
+\mbox{\Hypertarget{classindeed_1_1Indeed_ae460f5026455d12e9b50ceabc1a373dc}\label{classindeed_1_1Indeed_ae460f5026455d12e9b50ceabc1a373dc}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!page\+Parser@{page\+Parser}}
+\index{page\+Parser@{page\+Parser}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{page\+Parser()}{pageParser()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+page\+Parser (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Formats various indeed job search pages. 
+
+\mbox{\Hypertarget{classindeed_1_1Indeed_ab5b7de5f85902f3d22be6bc176bc5146}\label{classindeed_1_1Indeed_ab5b7de5f85902f3d22be6bc176bc5146}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!run@{run}}
+\index{run@{run}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Used to run various module functions. 
+
+\mbox{\Hypertarget{classindeed_1_1Indeed_a21ada3714f73ea0dc98c2ff0099ee286}\label{classindeed_1_1Indeed_a21ada3714f73ea0dc98c2ff0099ee286}} 
+\index{indeed\+::\+Indeed@{indeed\+::\+Indeed}!search@{search}}
+\index{search@{search}!indeed\+::\+Indeed@{indeed\+::\+Indeed}}
+\subsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily def indeed.\+Indeed.\+search (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enters in search parameters and returns url of results. 
+
+Uses Selenium to send keys to Indeed.\+com 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/gab/repos/application\+\_\+3xa3\+\_\+l01\+\_\+grp05/src/indeed.\+py\end{DoxyCompactItemize}
