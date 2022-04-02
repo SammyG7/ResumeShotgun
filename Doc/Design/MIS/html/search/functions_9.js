@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['run',['run',['../menu_8py.html#a040b4ec226d870506b3dbe7bed02dbb0',1,'menu']]]
+  ['navigatetologin',['navigateToLogin',['../get__links__indeed_8py.html#aaa087e767a1199ada0242fa6cbc2eee2',1,'get_links_indeed']]]
 ];

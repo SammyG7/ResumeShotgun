@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clearscreen',['clearScreen',['../menuMessages_8py.html#a4651f39c686a7c3c986e37d00e7c29d6',1,'menuMessages']]]
+  ['browse',['browse',['../classpdfReader_1_1pdfReader.html#abf8c42f08d79965e0228a9bef7b4bf7c',1,'pdfReader::pdfReader']]]
 ];

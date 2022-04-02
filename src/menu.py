@@ -2,7 +2,7 @@
 #  @author Gavin Jameson
 #  @author Sam Gorman
 #  @brief Allows the user to easily view and set new values for a user profile
-#  @date Mar 31, 2022
+#  @date Apr 2, 2022
 
 from menuMessages import *
 from sites import SITESLIST
@@ -203,9 +203,19 @@ def run(profile):
                     displayError("input")
         ## Main/Personal/Organisation
         elif menu == 15:
-            displayMenuPlaceholder("Main/Personal/Org")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuOrganisation(profile.getOrganisation())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setOrganisation(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Socials
         elif menu == 16:
             displayMenuPlaceholder("Main/Personal/Socials")
@@ -213,19 +223,51 @@ def run(profile):
             __changeMenu(2)
         ## Main/Personal/Location
         elif menu == 17:
-            displayMenuPlaceholder("Main/Personal/Location")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuLocation(profile.getLocation())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if profile.setLocation(choice):
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Grad
         elif menu == 18:
-            displayMenuPlaceholder("Main/Personal/Grad")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuGradDate(profile.getGradDate())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if profile.setGradDate(choice):
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Uni
         elif menu == 19:
-            displayMenuPlaceholder("Main/Personal/Uni")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuUniversity(profile.getUniversity())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setUniversity(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Search/Title
         elif menu == 21:
             displayMenuJobTitle(profile.getJobTitle())
