@@ -275,6 +275,8 @@ if __name__ == '__main__':
     driver = webdriver.Chrome('./chromedriver')
     
     aggregatedURLs = get_links_indeed.run(driver, profile)
+    
+    driver.close()
 
     '''
     for link in aggregatedURLs:
@@ -297,7 +299,7 @@ if __name__ == '__main__':
         aggregatedURLs = get_links_glassdoor.getURLs()
     else:
         aggregatedURLs = get_links_indeed.getURLs(driver, profile)
-    '''
+    
         
     #print(f'Job Listings: {aggregatedURLs}')
     print(f'Job Listings:')
@@ -338,3 +340,4 @@ if __name__ == '__main__':
     
 
     driver.close()
+    '''

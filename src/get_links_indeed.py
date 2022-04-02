@@ -48,12 +48,19 @@ def navigateToLogin(driver):
     nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
     # css-157vc5a e8ju0x51
     nextbutton.click()
+    
+    captchaHandler(driver)
+    
     time.sleep(1)
     password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
     password.send_keys('3XA3Group5')
     # nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
     nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
     nextbutton.click()
+
+    captchaHandler(driver)
+    time.sleep(1)
+    verificationHandler(driver)
 
 def waitForElement(xpath):
     found = False
@@ -65,8 +72,27 @@ def waitForElement(xpath):
         except:
             pass
 
+def captchaHandler(driver):
+    try:
+        driver.find_element_by_xpath("//*[@id='anchor']")
+        print("Captcha Detected: Waiting for user")
+        while(True):
+            driver.find_element_by_xpath("//*[@id='anchor']")
+    except:
+        return
+
+def verificationHandler(driver):
+    try:
+        driver.find_element_by_xpath("//*[@id='verification_input']")
+        print("Two Step Verification Detected: Waiting for user")
+        while(True):
+            driver.find_element_by_xpath("//*[@id='verification_input']")
+    except:
+        return
+
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
+
     '''
     ## Check for login info
     if(True or profile.getAutoLogin()):
@@ -76,8 +102,32 @@ def run(driver, profile):
     else:
         driver.get('https://ca.indeed.com/')
         time.sleep(60)  ## Placeholder Manual Login
-        
     '''
+    success = False
+    
+    if(True or profile.getAutoLogin()):
+        ## Attempt Auto Login
+        try:    
+            success = login(driver)
+        except:
+            pass
+
+    ## Manually log in if automatic didn't work
+    while(not success):
+        ## Periodically check if logged in
+        time.sleep(2)
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, 'html.parser')
+        mosaic = soup.find(id='mosaic-data')
+        text = mosaic.text.split("\n")
+
+        for x in text:
+            if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
+                logInCheck = x
+
+        if('"isLoggedIn":false' in logInCheck):
+            success = True
+        
     #time.sleep(60)
     #print("Hello")
     linkbot = Indeed("engineer", "collingwood", driver)
