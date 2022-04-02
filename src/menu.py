@@ -203,9 +203,19 @@ def run(profile):
                     displayError("input")
         ## Main/Personal/Organisation
         elif menu == 15:
-            displayMenuPlaceholder("Main/Personal/Org")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuOrganisation(profile.getOrganisation())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False)
+                if choice == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    profile.setOrganisation(choice.strip())
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Socials
         elif menu == 16:
             displayMenuPlaceholder("Main/Personal/Socials")
