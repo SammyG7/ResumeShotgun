@@ -16,7 +16,7 @@ import json
 import urllib.request
 import re
 import time 
-from indeed import *
+from indeed import Indeed
 
 ## @brief Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login.
 #  @param driver a Selenium object utilized to navigate the page.
@@ -52,7 +52,10 @@ def navigateToLogin(driver):
     captchaHandler(driver)
     
     time.sleep(1)
-    password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
+    try:
+        password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
+    except: ## Form number seems to change after captcha
+        password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-116']")
     password.send_keys('3XA3Group5')
     # nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
     nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
@@ -73,12 +76,17 @@ def waitForElement(xpath):
             pass
 
 def captchaHandler(driver):
+    time.sleep(1)
+    detected = False
     try:
-        driver.find_element_by_xpath("//*[@id='anchor']")
+        driver.find_element_by_xpath("//*[@class='pass-Captcha css-1lbfmuq eu4oa1w0']")
         print("Captcha Detected: Waiting for user")
+        detected = True
         while(True):
-            driver.find_element_by_xpath("//*[@id='anchor']")
+            driver.find_element_by_xpath("//*[@class='pass-Captcha css-1lbfmuq eu4oa1w0']")
     except:
+        if(detected):
+            print("Captcha Cleared")
         return
 
 def verificationHandler(driver):
@@ -107,27 +115,36 @@ def run(driver, profile):
     
     if(True or profile.getAutoLogin()):
         ## Attempt Auto Login
+        print("Attempting Automatic Login")
         try:    
             success = login(driver)
         except:
+            print("Something Went Wrong")
+            print("Switching to Manual Login")
             pass
 
+        
+        
     ## Manually log in if automatic didn't work
     while(not success):
         ## Periodically check if logged in
         time.sleep(2)
-        page_source = driver.page_source
-        soup = BeautifulSoup(page_source, 'html.parser')
-        mosaic = soup.find(id='mosaic-data')
-        text = mosaic.text.split("\n")
+        try: ## Crashes if on wrong page anyways
+            page_source = driver.page_source
+            soup = BeautifulSoup(page_source, 'html.parser')
+            mosaic = soup.find(id='mosaic-data')
+            text = mosaic.text.split("\n")
 
-        for x in text:
-            if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
-                logInCheck = x
+            for x in text:
+                if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
+                    logInCheck = x
 
-        if('"isLoggedIn":false' in logInCheck):
-            success = True
-        
+            if('"isLoggedIn":false' in logInCheck):
+                success = True
+        except:
+            pass
+
+    print("Logged in")
     #time.sleep(60)
     #print("Hello")
     linkbot = Indeed("engineer", "collingwood", driver)
@@ -136,7 +153,7 @@ def run(driver, profile):
     # time.sleep(100)
     
 
-#run(webdriver.Chrome('./chromedriver'), 1)
+#run(webdriiver.Chrome('./chromedriver'), 1)
 #//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button
 #//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button/div
 
