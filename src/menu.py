@@ -2,7 +2,7 @@
 #  @author Gavin Jameson
 #  @author Sam Gorman
 #  @brief Allows the user to easily view and set new values for a user profile
-#  @date Mar 31, 2022
+#  @date Apr 2, 2022
 
 from menuMessages import *
 from sites import SITESLIST
@@ -239,9 +239,20 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Grad
         elif menu == 18:
-            displayMenuPlaceholder("Main/Personal/Grad")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuGradDate(profile.getGradDate())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if profile.setGradDate(choice):
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Uni
         elif menu == 19:
             displayMenuUniversity(profile.getUniversity())
