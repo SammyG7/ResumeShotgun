@@ -8,7 +8,7 @@ from menuMessages import *
 from sites import SITESLIST
 from time import sleep
 import wx
-from pdfReader import *
+from pdfReader import pdfReader
 
 ## @brief Changes state dictating what menu is shown
 def __changeMenu(newMenu = -2):

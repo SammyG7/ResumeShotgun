@@ -184,6 +184,7 @@ def indeed(driver):
     
     if applyBtn.text != "Apply now":
         print("Error! Cannot apply on indeed")
+        return 0
     else:
         driver.find_element_by_xpath("//*[@id='indeedApplyButton']").click()
         print("worked")
@@ -261,42 +262,61 @@ def indeed(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
+    
     profile = userProfile()
     profile.loadProfile()
+    '''
     menu.run(profile)
     profile.saveProfile()
-    site = profile.getSite()
+    '''
 
-    print("Hello")
+    site = profile.getSite()
 
     driver = webdriver.Chrome('./chromedriver')
     
     aggregatedURLs = get_links_indeed.run(driver, profile)
 
-    for link in aggregatedURLs:
-        indeed(driver.get(link))
-
     '''
+    for link in aggregatedURLs:
+        ##indeed(driver.get(link))
+        print(link)
+        print("\n")
+
+    print(len(aggregatedURLs))
+
+    
     profile = userProfile()
     profile.loadProfile()
     menu.run(profile)
     profile.saveProfile()
     site = profile.getSite()
+    
 
     ## Get Links From User Specified Website
     if(site == "glassdoor"):
         aggregatedURLs = get_links_glassdoor.getURLs()
     else:
         aggregatedURLs = get_links_indeed.getURLs(driver, profile)
+    '''
         
-    print(f'Job Listings: {aggregatedURLs}')
+    #print(f'Job Listings: {aggregatedURLs}')
+    print(f'Job Listings:')
     print('\n')
     
     for url in aggregatedURLs:
         print('\n')
+        #indeed(driver.get(link))
 
         ## Decide application process based on URL information
-        if 'greenhouse' in url:
+        if 'indeed' in url:
+            print("Indeed\n")
+            try:
+                indeed(driver.get(url))
+                print(f'SUCCESS FOR: {url}')
+            except:
+                print(url, "broken")
+            
+        elif 'greenhouse' in url:
             driver.get(url)
             try:
                 greenhouse(driver)
@@ -315,6 +335,6 @@ if __name__ == '__main__':
             continue
 
         time.sleep(1)
-    '''
+    
 
     driver.close()

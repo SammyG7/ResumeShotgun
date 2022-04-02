@@ -67,7 +67,7 @@ def waitForElement(xpath):
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
-    
+    '''
     ## Check for login info
     if(True or profile.getAutoLogin()):
         success = login(driver)
@@ -77,7 +77,7 @@ def run(driver, profile):
         driver.get('https://ca.indeed.com/')
         time.sleep(60)  ## Placeholder Manual Login
         
-  
+    '''
     #time.sleep(60)
     #print("Hello")
     linkbot = Indeed("engineer", "collingwood", driver)
