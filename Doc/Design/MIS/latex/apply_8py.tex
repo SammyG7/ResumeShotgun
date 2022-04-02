@@ -11,7 +11,9 @@ Main module used for the application proccess.
 def \hyperlink{apply_8py_ad12e4221cac8a18b0fdd5df5da7f038a}{apply.\+greenhouse} (driver)
 \begin{DoxyCompactList}\small\item\em Fills in website text boxes with user information and submits resume. \end{DoxyCompactList}\item 
 def \hyperlink{apply_8py_a00006462ba314126513d925b52b7e9e5}{apply.\+lever} (driver)
-\begin{DoxyCompactList}\small\item\em Fills in website text boxes with user information and submits resume. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fills in website text boxes with user information and submits resume. \end{DoxyCompactList}\item 
+def \hyperlink{apply_8py_ae176b1d67f1abade765ab0e39dbc9f2e}{apply.\+indeed} (driver)
+\begin{DoxyCompactList}\small\item\em Fills in website text boxes with user information and submits resume for Indeed native application. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,16 +43,13 @@ list {\bfseries apply.\+U\+R\+LS} = \mbox{[}U\+R\+L\+\_\+g1, U\+R\+L\+\_\+l4, U\
 \item 
 dictionary {\bfseries apply.\+J\+O\+B\+\_\+\+A\+PP}
 \item 
-\hyperlink{apply_8py_a28be50c998760a690057e2998d1f2a6f}{apply.\+profile} = user\+Profile()
+\hyperlink{apply_8py_a934eb0a16e16d7bd0dcbb968fab260a4}{apply.\+driver} = webdriver.\+Chrome(\textquotesingle{}./chromedriver\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Initial function run upon execution of program. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{apply_8py_a01d2ff9cd06b1727e62b986ca2d1e0bf}\label{apply_8py_a01d2ff9cd06b1727e62b986ca2d1e0bf}} 
-{\bfseries apply.\+site} = profile.\+get\+Site()
+\mbox{\Hypertarget{apply_8py_a28be50c998760a690057e2998d1f2a6f}\label{apply_8py_a28be50c998760a690057e2998d1f2a6f}} 
+{\bfseries apply.\+profile} = user\+Profile()
 \item 
 \mbox{\Hypertarget{apply_8py_a994f267a59bfa1915cd92c54bf9ccc66}\label{apply_8py_a994f267a59bfa1915cd92c54bf9ccc66}} 
-\hyperlink{apply_8py_a994f267a59bfa1915cd92c54bf9ccc66}{apply.\+aggregated\+U\+R\+Ls} = get\+\_\+links\+\_\+glassdoor.\+get\+U\+R\+Ls()
-\begin{DoxyCompactList}\small\item\em Get Links From User Specified Website. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{apply_8py_a934eb0a16e16d7bd0dcbb968fab260a4}\label{apply_8py_a934eb0a16e16d7bd0dcbb968fab260a4}} 
-{\bfseries apply.\+driver} = webdriver.\+Chrome(executable\+\_\+path=\textquotesingle{}./chromedriver\textquotesingle{})
+{\bfseries apply.\+aggregated\+U\+R\+Ls} = get\+\_\+links\+\_\+indeed.\+run(driver, profile)
 \end{DoxyCompactItemize}
 
 
@@ -85,6 +84,28 @@ Fills in website text boxes with user information and submits resume.
 {\em driver} & Webdriver for chrome which parses and interacts with the H\+T\+ML from a given website \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{apply_8py_file_ae176b1d67f1abade765ab0e39dbc9f2e}\label{apply_8py_file_ae176b1d67f1abade765ab0e39dbc9f2e}} 
+\index{apply.\+py@{apply.\+py}!indeed@{indeed}}
+\index{indeed@{indeed}!apply.\+py@{apply.\+py}}
+\subsubsection{\texorpdfstring{indeed()}{indeed()}}
+{\footnotesize\ttfamily def apply.\+indeed (\begin{DoxyParamCaption}\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+Fills in website text boxes with user information and submits resume for Indeed native application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & Webdriver for chrome which parses and interacts with the H\+T\+ML from a given website \begin{DoxyVerb}Check sign in ... leave for now
+checkSignIn = driver.find_element_by_xpath("//*[@id='gnav-main-container']/div/div/div[2]/div[2]/div[1]/a")
+
+if checkSignIn.text == "Sign in":
+    #Initial login from get_links_indeed
+    pass
+\end{DoxyVerb}
+ \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{apply_8py_file_a00006462ba314126513d925b52b7e9e5}\label{apply_8py_file_a00006462ba314126513d925b52b7e9e5}} 
 \index{apply.\+py@{apply.\+py}!lever@{lever}}
 \index{lever@{lever}!apply.\+py@{apply.\+py}}
@@ -103,7 +124,17 @@ Fills in website text boxes with user information and submits resume.
 
 
 \subsection{Variable Documentation}
-\mbox{\Hypertarget{apply_8py_file_ae9bedeb7feb9f729a8bdc73dd3555892}\label{apply_8py_file_ae9bedeb7feb9f729a8bdc73dd3555892}} 
+\mbox{\Hypertarget{apply_8py_file_a934eb0a16e16d7bd0dcbb968fab260a4}\label{apply_8py_file_a934eb0a16e16d7bd0dcbb968fab260a4}} 
+\index{apply.\+py@{apply.\+py}!driver@{driver}}
+\index{driver@{driver}!apply.\+py@{apply.\+py}}
+\subsubsection{\texorpdfstring{driver}{driver}}
+{\footnotesize\ttfamily apply.\+driver = webdriver.\+Chrome(\textquotesingle{}./chromedriver\textquotesingle{})}
+
+
+
+Initial function run upon execution of program. 
+
+Gathers links through secondary modules then coordinates the apllication process \mbox{\Hypertarget{apply_8py_file_ae9bedeb7feb9f729a8bdc73dd3555892}\label{apply_8py_file_ae9bedeb7feb9f729a8bdc73dd3555892}} 
 \index{apply.\+py@{apply.\+py}!J\+O\+B\+\_\+\+A\+PP@{J\+O\+B\+\_\+\+A\+PP}}
 \index{J\+O\+B\+\_\+\+A\+PP@{J\+O\+B\+\_\+\+A\+PP}!apply.\+py@{apply.\+py}}
 \subsubsection{\texorpdfstring{J\+O\+B\+\_\+\+A\+PP}{JOB\_APP}}
@@ -114,8 +145,8 @@ Fills in website text boxes with user information and submits resume.
 1 =  \{
 2     \textcolor{stringliteral}{"first\_name"}: \textcolor{stringliteral}{"Foo"},
 3     \textcolor{stringliteral}{"last\_name"}: \textcolor{stringliteral}{"Bar"},
-4     \textcolor{stringliteral}{"email"}: \textcolor{stringliteral}{"test@test.com"},
-5     \textcolor{stringliteral}{"phone"}: \textcolor{stringliteral}{"123-456-7890"},
+4     \textcolor{stringliteral}{"email"}: \textcolor{stringliteral}{"3XA3Tester@gmail.com"},
+5     \textcolor{stringliteral}{"phone"}: \textcolor{stringliteral}{"9053872700"},
 6     \textcolor{stringliteral}{"org"}: \textcolor{stringliteral}{"Self-Employed"},
 7     \textcolor{stringliteral}{"resume"}: \textcolor{stringliteral}{"resume.pdf"},
 8     \textcolor{stringliteral}{"resume\_textfile"}: \textcolor{stringliteral}{"resume\_short.txt"},
@@ -129,14 +160,3 @@ Fills in website text boxes with user information and submits resume.
 16     \textcolor{stringliteral}{"university"}: \textcolor{stringliteral}{"MIT"}
 17 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{apply_8py_file_a28be50c998760a690057e2998d1f2a6f}\label{apply_8py_file_a28be50c998760a690057e2998d1f2a6f}} 
-\index{apply.\+py@{apply.\+py}!profile@{profile}}
-\index{profile@{profile}!apply.\+py@{apply.\+py}}
-\subsubsection{\texorpdfstring{profile}{profile}}
-{\footnotesize\ttfamily apply.\+profile = user\+Profile()}
-
-
-
-Initial function run upon execution of program. 
-
-Gathers links through secondary modules then coordinates the apllication process 

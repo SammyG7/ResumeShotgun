@@ -75,82 +75,21 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5e7c156aa05aa95dbb11c3807d57020c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="get__links__indeed_8py.html#a5e7c156aa05aa95dbb11c3807d57020c">get_links_indeed.login</a> (driver)</td></tr>
-<tr class="memdesc:a5e7c156aa05aa95dbb11c3807d57020c"><td class="mdescLeft">&#160;</td><td class="mdescRight">PREFERENCES = { "position_title": "Software Engineer", "location": "San Francisco, CA" }.  <a href="get__links__indeed_8py.html#a5e7c156aa05aa95dbb11c3807d57020c">More...</a><br /></td></tr>
+<tr class="memdesc:a5e7c156aa05aa95dbb11c3807d57020c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login.  <a href="get__links__indeed_8py.html#a5e7c156aa05aa95dbb11c3807d57020c">More...</a><br /></td></tr>
 <tr class="separator:a5e7c156aa05aa95dbb11c3807d57020c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa087e767a1199ada0242fa6cbc2eee2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="get__links__indeed_8py.html#aaa087e767a1199ada0242fa6cbc2eee2">get_links_indeed.navigateToLogin</a> (driver)</td></tr>
 <tr class="memdesc:aaa087e767a1199ada0242fa6cbc2eee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens Indeed login page and inputs email and password then signs in.  <a href="get__links__indeed_8py.html#aaa087e767a1199ada0242fa6cbc2eee2">More...</a><br /></td></tr>
 <tr class="separator:aaa087e767a1199ada0242fa6cbc2eee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bfbcb6fb9d42363059d4399c453df4e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="get__links__indeed_8py.html#a7bfbcb6fb9d42363059d4399c453df4e">get_links_indeed.getURLs</a> ()</td></tr>
-<tr class="memdesc:a7bfbcb6fb9d42363059d4399c453df4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">navigate to appropriate job listing page def go_to_listings(driver):  <a href="get__links__indeed_8py.html#a7bfbcb6fb9d42363059d4399c453df4e">More...</a><br /></td></tr>
-<tr class="separator:a7bfbcb6fb9d42363059d4399c453df4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe1832674091a258b5fb1205583967e6"><td class="memItemLeft" align="right" valign="top"><a id="afe1832674091a258b5fb1205583967e6"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="get__links__indeed_8py.html#afe1832674091a258b5fb1205583967e6">get_links_indeed.run</a> (driver, profile)</td></tr>
+<tr class="memdesc:afe1832674091a258b5fb1205583967e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls <a class="el" href="get__links__indeed_8py.html#a5e7c156aa05aa95dbb11c3807d57020c" title="Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login...">login()</a> <br /></td></tr>
+<tr class="separator:afe1832674091a258b5fb1205583967e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module that signs into Indeed website. </p>
 <dl class="section author"><dt>Author</dt><dd>Samuel Gorman </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>March 17, 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="file_a7bfbcb6fb9d42363059d4399c453df4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#file_a7bfbcb6fb9d42363059d4399c453df4e">&#9670;&nbsp;</a></span>getURLs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def get_links_indeed.getURLs </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>navigate to appropriate job listing page def go_to_listings(driver): </p>
-<h1>wait for the search bar to appear</h1>
-<p>element = WebDriverWait(driver, 20).until( EC.presence_of_element_located((By.XPATH, "//*[@id='scBar']")) )</p>
-<p>try: </p><h1>look for search bar fields</h1>
-<p>position_field = driver.find_element_by_xpath("//*[@id='sc.keyword']") location_field = driver.find_element_by_xpath("//*[@id='sc.location']") location_field.clear()</p>
-<h1>fill in with pre-defined data</h1>
-<p>position_field.send_keys(PREFERENCES['position_title']) location_field.clear() location_field.send_keys(PREFERENCES['location'])</p>
-<h1>wait for a little so location gets set</h1>
-<p>time.sleep(1) driver.find_element_by_xpath(" //*[@id='scBar']/div/button").click()</p>
-<h1>close a random popup if it shows up</h1>
-<p>try: driver.find_element_by_xpath("//*[@id='JAModal']/div/div[2]/span").click() except NoSuchElementException: pass</p>
-<p>return True</p>
-<h1>note: please ignore all crappy error handling haha</h1>
-<p>except NoSuchElementException: return False</p>
-<p>aggregate all url links in a set def aggregate_links(driver): allLinks = [] # all hrefs that exist on the page</p>
-<h1>wait for page to fully load</h1>
-<p>element = WebDriverWait(driver, 20).until( EC.presence_of_element_located((By.XPATH, "//*[@id='MainCol']/div[1]/ul")) )</p>
-<p>time.sleep(5)</p>
-<h1>parse the page source using beautiful soup</h1>
-<p>page_source = driver.page_source soup = BeautifulSoup(page_source)</p>
-<h1>find all hrefs</h1>
-<p>allJobLinks = soup.findAll("a", {"class": "jobLink"}) allLinks = [jobLink['href'] for jobLink in allJobLinks] allFixedLinks = []</p>
-<h1>clean up the job links by opening, modifying, and 'unraveling' the URL</h1>
-<p>for link in allLinks: </p><h1>first, replace GD_JOB_AD with GD_JOB_VIEW</h1>
-<h1>this will replace the Glassdoor hosted job page to the proper job page</h1>
-<h1>hosted on most likely Greenhouse or Lever</h1>
-<p>link = link.replace("GD_JOB_AD", "GD_JOB_VIEW")</p>
-<h1>if there is no glassdoor prefex, add that</h1>
-<h1>for example, /partner/jobListing.htm?pos=121... needs the prefix</h1>
-<pre class="fragment">    if link[0] == '/':
-        link = f"https://www.glassdoor.com{link}"
-</pre><h1>then, open up each url and save the result url</h1>
-<h1>because we got a 403 error when opening this normally, we have to establish the user agent</h1>
-<p>user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7' headers={'User-Agent':user_agent,} request=urllib.request.Request(link,None,headers) #The assembled request</p>
-<p>try: </p><h1>the url is on glassdoor itself, but once it's opened, it redirects - so let's store that</h1>
-<p>response = urllib.request.urlopen(request) newLink = response.geturl()</p>
-<h1>if the result url is from glassdoor, it's an 'easy apply' one and worth not saving</h1>
-<h1>however, this logic can be changed if you want to keep those</h1>
-<p>if "glassdoor" not in newLink: print(newLink) print('<br />
-') allFixedLinks.append(newLink) except Exception: </p><h1>horrible way to catch errors but this doesnt happen regualrly (just 302 HTTP error)</h1>
-<p>print(f'ERROR: failed for {link}') print('<br />
-')</p>
-<h1>convert to a set to eliminate duplicates</h1>
-<p>return set(allFixedLinks) Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls <a class="el" href="get__links__indeed_8py.html#a5e7c156aa05aa95dbb11c3807d57020c" title="PREFERENCES = { &quot;position_title&quot;: &quot;Software Engineer&quot;, &quot;location&quot;: &quot;San Francisco, CA&quot; }. ">login()</a> </p>
-
-</div>
-</div>
 <a id="file_a5e7c156aa05aa95dbb11c3807d57020c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#file_a5e7c156aa05aa95dbb11c3807d57020c">&#9670;&nbsp;</a></span>login()</h2>
 
@@ -167,8 +106,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>PREFERENCES = { "position_title": "Software Engineer", "location": "San Francisco, CA" }. </p>
-<p>Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Opens indeed.com/ and checks if user is logged in, otherwise calls function to auto login. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">driver</td><td>a Selenium object utilized to navigate the page. </td></tr>
   </table>
