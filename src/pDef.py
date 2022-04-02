@@ -1,7 +1,7 @@
 ## @file pDef.py
 #  @author Gavin Jameson
 #  @brief General information about the user profile module that needs to be accessed in numerous places
-#  @date Mar 31, 2022
+#  @date Apr 2, 2022
 
 ## @brief Dictionary of default variable states and if they need updating for use
 #  @details Tuple; index 0 is value, index 1 is if it requires changing
@@ -21,3 +21,19 @@ DEFAULT = {
     "university": ("", False),
     "autoLogin": (None, False) # not a boolean so changes can be detected, getter converts blank to False
 }
+
+## @brief List of months for converting between number and string representations
+MONTHS = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december"
+]
