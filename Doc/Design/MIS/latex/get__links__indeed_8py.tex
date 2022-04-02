@@ -9,11 +9,12 @@ Module that signs into Indeed website.
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{get__links__indeed_8py_a5e7c156aa05aa95dbb11c3807d57020c}{get\+\_\+links\+\_\+indeed.\+login} (driver)
-\begin{DoxyCompactList}\small\item\em P\+R\+E\+F\+E\+R\+E\+N\+C\+ES = \{ \char`\"{}position\+\_\+title\char`\"{}\+: \char`\"{}\+Software Engineer\char`\"{}, \char`\"{}location\char`\"{}\+: \char`\"{}\+San Francisco, C\+A\char`\"{} \}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Opens indeed.\+com/ and checks if user is logged in, otherwise calls function to auto login. \end{DoxyCompactList}\item 
 def \hyperlink{get__links__indeed_8py_aaa087e767a1199ada0242fa6cbc2eee2}{get\+\_\+links\+\_\+indeed.\+navigate\+To\+Login} (driver)
 \begin{DoxyCompactList}\small\item\em Opens Indeed login page and inputs email and password then signs in. \end{DoxyCompactList}\item 
-def \hyperlink{get__links__indeed_8py_a7bfbcb6fb9d42363059d4399c453df4e}{get\+\_\+links\+\_\+indeed.\+get\+U\+R\+Ls} ()
-\begin{DoxyCompactList}\small\item\em navigate to appropriate job listing page def go\+\_\+to\+\_\+listings(driver)\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{get__links__indeed_8py_afe1832674091a258b5fb1205583967e6}\label{get__links__indeed_8py_afe1832674091a258b5fb1205583967e6}} 
+def \hyperlink{get__links__indeed_8py_afe1832674091a258b5fb1205583967e6}{get\+\_\+links\+\_\+indeed.\+run} (driver, profile)
+\begin{DoxyCompactList}\small\item\em Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls \hyperlink{get__links__indeed_8py_a5e7c156aa05aa95dbb11c3807d57020c}{login()} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -28,100 +29,7 @@ March 17, 2022
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{get__links__indeed_8py_file_a7bfbcb6fb9d42363059d4399c453df4e}\label{get__links__indeed_8py_file_a7bfbcb6fb9d42363059d4399c453df4e}} 
-\index{get\+\_\+links\+\_\+indeed.\+py@{get\+\_\+links\+\_\+indeed.\+py}!get\+U\+R\+Ls@{get\+U\+R\+Ls}}
-\index{get\+U\+R\+Ls@{get\+U\+R\+Ls}!get\+\_\+links\+\_\+indeed.\+py@{get\+\_\+links\+\_\+indeed.\+py}}
-\subsubsection{\texorpdfstring{get\+U\+R\+Ls()}{getURLs()}}
-{\footnotesize\ttfamily def get\+\_\+links\+\_\+indeed.\+get\+U\+R\+Ls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-navigate to appropriate job listing page def go\+\_\+to\+\_\+listings(driver)\+: 
-
-\subsection*{wait for the search bar to appear}
-
-element = Web\+Driver\+Wait(driver, 20).until( E\+C.\+presence\+\_\+of\+\_\+element\+\_\+located((By.\+X\+P\+A\+TH, \char`\"{}//$\ast$\mbox{[}@id=\textquotesingle{}sc\+Bar\textquotesingle{}\mbox{]}\char`\"{})) )
-
-try\+: \subsection*{look for search bar fields}
-
-position\+\_\+field = driver.\+find\+\_\+element\+\_\+by\+\_\+xpath(\char`\"{}//$\ast$\mbox{[}@id=\textquotesingle{}sc.\+keyword\textquotesingle{}\mbox{]}\char`\"{}) location\+\_\+field = driver.\+find\+\_\+element\+\_\+by\+\_\+xpath(\char`\"{}//$\ast$\mbox{[}@id=\textquotesingle{}sc.\+location\textquotesingle{}\mbox{]}\char`\"{}) location\+\_\+field.\+clear()
-
-\subsection*{fill in with pre-\/defined data}
-
-position\+\_\+field.\+send\+\_\+keys(P\+R\+E\+F\+E\+R\+E\+N\+C\+ES\mbox{[}\textquotesingle{}position\+\_\+title\textquotesingle{}\mbox{]}) location\+\_\+field.\+clear() location\+\_\+field.\+send\+\_\+keys(P\+R\+E\+F\+E\+R\+E\+N\+C\+ES\mbox{[}\textquotesingle{}location\textquotesingle{}\mbox{]})
-
-\subsection*{wait for a little so location gets set}
-
-time.\+sleep(1) driver.\+find\+\_\+element\+\_\+by\+\_\+xpath(\char`\"{} //$\ast$\mbox{[}@id=\textquotesingle{}sc\+Bar\textquotesingle{}\mbox{]}/div/button\char`\"{}).click()
-
-\subsection*{close a random popup if it shows up}
-
-try\+: driver.\+find\+\_\+element\+\_\+by\+\_\+xpath(\char`\"{}//$\ast$\mbox{[}@id=\textquotesingle{}\+J\+A\+Modal\textquotesingle{}\mbox{]}/div/div\mbox{[}2\mbox{]}/span\char`\"{}).click() except No\+Such\+Element\+Exception\+: pass
-
-return True
-
-\subsection*{note\+: please ignore all crappy error handling haha}
-
-except No\+Such\+Element\+Exception\+: return False
-
-aggregate all url links in a set def aggregate\+\_\+links(driver)\+: all\+Links = \mbox{[}\mbox{]} \# all hrefs that exist on the page
-
-\subsection*{wait for page to fully load}
-
-element = Web\+Driver\+Wait(driver, 20).until( E\+C.\+presence\+\_\+of\+\_\+element\+\_\+located((By.\+X\+P\+A\+TH, \char`\"{}//$\ast$\mbox{[}@id=\textquotesingle{}\+Main\+Col\textquotesingle{}\mbox{]}/div\mbox{[}1\mbox{]}/ul\char`\"{})) )
-
-time.\+sleep(5)
-
-\subsection*{parse the page source using beautiful soup}
-
-page\+\_\+source = driver.\+page\+\_\+source soup = Beautiful\+Soup(page\+\_\+source)
-
-\subsection*{find all hrefs}
-
-all\+Job\+Links = soup.\+find\+All(\char`\"{}a\char`\"{}, \{\char`\"{}class\char`\"{}\+: \char`\"{}job\+Link\char`\"{}\}) all\+Links = \mbox{[}job\+Link\mbox{[}\textquotesingle{}href\textquotesingle{}\mbox{]} for job\+Link in all\+Job\+Links\mbox{]} all\+Fixed\+Links = \mbox{[}\mbox{]}
-
-\subsection*{clean up the job links by opening, modifying, and \textquotesingle{}unraveling\textquotesingle{} the U\+RL}
-
-for link in all\+Links\+: \subsection*{first, replace G\+D\+\_\+\+J\+O\+B\+\_\+\+AD with G\+D\+\_\+\+J\+O\+B\+\_\+\+V\+I\+EW}
-
-\subsection*{this will replace the Glassdoor hosted job page to the proper job page}
-
-\subsection*{hosted on most likely Greenhouse or Lever}
-
-link = link.\+replace(\char`\"{}\+G\+D\+\_\+\+J\+O\+B\+\_\+\+A\+D\char`\"{}, \char`\"{}\+G\+D\+\_\+\+J\+O\+B\+\_\+\+V\+I\+E\+W\char`\"{})
-
-\subsection*{if there is no glassdoor prefex, add that}
-
-\subsection*{for example, /partner/job\+Listing.htm?pos=121... needs the prefix}
-
-\begin{DoxyVerb}    if link[0] == '/':
-        link = f"https://www.glassdoor.com{link}"
-\end{DoxyVerb}
-
-
-\subsection*{then, open up each url and save the result url}
-
-\subsection*{because we got a 403 error when opening this normally, we have to establish the user agent}
-
-user\+\_\+agent = \textquotesingle{}Mozilla/5.\+0 (Windows; U; Windows NT 5.\+1; en-\/\+US; rv\+:1.\+9.\+0.\+7) Gecko/2009021910 Firefox/3.\+0.\+7\textquotesingle{} headers=\{\textquotesingle{}User-\/\+Agent\textquotesingle{}\+:user\+\_\+agent,\} request=urllib.\+request.\+Request(link,\+None,headers) \#\+The assembled request
-
-try\+: \subsection*{the url is on glassdoor itself, but once it\textquotesingle{}s opened, it redirects -\/ so let\textquotesingle{}s store that}
-
-response = urllib.\+request.\+urlopen(request) new\+Link = response.\+geturl()
-
-\subsection*{if the result url is from glassdoor, it\textquotesingle{}s an \textquotesingle{}easy apply\textquotesingle{} one and worth not saving}
-
-\subsection*{however, this logic can be changed if you want to keep those}
-
-if \char`\"{}glassdoor\char`\"{} not in new\+Link\+: print(new\+Link) print(\textquotesingle{}~\newline
-\textquotesingle{}) all\+Fixed\+Links.\+append(new\+Link) except Exception\+: \subsection*{horrible way to catch errors but this doesnt happen regualrly (just 302 H\+T\+TP error)}
-
-print(f\textquotesingle{}E\+R\+R\+OR\+: failed for \{link\}\textquotesingle{}) print(\textquotesingle{}~\newline
-\textquotesingle{})
-
-\subsection*{convert to a set to eliminate duplicates}
-
-return set(all\+Fixed\+Links) Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls \hyperlink{get__links__indeed_8py_a5e7c156aa05aa95dbb11c3807d57020c}{login()} \mbox{\Hypertarget{get__links__indeed_8py_file_a5e7c156aa05aa95dbb11c3807d57020c}\label{get__links__indeed_8py_file_a5e7c156aa05aa95dbb11c3807d57020c}} 
+\mbox{\Hypertarget{get__links__indeed_8py_file_a5e7c156aa05aa95dbb11c3807d57020c}\label{get__links__indeed_8py_file_a5e7c156aa05aa95dbb11c3807d57020c}} 
 \index{get\+\_\+links\+\_\+indeed.\+py@{get\+\_\+links\+\_\+indeed.\+py}!login@{login}}
 \index{login@{login}!get\+\_\+links\+\_\+indeed.\+py@{get\+\_\+links\+\_\+indeed.\+py}}
 \subsubsection{\texorpdfstring{login()}{login()}}
@@ -129,9 +37,9 @@ return set(all\+Fixed\+Links) Instantiates a Selenium chrome driver with executa
 
 
 
-P\+R\+E\+F\+E\+R\+E\+N\+C\+ES = \{ \char`\"{}position\+\_\+title\char`\"{}\+: \char`\"{}\+Software Engineer\char`\"{}, \char`\"{}location\char`\"{}\+: \char`\"{}\+San Francisco, C\+A\char`\"{} \}. 
-
 Opens indeed.\+com/ and checks if user is logged in, otherwise calls function to auto login. 
+
+
 \begin{DoxyParams}{Parameters}
 {\em driver} & a Selenium object utilized to navigate the page. \\
 \hline

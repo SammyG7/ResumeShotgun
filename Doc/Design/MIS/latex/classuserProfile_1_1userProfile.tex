@@ -18,6 +18,8 @@ def \hyperlink{classuserProfile_1_1userProfile_a805c57945934e5b839077ee8d8edfe5d
 \begin{DoxyCompactList}\small\item\em Method verifies that all profile elements were changed that are required for a base job application. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a1a61a204207c67cc6bc2c0b2b810ea32}{get\+Keywords} (self)
 \begin{DoxyCompactList}\small\item\em Method gets keywords to use in searching. \end{DoxyCompactList}\item 
+def \hyperlink{classuserProfile_1_1userProfile_a8cbc67cf93584ff8a9bd0d032c0a1c44}{get\+Job\+Title} (self)
+\begin{DoxyCompactList}\small\item\em Method gets job title to use in searching. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_afa86adbeac8ea685d8c9f1d343f734fd}{get\+Site} (self)
 \begin{DoxyCompactList}\small\item\em Method gets site that will be scraped. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a3b66b43cf824415acf3c18dfb71ae226}{get\+First\+Name} (self)
@@ -40,10 +42,14 @@ def \hyperlink{classuserProfile_1_1userProfile_acdaf40b01b5086ab70b8802ba944b337
 \begin{DoxyCompactList}\small\item\em Method gets graduation date. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a25a425c5045c07739c784f7f8dcff2af}{get\+University} (self)
 \begin{DoxyCompactList}\small\item\em Method gets university attended. \end{DoxyCompactList}\item 
+def \hyperlink{classuserProfile_1_1userProfile_aa3806d54ee2f967e826537926e5aadf8}{get\+Auto\+Login} (self, convert=True)
+\begin{DoxyCompactList}\small\item\em Method gets whether or not website logins should be automated. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_adb914cd59899ee5fc36c23be7f2219d0}{get\+Profile\+Dict} (self)
 \begin{DoxyCompactList}\small\item\em Method gets all values stored in profile. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_ad1e2dc6aedf50cba360f2bc6669ea3f9}{set\+Keywords} (self, keywords, toggle\+Mode=False)
 \begin{DoxyCompactList}\small\item\em Method sets keywords. \end{DoxyCompactList}\item 
+def \hyperlink{classuserProfile_1_1userProfile_aa8d7bc0df8fb26fe203b8c6459cd403c}{set\+Job\+Title} (self, title)
+\begin{DoxyCompactList}\small\item\em Method sets job title. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a67fc7d06910ee0cb4914884dff2ef28e}{set\+Site} (self, site)
 \begin{DoxyCompactList}\small\item\em Method tries to set active site for scraping. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_aafd4f084d296a83fb1ac2ff703aaa251}{set\+First\+Name} (self, name)
@@ -58,19 +64,16 @@ def \hyperlink{classuserProfile_1_1userProfile_a240b062efefc77fb5137306709aef5ed
 \begin{DoxyCompactList}\small\item\em Method sets organisation. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_ae7ad036942595e2ae9c1247d2c49a63b}{set\+Resume\+Path} (self, file, append\+Working=True)
 \begin{DoxyCompactList}\small\item\em Method tries to set path to resume file. \end{DoxyCompactList}\item 
-def \hyperlink{classuserProfile_1_1userProfile_a4e47efdac8d7178519309a72b81cc8c0}{set\+Socials} (self, links, toggle\+Mode=False)
+def \hyperlink{classuserProfile_1_1userProfile_a2a10347741d3e396e48d6aa1bb49cecb}{set\+Socials} (self, link, toggle\+Mode=False)
 \begin{DoxyCompactList}\small\item\em Method sets social links. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_ad8b26311a1d9adf8b7b29c7d7ab73358}{set\+Location} (self, loc)
 \begin{DoxyCompactList}\small\item\em Method sets location. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a49e06c1b0a539a79d66108e096fc46d6}{set\+Grad\+Date} (self, grad)
 \begin{DoxyCompactList}\small\item\em Method tries to set grad date. \end{DoxyCompactList}\item 
 def \hyperlink{classuserProfile_1_1userProfile_a33423b70af186c953dc94e302cc717d3}{set\+University} (self, name)
-\begin{DoxyCompactList}\small\item\em Method sets university. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Static Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-dictionary \hyperlink{classuserProfile_1_1userProfile_ac625f3eab69fbe3d90822c139bb87ced}{D\+E\+F\+A\+U\+LT}
-\begin{DoxyCompactList}\small\item\em Dictionary of default variable states and if they need updating for use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method sets university. \end{DoxyCompactList}\item 
+def \hyperlink{classuserProfile_1_1userProfile_a069b4dcc551295eceac4eaef147d59f3}{set\+Auto\+Login} (self, val)
+\begin{DoxyCompactList}\small\item\em Method sets auto login setting. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -95,6 +98,24 @@ Sets default values for profile
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classuserProfile_1_1userProfile_aa3806d54ee2f967e826537926e5aadf8}\label{classuserProfile_1_1userProfile_aa3806d54ee2f967e826537926e5aadf8}} 
+\index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!get\+Auto\+Login@{get\+Auto\+Login}}
+\index{get\+Auto\+Login@{get\+Auto\+Login}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
+\subsubsection{\texorpdfstring{get\+Auto\+Login()}{getAutoLogin()}}
+{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+get\+Auto\+Login (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{convert = {\ttfamily True} }\end{DoxyParamCaption})}
+
+
+
+Method gets whether or not website logins should be automated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em convert} & (optional) Boolean if blank value should be converted to False \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String indicating name of university 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_a31aed4505464a0f546e0bb33306a355d}\label{classuserProfile_1_1userProfile_a31aed4505464a0f546e0bb33306a355d}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!get\+Email@{get\+Email}}
 \index{get\+Email@{get\+Email}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
@@ -133,6 +154,19 @@ Method gets graduation date.
 
 \begin{DoxyReturn}{Returns}
 Tuple of 2 integers indicating the month and year of graduation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classuserProfile_1_1userProfile_a8cbc67cf93584ff8a9bd0d032c0a1c44}\label{classuserProfile_1_1userProfile_a8cbc67cf93584ff8a9bd0d032c0a1c44}} 
+\index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!get\+Job\+Title@{get\+Job\+Title}}
+\index{get\+Job\+Title@{get\+Job\+Title}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
+\subsubsection{\texorpdfstring{get\+Job\+Title()}{getJobTitle()}}
+{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+get\+Job\+Title (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Method gets job title to use in searching. 
+
+\begin{DoxyReturn}{Returns}
+String indicating job title 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_a1a61a204207c67cc6bc2c0b2b810ea32}\label{classuserProfile_1_1userProfile_a1a61a204207c67cc6bc2c0b2b810ea32}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!get\+Keywords@{get\+Keywords}}
@@ -316,6 +350,21 @@ Will overwrite the file if it exists already
 {\em file} & (optional) A string indicating a path to the profile to write \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classuserProfile_1_1userProfile_a069b4dcc551295eceac4eaef147d59f3}\label{classuserProfile_1_1userProfile_a069b4dcc551295eceac4eaef147d59f3}} 
+\index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Auto\+Login@{set\+Auto\+Login}}
+\index{set\+Auto\+Login@{set\+Auto\+Login}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
+\subsubsection{\texorpdfstring{set\+Auto\+Login()}{setAutoLogin()}}
+{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+set\+Auto\+Login (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{val }\end{DoxyParamCaption})}
+
+
+
+Method sets auto login setting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & Boolean indicating if auto login should be done \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_a6420f8a55919d59d5d357b9ed93cb279}\label{classuserProfile_1_1userProfile_a6420f8a55919d59d5d357b9ed93cb279}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Email@{set\+Email}}
 \index{set\+Email@{set\+Email}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
@@ -332,7 +381,7 @@ Method will not change the value if the new input is invalid
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Boolean True if email was updated (has top-\/level domain and \char`\"{}@\char`\"{}), False if not 
+Boolean True if email was updated, False if not 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_aafd4f084d296a83fb1ac2ff703aaa251}\label{classuserProfile_1_1userProfile_aafd4f084d296a83fb1ac2ff703aaa251}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+First\+Name@{set\+First\+Name}}
@@ -361,12 +410,27 @@ Method tries to set grad date.
 
 
 \begin{DoxyParams}{Parameters}
-{\em grad} & A length 2 list of integers in the form \mbox{[}grad month, grad year\mbox{]} \\
+{\em grad} & A length 2 list of strings indicating a month (as name or int) and year \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Boolean True if date was updated (grad month number must be from 1-\/12), False if not 
+Boolean True if date was updated, False if not 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classuserProfile_1_1userProfile_aa8d7bc0df8fb26fe203b8c6459cd403c}\label{classuserProfile_1_1userProfile_aa8d7bc0df8fb26fe203b8c6459cd403c}} 
+\index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Job\+Title@{set\+Job\+Title}}
+\index{set\+Job\+Title@{set\+Job\+Title}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
+\subsubsection{\texorpdfstring{set\+Job\+Title()}{setJobTitle()}}
+{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+set\+Job\+Title (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{title }\end{DoxyParamCaption})}
+
+
+
+Method sets job title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & String indicating job title \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_ad1e2dc6aedf50cba360f2bc6669ea3f9}\label{classuserProfile_1_1userProfile_ad1e2dc6aedf50cba360f2bc6669ea3f9}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Keywords@{set\+Keywords}}
 \index{set\+Keywords@{set\+Keywords}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
@@ -409,11 +473,14 @@ Method sets last name.
 
 Method sets location. 
 
-If 2 inputs received, it will be stored as a length 3 with a blank value between the two inputted values so indexing always access the same kind of location (i.\+e. country) 
+If 2 inputs received, it will be stored as a length 3 with a blank value between the two inputted values so indexing always access the same kind of location (i.\+e. country at 2) 
 \begin{DoxyParams}{Parameters}
 {\em loc} & A length 2 or 3 list of strings indicating locations in the form \mbox{[}city, state/province, country\mbox{]} or \mbox{[}city, country\mbox{]} \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean True if location was updated, False if not 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_a240b062efefc77fb5137306709aef5ed}\label{classuserProfile_1_1userProfile_a240b062efefc77fb5137306709aef5ed}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Organisation@{set\+Organisation}}
 \index{set\+Organisation@{set\+Organisation}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
@@ -445,7 +512,7 @@ Method will not change the value if the new input is invalid; accepts different 
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Boolean True if email was updated (exactly 10 numbers), False if not 
+Boolean True if email was updated, False if not 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classuserProfile_1_1userProfile_ae7ad036942595e2ae9c1247d2c49a63b}\label{classuserProfile_1_1userProfile_ae7ad036942595e2ae9c1247d2c49a63b}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Resume\+Path@{set\+Resume\+Path}}
@@ -485,11 +552,11 @@ Method will not change the active site if it does not map to one in the list
 \begin{DoxyReturn}{Returns}
 Boolean True if the site was updated, False if not 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classuserProfile_1_1userProfile_a4e47efdac8d7178519309a72b81cc8c0}\label{classuserProfile_1_1userProfile_a4e47efdac8d7178519309a72b81cc8c0}} 
+\mbox{\Hypertarget{classuserProfile_1_1userProfile_a2a10347741d3e396e48d6aa1bb49cecb}\label{classuserProfile_1_1userProfile_a2a10347741d3e396e48d6aa1bb49cecb}} 
 \index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!set\+Socials@{set\+Socials}}
 \index{set\+Socials@{set\+Socials}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
 \subsubsection{\texorpdfstring{set\+Socials()}{setSocials()}}
-{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+set\+Socials (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{links,  }\item[{}]{toggle\+Mode = {\ttfamily False} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def user\+Profile.\+user\+Profile.\+set\+Socials (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{link,  }\item[{}]{toggle\+Mode = {\ttfamily False} }\end{DoxyParamCaption})}
 
 
 
@@ -497,7 +564,7 @@ Method sets social links.
 
 When toggle\+Mode = True, only the site name is required to remove an element 
 \begin{DoxyParams}{Parameters}
-{\em links} & A list of strings used as links \\
+{\em link} & A string representing a link \\
 \hline
 {\em toggle\+Mode} & (optional) If true, instead of overwriting the class varible with the parameter, it will add words to the class varable from the parameter that are not there and remove ones that are \\
 \hline
@@ -518,36 +585,6 @@ Method sets university.
 \hline
 \end{DoxyParams}
 
-
-\subsection{Member Data Documentation}
-\mbox{\Hypertarget{classuserProfile_1_1userProfile_ac625f3eab69fbe3d90822c139bb87ced}\label{classuserProfile_1_1userProfile_ac625f3eab69fbe3d90822c139bb87ced}} 
-\index{user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}!D\+E\+F\+A\+U\+LT@{D\+E\+F\+A\+U\+LT}}
-\index{D\+E\+F\+A\+U\+LT@{D\+E\+F\+A\+U\+LT}!user\+Profile\+::user\+Profile@{user\+Profile\+::user\+Profile}}
-\subsubsection{\texorpdfstring{D\+E\+F\+A\+U\+LT}{DEFAULT}}
-{\footnotesize\ttfamily dictionary user\+Profile.\+user\+Profile.\+D\+E\+F\+A\+U\+LT\hspace{0.3cm}{\ttfamily [static]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}
-=  \{
-            \textcolor{stringliteral}{"keywords"}: ([], \textcolor{keyword}{False}),
-            \textcolor{stringliteral}{"site"}: (\textcolor{stringliteral}{"glassdoor"}, \textcolor{keyword}{False}),
-            \textcolor{stringliteral}{"firstName"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"lastName"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"email"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"phone"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"organisation"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{False}),
-            \textcolor{stringliteral}{"resumePath"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"socials"}: ([], \textcolor{keyword}{False}),
-            \textcolor{stringliteral}{"location"}: ((), \textcolor{keyword}{True}),
-            \textcolor{stringliteral}{"gradDate"}: ((), \textcolor{keyword}{False}),
-            \textcolor{stringliteral}{"university"}: (\textcolor{stringliteral}{""}, \textcolor{keyword}{False})
-        \}
-\end{DoxyCode}
-
-
-Dictionary of default variable states and if they need updating for use. 
-
-Tuple; index 0 is value, index 1 is if it requires changing 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
