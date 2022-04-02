@@ -261,8 +261,16 @@ def indeed(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
-    driver = webdriver.Chrome('./chromedriver')
     profile = userProfile()
+    profile.loadProfile()
+    menu.run(profile)
+    profile.saveProfile()
+    site = profile.getSite()
+
+    print("Hello")
+
+    driver = webdriver.Chrome('./chromedriver')
+    
     aggregatedURLs = get_links_indeed.run(driver, profile)
 
     for link in aggregatedURLs:
