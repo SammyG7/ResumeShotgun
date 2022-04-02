@@ -41,23 +41,23 @@ def login(driver):
 ## @brief Opens Indeed login page and inputs email and password then signs in.
 #  @param driver a Selenium object utilized to navigate the page.
 def navigateToLogin(driver):
+    ## Email
     driver.get("https://secure.indeed.com/account/login?hl=en_CA&amp;co=CA&amp;continue=https%3A%2F%2Fca.indeed.com%2Fjobs%3Fq%3Dmaterials%2Bengineer%26l%3DHamilton%252C%2BON%26ts%3D1646004111972%26pts%3D1641679429865%26rq%3D1%26rsIdx%3D1&amp;tmpl=desktop&amp;service=my&amp;from=gnav-util-jobsearch--jasx")
     email = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
     email.send_keys('3XA3Tester@gmail.com')
-    #nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
     nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
-    # css-157vc5a e8ju0x51
     nextbutton.click()
     
     captchaHandler(driver)
-    
     time.sleep(1)
+
+    ## Password
     try:
         password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
     except: ## Form number seems to change after captcha
         password = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-116']")
     password.send_keys('3XA3Group5')
-    # nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
+    
     nextbutton = driver.find_element_by_xpath("//*[@class='css-157vc5a e8ju0x51']")
     nextbutton.click()
 
@@ -100,20 +100,9 @@ def verificationHandler(driver):
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
-
-    '''
-    ## Check for login info
-    if(True or profile.getAutoLogin()):
-        success = login(driver)
-        if not success:
-            time.sleep(60)
-    else:
-        driver.get('https://ca.indeed.com/')
-        time.sleep(60)  ## Placeholder Manual Login
-    '''
     success = False
     
-    if(True or profile.getAutoLogin()):
+    if(True or profile.getAutoLogin()): # *** Change with working autoLogin
         ## Attempt Auto Login
         print("Attempting Automatic Login")
         try:    
@@ -145,18 +134,10 @@ def run(driver, profile):
             pass
 
     print("Logged in")
-    #time.sleep(60)
-    #print("Hello")
+
     linkbot = Indeed("engineer", "collingwood", driver)
     linkbot.run()
     return linkbot.returnLinks()
-    # time.sleep(100)
-    
 
-#run(webdriiver.Chrome('./chromedriver'), 1)
-#//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button
-#//*[@id="jobsearch-ViewJobButtons-container"]/div[2]/div/div/span/div[1]/button/div
-
-
-    
-
+## Old HTML
+# nextbutton = driver.find_element_by_xpath("//*[@class='css-rhczsh e8ju0x51']")
