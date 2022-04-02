@@ -70,11 +70,21 @@ class pdfReader:
             for page in doc:
                 text+= page.get_text()
 
-        print(text)
+        #print(text)
         return text
         #print(text)
         #print("Musk" in text)
         #print("Sam" in text)
+
+    def setPath(self):
+        self.path = path
+
+        try: # Try instead of if for invalid paths
+            self.plaintext = self.getText()
+            self.getAllLinks()
+            self.setKnownLinks()
+        except:
+            self.plaintext = None
 
     ## @brief Checks user imports
     #  @return Boolean value based on whether or not the import could be found

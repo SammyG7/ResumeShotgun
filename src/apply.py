@@ -16,6 +16,8 @@ import get_links_indeed
 import menu
 from userProfile import *
 
+from pdfReader import pdfReader ##*****Temp
+
 ## Global Variables
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
 URL_l3 = 'https://jobs.lever.co/fleetsmith/eb6648a6-7ad9-4f4a-9918-8b124e10c525/apply?lever-source=Glassdoor'
@@ -263,13 +265,17 @@ def indeed(driver):
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
 
+    ## PDF Tests. Just delete if you're working in apply
+    resume = pdfReader("./Resumes/BobBobberResume.pdf")
+    
+    '''
     print("Go")
     profile = userProfile()
     profile.loadProfile()
-    '''
+ 
     menu.run(profile)
     profile.saveProfile()
-    '''
+ 
 
     site = profile.getSite()
 
@@ -281,7 +287,7 @@ if __name__ == '__main__':
     
     driver.close()
 
-    '''
+    
     for link in aggregatedURLs:
         ##indeed(driver.get(link))
         print(link)
