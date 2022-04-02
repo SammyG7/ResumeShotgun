@@ -223,9 +223,20 @@ def run(profile):
             __changeMenu(2)
         ## Main/Personal/Location
         elif menu == 17:
-            displayMenuPlaceholder("Main/Personal/Location")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuLocation(profile.getLocation())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) > 0:
+                    if profile.setLocation(choice):
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
         ## Main/Personal/Grad
         elif menu == 18:
             displayMenuPlaceholder("Main/Personal/Grad")
