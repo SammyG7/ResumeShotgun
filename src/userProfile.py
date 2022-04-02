@@ -1,11 +1,11 @@
 ## @file userProfile.py
 #  @author Gavin Jameson
 #  @brief user profile module
-#  @date Mar 31, 2022
+#  @date Apr 2, 2022
 
 from menuMessages import wrappedString as wS, waitForUser
 from sites import SITESLIST
-from pDef import DEFAULT
+from pDef import DEFAULT, MONTHS
 from os import getcwd
 from os.path import isfile, join
 from yaml import load, dump
@@ -405,13 +405,16 @@ class userProfile:
         return True            
 
     ## @brief Method tries to set grad date
-    #  @param grad A length 2 list of strings indicating integers in the form [grad month, grad year]
+    #  @param grad A length 2 list of strings indicating a month (as name or int) and year
     #  @return Boolean True if date was updated, False if not
     def setGradDate(self, grad):
-        if len(grad) == 2 and grad[0].isnumeric() and grad[1].isnumeric() and \
-        int(grad[0]) > 0 and int(grad[0]) < 13:
-            self.__gradDate = (int(grad[0]), int(grad[1]))
-            return True
+        if len(grad) == 2 and grad[1].isnumeric():
+            if grad[0].isnumeric() and int(grad[0]) > 0 and int(grad[0]) < 13:
+                self.__gradDate = (int(grad[0]), int(grad[1]))
+                return True
+            elif grad[0].lower() in MONTHS:
+                self.__gradDate = (MONTHS.index(grad[0].lower()) + 1, int(grad[1]))
+                return True
         return False
                 
     
