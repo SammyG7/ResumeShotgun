@@ -263,36 +263,36 @@ def indeed(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
-
+    '''
     ## PDF Tests. Just delete if you're working in apply
     resume = pdfReader("./Resumes/BobBobberResume.pdf")
-    
     '''
-    print("Go")
+
     profile = userProfile()
     profile.loadProfile()
- 
-    menu.run(profile)
-    profile.saveProfile()
+    #menu.run(profile)
+    #profile.saveProfile()
  
 
-    site = profile.getSite()
+    #site = profile.getSite()
+    site = ""                   ##-----
 
     #path = './chromedriver'
     #servicePath = Service(path) 
     driver = webdriver.Chrome('./chromedriver')
     
-    aggregatedURLs = get_links_indeed.run(driver, profile)
+    #aggregatedURLs = get_links_indeed.run(driver, profile)
     
-    driver.close()
+    #driver.close()
 
-    
+    '''
     for link in aggregatedURLs:
         ##indeed(driver.get(link))
         print(link)
         print("\n")
+    
 
-    print(len(aggregatedURLs))
+    ##print(len(aggregatedURLs))
 
     
     profile = userProfile()
@@ -300,13 +300,14 @@ if __name__ == '__main__':
     menu.run(profile)
     profile.saveProfile()
     site = profile.getSite()
+    '''
     
 
     ## Get Links From User Specified Website
     if(site == "glassdoor"):
         aggregatedURLs = get_links_glassdoor.getURLs()
     else:
-        aggregatedURLs = get_links_indeed.getURLs(driver, profile)
+        aggregatedURLs = get_links_indeed.run(driver, profile)
     
         
     #print(f'Job Listings: {aggregatedURLs}')
@@ -348,4 +349,4 @@ if __name__ == '__main__':
     
 
     driver.close()
-    '''
+    
