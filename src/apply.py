@@ -18,6 +18,7 @@ import menu
 from userProfile import *
 from bs4 import BeautifulSoup
 import requests
+import random
 
 from pdfReader import pdfReader ##*****Temp
 
@@ -178,41 +179,14 @@ def indeed(driver):
     
     if applyBtn.text != "Apply now":
         print("Error! Cannot apply on indeed")
-<<<<<<< HEAD
         return 0
-=======
-        return
->>>>>>> Jeremy
     else:
         driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']").click()
         #print("worked")
     time.sleep(round(random.uniform(0.1,0.75), 4))
 
     try:
-<<<<<<< HEAD
-        '''
-        # Email page
-        try:
-            emailInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-3']")
-            emailInput.send_keys(JOB_APP["email"])
-            driver.find_element_by_xpath("//*[@id='emailform']/button").click()
-            time.sleep(round(random.uniform(0.1,0.75), 4))
-        except:
-            print("Error on email input")
-
-        # Password page
-        try:
-            passwordInput = driver.find_element_by_xpath("//*[@id='ifl-InputFormField-111']")
-            passwordInput.send_keys(JOB_APP["password"])
-            time.sleep(round(random.uniform(0.1,0.75), 4))
-            driver.find_element_by_xpath("//*[@id='loginform']/button").click()
-            time.sleep(round(random.uniform(0.1,0.75), 4))
-        except:
-            print("Error on password input")
-        '''
-=======
-
->>>>>>> Jeremy
+        
         # Information page
         try:
             '''
