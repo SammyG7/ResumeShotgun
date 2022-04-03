@@ -9,12 +9,15 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import os 
 import time 
 import get_links_glassdoor
 import get_links_indeed
 import menu
 from userProfile import *
+from bs4 import BeautifulSoup
+import requests
 
 from pdfReader import pdfReader ##*****Temp
 
@@ -167,32 +170,26 @@ def lever(driver):
 #  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
 def indeed(driver):
     
-    # determine if user is logged in first
-    # if so continue otherwise log in
-    # return to apply page
+    page = requests.get(driver.current_url)
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    '''
-    Check sign in ... leave for now
-    checkSignIn = driver.find_element_by_xpath("//*[@id='gnav-main-container']/div/div/div[2]/div[2]/div[1]/a")
+    applyBtn = soup.find("span", class_="jobsearch-IndeedApplyButton-newDesign")
 
-    if checkSignIn.text == "Sign in":
-        #Initial login from get_links_indeed
-        pass
-    '''
-
-    applyBtn = driver.find_element_by_xpath("//*[@id='indeedApplyButton']/div/span")
-
-    print(applyBtn.text)
     
     if applyBtn.text != "Apply now":
         print("Error! Cannot apply on indeed")
+<<<<<<< HEAD
         return 0
+=======
+        return
+>>>>>>> Jeremy
     else:
-        driver.find_element_by_xpath("//*[@id='indeedApplyButton']").click()
-        print("worked")
+        driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']").click()
+        #print("worked")
     time.sleep(round(random.uniform(0.1,0.75), 4))
 
     try:
+<<<<<<< HEAD
         '''
         # Email page
         try:
@@ -213,53 +210,81 @@ def indeed(driver):
         except:
             print("Error on password input")
         '''
+=======
+
+>>>>>>> Jeremy
         # Information page
         try:
-            nameInput = driver.find_element_by_xpath("//*[@id='input-firstName']")
-            nameInput.send_keys(JOB_APP["first_name"])
-            nameInput = driver.find_element_by_xpath("//*[@id='input-lastName']")
-            nameInput.send_keys(JOB_APP["last_name"])
-            nameInput = driver.find_element_by_xpath("//*[@id='input-phoneNumber']")
+            '''
+            nameInput = driver.find_element(By.XPATH, "//*[@id='input-firstName']")
+            time.sleep(0.5)
+            nameInput = driver.find_element(By.XPATH, "//*[@id='input-lastName']")
+            time.sleep(0.5)
+            nameInput = driver.find_element(By.XPATH, "//*[@id='input-phoneNumber']")
             nameInput.send_keys(JOB_APP["phone"])
+            '''
             time.sleep(round(random.uniform(0.1,0.75), 4))
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+            time.sleep(0.5)
         except:
             print("Error on information page input")
+            return 
+
+        # Available interview times
+        try:
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+            time.sleep(0.5)
+        except:
+            print("Error on interview times")
+            return 
 
         # Upload resume
         try:
-            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
+            #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
+            driver.find_element(By.XPATH, "//*[@id='resume-display-buttonHeader']/div[2]/span[1]").click()
+
             #UPLOAD FILE
             #select first resume file from below
-            driver.find_element_by_xpath("//*[@id='resume-display-buttonHeader']/div[2]/span[2]").click
+            time.sleep(0.5)
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
         except:
             print("Error on resume upload")
+            return 
 
         # Optional job experience filling out
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        time.sleep(round(random.uniform(0.1,0.75), 4))
+        try: 
+            #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[3]/div/div[1]/div/div/div/div[1]/span[2]").click()
+            #time.sleep(0.5)
+            time.sleep(0.5)
+            driver.find_element(By.XPATH, "//*[@id='jobTitle']")
+            driver.send_keys("Blank")
+            time.sleep(0.75)
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+            time.sleep(0.5)
+        except:
+            print("Error on job expereience")
+            return
 
         # Cover letter upload
-        coverLetter = True
+        coverLetter = False
         if coverLetter:
-            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/span[2]").click()
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/span[2]").click()
             #UPLOAD FILE
         else:
-            driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
+            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
         
         # Finish application
         time.sleep(round(random.uniform(0.1,0.75), 4))
-        driver.find_element_by_xpath("//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
+        driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
     
         # Confirm applicaiton
         time.sleep(round(random.uniform(0.1,0.75), 4))
         # Uncomment below to confirm application
-        #driver.find_element_by_xpath("//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
 
     except:
         print("Error")
-        return
+        
 
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
