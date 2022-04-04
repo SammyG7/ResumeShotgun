@@ -14,13 +14,13 @@ import os
 import time 
 import get_links_glassdoor
 import get_links_indeed
-import menu
+#import menu
 from userProfile import *
 from bs4 import BeautifulSoup
 import requests
 import random
 
-from pdfReader import pdfReader ##*****Temp
+#from pdfReader import pdfReader ##*****Temp
 
 ## Global Variables
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
@@ -178,8 +178,8 @@ def indeed(driver):
     applyBtn = soup.find("span", class_="jobsearch-IndeedApplyButton-newDesign")
     
     if applyBtn.text != "Apply now":
-        print("Error! Cannot apply on indeed")
-        return 0
+        #print("Error! Cannot apply on indeed")
+        return ValueError("Error! Cannot apply on indeed")
     else:
         driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']").click()
         #print("worked")
@@ -279,7 +279,7 @@ if __name__ == '__main__':
 
     #path = './chromedriver'
     #servicePath = Service(path) 
-    driver = webdriver.Chrome('./chromedriver')
+    driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
     
     #aggregatedURLs = get_links_indeed.run(driver, profile)
     
@@ -320,8 +320,8 @@ if __name__ == '__main__':
 
         ## Decide application process based on URL information
         if 'indeed' in url:
-            print("Indeed\n")
-            print("URL: ", url)
+            #print("Indeed\n")
+            #print("URL: ", url)
             driver.get(url)
             try:
                 driver.switch_to.alert.accept()
@@ -332,7 +332,7 @@ if __name__ == '__main__':
                 indeed(driver)
                 #print(f'SUCCESS FOR: {url}')
             except:
-                print(url, "totally broken")
+                print(f"Apply manually for: {url}")
             
         elif 'greenhouse' in url:
             driver.get(url)
