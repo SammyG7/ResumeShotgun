@@ -45,11 +45,13 @@ def runApplication(driver):
 
     for i in range(numSteps):
         header = soup.find("h1", class_="ia-BasePage-heading").text
-
-        if header in pages:
-            driver = pages[header](driver)
-        else:
-            driver = manual(driver)
+        try:
+            if header in pages:
+                driver = pages[header](driver)
+            else:
+                driver = manual(driver)
+        except:
+            return ValueError("Overal funciton broke")
 
     return 0
 
@@ -83,8 +85,12 @@ def contactInfo(driver):
         return ValueError("Error on information page input")
 
 def manual(driver):
-
-    return
+    # Lets user know they need to add info then requests them to press Enter!
+    print("Please fill out form on the open google chrome tab then press Enter!")
+    inp = input()
+    if inp == "":
+        driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        return driver
 
 def selectResume(driver):
 
