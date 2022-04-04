@@ -170,12 +170,12 @@ def lever(driver):
 ## @brief Fills in website text boxes with user information and submits resume for Indeed native application
 #  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
 def indeed(driver):
-    
+
     page = requests.get(driver.current_url)
+ 
     soup = BeautifulSoup(page.content, "html.parser")
 
     applyBtn = soup.find("span", class_="jobsearch-IndeedApplyButton-newDesign")
-
     
     if applyBtn.text != "Apply now":
         print("Error! Cannot apply on indeed")
@@ -321,11 +321,18 @@ if __name__ == '__main__':
         ## Decide application process based on URL information
         if 'indeed' in url:
             print("Indeed\n")
+            print("URL: ", url)
+            driver.get(url)
             try:
-                indeed(driver.get(url))
-                print(f'SUCCESS FOR: {url}')
+                driver.switch_to.alert.accept()
             except:
-                print(url, "broken")
+                pass
+
+            try:
+                indeed(driver)
+                #print(f'SUCCESS FOR: {url}')
+            except:
+                print(url, "totally broken")
             
         elif 'greenhouse' in url:
             driver.get(url)

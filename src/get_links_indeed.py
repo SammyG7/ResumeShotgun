@@ -73,6 +73,7 @@ def waitForElement(xpath):
              driver.find_element_by_xpath(xpath)
              found = true
         except:
+            time.sleep(1)
             pass
 
 def captchaHandler(driver):
