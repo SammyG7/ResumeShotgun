@@ -1,0 +1,3 @@
+This directory contains chromedriver version 100.0.4896.60.
+
+It is used as a default fixed path so Chrome versions can be checked and other versions can be downloaded accordingly.
