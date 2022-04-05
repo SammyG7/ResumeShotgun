@@ -10,7 +10,7 @@ import re
 
 ## @brief This class represents a PDF document  
 #  @details Assumes all inputs are of the correct type
-class pdfReader:
+class pdfReader(wx.Dialog):
     ## @brief Constructor for pdfReader
     #  @details Defines a PDF based on a file path
     #  @param path: String value which describes the file path to the desired document
@@ -22,6 +22,7 @@ class pdfReader:
         self.expectedinfo = {}
         self.expectedinfo["links"] = {}
         self.expectedinfo["languages"] = {}
+        #self.display = Display(path)
         
         try: # Try instead of if for invalid paths
             self.plaintext = self.getText()
@@ -48,6 +49,14 @@ class pdfReader:
 
     ## @brief Displays the document to the user in an interactive window
     def showPDF(self):
+        defPos = wx.DefaultPosition
+        defSiz = wx.DefaultSize
+        zoom   = 1.2                        # zoom factor of display
+        wx.Dialog.__init__ (self, None, id = wx.ID_ANY,
+            title = u"Display with PyMuPDF: ",
+            pos = defPos, size = defSiz,
+            style = wx.CAPTION|wx.CLOSE_BOX|
+                    wx.DEFAULT_DIALOG_STYLE)
         self.doc = fitz.open(self.path) # create Document object
 
         self.dl_array = [0] * len(self.doc)
@@ -57,8 +66,39 @@ class pdfReader:
         self.current_idx = -1          # store entry of found rectangle
         self.current_lnks = []         # store entry of found rectangle
 
+        self.matrix = fitz.Matrix(zoom, zoom)
+        
         self.TextToPage = wx.TextCtrl(self, wx.ID_ANY, u"1", defPos, wx.Size(40, -1), 
                              wx.TE_RIGHT|wx.TE_PROCESS_ENTER)
+
+        self.PDFimage = wx.StaticBitmap(self, wx.ID_ANY, self.pdf_show(1),
+                           defPos, defSiz, style = 0)
+
+        self.szr10 = wx.BoxSizer(wx.VERTICAL)
+        szr20 = wx.BoxSizer(wx.HORIZONTAL)
+        #szr20.Add(self.ButtonNext, 0, wx.ALL, 5)
+        #szr20.Add(self.ButtonPrevious, 0, wx.ALL, 5)
+        szr20.Add(self.TextToPage, 0, wx.ALL, 5)
+        #szr20.Add(self.statPageMax, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        #szr20.Add( self.links, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+        #szr20.Add(self.paperform, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
+        # sizer ready, represents top dialog line
+        self.szr10.Add(szr20, 0, wx.EXPAND, 5)
+        self.szr10.Add(self.PDFimage, 0, wx.ALL, 5)
+        # main sizer now ready - request final size & layout adjustments
+        self.szr10.Fit(self)
+        self.SetSizer(self.szr10)
+        self.Layout()
+        # center dialog on screen
+        self.Centre(wx.BOTH)
+
+        # Bind buttons and fields to event handlers
+        #self.ButtonNext.Bind(wx.EVT_BUTTON, self.NextPage)
+        #self.ButtonPrevious.Bind(wx.EVT_BUTTON, self.PreviousPage)
+        #self.TextToPage.Bind(wx.EVT_TEXT_ENTER, self.GotoPage)
+        ##self.PDFimage.Bind(wx.EVT_MOUSEWHEEL, self.OnMouseWheel)
+        ##self.PDFimage.Bind(wx.EVT_MOTION, self.move_mouse)
+        ##self.PDFimage.Bind(wx.EVT_LEFT_DOWN, self.OnLeftDown)
 
         self.doc.close()
 
@@ -156,9 +196,39 @@ class pdfReader:
         else:
             self.expectedinfo["languages"]["javascript"] = False
 
+    def pdf_show(self, pg_nr):
+        pno = int(pg_nr) - 1
+        if self.dl_array[pno] == 0:
+            self.dl_array[pno] = self.doc[pno].get_displaylist()
+        dl = self.dl_array[pno]
+        pix = dl.get_pixmap(matrix = self.matrix, alpha = False)
+        bmp = wx.Bitmap.FromBuffer(pix.w, pix.h, pix.samples)
+        r = dl.rect
+        #paper = FindFit(r.x1, r.y1)
+        #self.paperform.Label = "Page format: " + paper
+        '''
+        if self.links.Value:
+            self.current_lnks = self.doc[pno].get_links()
+            self.pg_ir = dl.rect.irect
+        '''
+        pix = None
+        return bmp
+
+'''
+class Display(wx.Dialog):
+    def __init__(self, path):
+        self.dl_array = [0] * len(self.doc)
+        self.last_page = -1            # memorize last page displayed
+        self.link_rects = []           # store link rectangles here
+        self.link_texts = []           # store link texts here
+        self.current_idx = -1          # store entry of found rectangle
+        self.current_lnks = []         # store entry of found rectangle
+'''
+
 ## Test
-##p = pdfReader("Resumes/SamResume.pdf")
-##print(p.plaintext)
+p = pdfReader("Resumes/BobBobberResume.pdf")
+print(p.plaintext)
+p.showPDF()
 ##p.setKnownLanguages()
 ##print(p.expectedinfo)
 
