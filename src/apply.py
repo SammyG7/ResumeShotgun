@@ -12,6 +12,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 import os 
 import time 
 import get_links_glassdoor
@@ -336,7 +338,9 @@ if __name__ == '__main__':
     #path = './chromedriver'
     #servicePath = Service(path) 
     #driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
-    driver = webdriver.Chrome("./ChomeDrivers/v100/chromedriver.exe")
+    #driver = webdriver.Chrome("./ChomeDrivers/v100/chromedriver.exe") # depreciated
+    driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+    
     
     #aggregatedURLs = get_links_indeed.run(driver, profile)
     
