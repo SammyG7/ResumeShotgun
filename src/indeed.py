@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from Job import Job
 
 from bs4 import BeautifulSoup
@@ -37,9 +38,8 @@ class Indeed:
     def __init__(self, keyword, location, driver): #= webdriver.Chrome('./chromedriver')):
         self.keyword = keyword
         self.location = location
-        #self.driverLocation = driver
-        #self.driver = webdriver.Chrome(executable_path=self.driverLocation)
         self.driver = driver
+
     def updateCurrentPage(self, url):
         self.url = url
         self.page = requests.get(self.url)
@@ -50,16 +50,23 @@ class Indeed:
     def search(self):
         
         self.driver.get("https://ca.indeed.com/")
-        self.driver.find_element(By.ID,"text-input-what").send_keys(self.keyword)
-        time.sleep(.5)
 
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID,"text-input-what")))
+        
+        # Send keys of keyword
+        self.driver.find_element(By.ID,"text-input-what").send_keys(self.keyword)  
+        
+
+        # Send keys for location
         self.driver.find_element(By.ID,"text-input-where").send_keys(Keys.CONTROL + "a")
         self.driver.find_element(By.ID,"text-input-where").send_keys(Keys.DELETE)
         self.driver.find_element(By.ID,"text-input-where").send_keys(self.location)
         time.sleep(0.5)
         self.driver.find_element(By.CLASS_NAME,"yosegi-InlineWhatWhere-primaryButton").click()
 
+        # Update driver to url with page results
         self.url = self.driver.current_url
+
         self.page = requests.get(self.url)
         self.soup = BeautifulSoup(self.page.content, "html.parser")
     
@@ -164,13 +171,12 @@ class Indeed:
             links.append(self.jobs[i].link)
         return links
     
-''' Uncomment to run
+'''
 if __name__ == "__main__":
-    
-    s1 = Indeed("Software Engineer", "Barrie")
-    s1.run()
-    print(len(s1.jobs))
-    print(s1.returnLinks())
+    #s1 = Indeed("Engineer", "Orillia")
+    #s1.run()
+    #print(len(s1.jobs))
+    #print(s1.returnLinks())
     #hehe
     #for i in range(len(s1.jobs)):
     #    print([s1.jobs[i].title, s1.jobs[i].company, s1.jobs[i].link])
@@ -179,9 +185,5 @@ if __name__ == "__main__":
 
     #s1.search()
     #s1.getPages()
-    #s1.pageParser()  
-=======
-    s1 = Indeed("Engineer", "Huntsville, ON")
-    s1.run()  
+    #s1.pageParser()
 '''
-
