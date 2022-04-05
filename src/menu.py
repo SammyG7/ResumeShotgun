@@ -75,11 +75,13 @@ def run(profile):
     
     global menu
     menu = 0
-    #resume = pdfReader(profile.getResumePath())
+    resume = pdfReader(profile.getResumePath())
     
     clearScreen()
 
-    #print(resume.path)
+    print("Hello")
+    print(resume.path)
+    print("Hello")
     #print(profile)
     
     while menu >= 0:

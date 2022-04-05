@@ -15,6 +15,7 @@ class pdfReader:
     #  @details Defines a PDF based on a file path
     #  @param path: String value which describes the file path to the desired document
     def __init__(self, path = None, testBool = False):# Add param for has correct imports
+        
         self.path = path
         self.app = wx.App()
         self.doc = None
@@ -25,10 +26,11 @@ class pdfReader:
         
         try: # Try instead of if for invalid paths
             self.plaintext = self.getText()
-            self.getAllLinks()
-            self.setKnownLinks()
+##            self.getAllLinks()
+##            self.setKnownLinks()
         except:
             self.plaintext = None
+        
 
     ## @brief Gets the current path to PDF
     #  @return String representing the path
@@ -66,6 +68,11 @@ class pdfReader:
     #  @return String on plaintext
     def getText(self):
         text = ''
+
+        print("Go")
+        result = fitz.open("No.pdf")
+        print("Result ", result)
+    
         with fitz.open(self.path) as doc:
             for page in doc:
                 text+= page.get_text()
