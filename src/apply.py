@@ -336,7 +336,7 @@ if __name__ == '__main__':
     #path = './chromedriver'
     #servicePath = Service(path) 
     #driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
-    driver = webdriver.Chrome("./chromedriver") 
+    driver = webdriver.Chrome("./ChomeDrivers/v100/chromedriver.exe")
     
     #aggregatedURLs = get_links_indeed.run(driver, profile)
     
@@ -411,6 +411,6 @@ if __name__ == '__main__':
 
         time.sleep(1)
     
-
+    print("Finished")
     driver.close()
     
