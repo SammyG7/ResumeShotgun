@@ -14,13 +14,13 @@ import os
 import time 
 import get_links_glassdoor
 import get_links_indeed
-#import menu
+import menu
 from userProfile import *
 from bs4 import BeautifulSoup
 import requests
 import random
 
-#from pdfReader import pdfReader ##*****Temp
+from pdfReader import pdfReader ##*****Temp
 
 ## Global Variables
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
@@ -279,7 +279,8 @@ if __name__ == '__main__':
 
     #path = './chromedriver'
     #servicePath = Service(path) 
-    driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
+    #driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
+    driver = webdriver.Chrome("./chromedriver") 
     
     #aggregatedURLs = get_links_indeed.run(driver, profile)
     
@@ -320,8 +321,8 @@ if __name__ == '__main__':
 
         ## Decide application process based on URL information
         if 'indeed' in url:
-            #print("Indeed\n")
-            #print("URL: ", url)
+            print("Indeed\n")
+            print("URL: ", url)
             driver.get(url)
             try:
                 driver.switch_to.alert.accept()

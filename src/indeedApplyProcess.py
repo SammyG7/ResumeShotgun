@@ -8,6 +8,7 @@
 ## Imports
 from gettext import find
 from multiprocessing.managers import ValueProxy
+import numbers
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -19,16 +20,26 @@ import requests
 import random
 
 def runApplication(driver):
-    page = requests.get(driver.current_url)
-    soup = BeautifulSoup(page.content, "html.parser")
 
+    # dictionary of header values to corresponding function
+    '''
     pages = {
-        "contact information":contactInfo,
-        "Questions from the employer": manual,
-        "Add a resume for the employer": selectResume,
+        "Add your contact information":contactInfo,
+        "Questions from": manual,
+        "Add a resume": selectResume,
         "Select a past job that shows relevant experience": pastJob,
         "Want to include any supporting documents?": coverLetter,
         "Please review your application": reviewApp,
+    }
+    
+    '''
+    pages = {
+        1:contactInfo,
+        2: manual,
+        3: selectResume,
+        4: pastJob,
+        5: coverLetter,
+        6: reviewApp,
     }
 
     '''
@@ -41,17 +52,38 @@ def runApplication(driver):
     Review
     '''
     #get number of application steps
-    numSteps = int(soup.find("div", class_="ia-Navigation-steps").text[-1])
+    numSteps = int((driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[1]/div/div[2]/div[2]").text)[-1])
 
-    for i in range(numSteps):
-        header = soup.find("h1", class_="ia-BasePage-heading").text
+    # Go through all application steps
+
+    contactInfo(driver)
+    selectResume(driver)
+    coverLetter(driver)
+
+    '''
+    for _ in range(numSteps):
+        header = str(driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/h1").text)
+        print(header)
         try:
-            if header in pages:
-                driver = pages[header](driver)
+            #check if header is in the dicitonary of possible pages
+            if "contact information" in header:
+                contactInfo(driver)
+            elif "Questions" in header:
+                manual(driver)
+            elif "resume" in header:
+                selectResume(driver)
+            elif "past job" in header:
+                pastJob(driver)
+            elif "supporting documents" in header:
+                coverLetter(driver)
+            elif "review your application" in header:
+                reviewApp(driver)
             else:
-                driver = manual(driver)
+                manual(driver)
         except:
-            return ValueError("Overal funciton broke")
+            print("yikes")
+            return ValueError("Overall function broke")
+    '''
 
     return 0
 
@@ -79,7 +111,6 @@ def contactInfo(driver):
         time.sleep(round(random.uniform(0.1,0.75), 4))
         driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
         time.sleep(round(random.uniform(0.1,0.75), 4))
-        return driver
 
     except:
         return ValueError("Error on information page input")
@@ -90,7 +121,6 @@ def manual(driver):
     inp = input()
     if inp == "":
         driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        return driver
 
 def selectResume(driver):
 
@@ -98,11 +128,9 @@ def selectResume(driver):
         driver.find_element(By.XPATH, "//*[@id='resume-display-buttonHeader']/div[2]/span[1]").click()
         time.sleep(0.5)
         driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        return driver
     except:
         return ValueError("Error on resume upload page")
 
-    return 
 
 def pastJob(driver):
     
@@ -120,13 +148,24 @@ def coverLetter(driver):
         driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
         time.sleep(0.5)
         driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
-        return driver
     except:
         return ValueError("Error on cover letter upload")
 
 def reviewApp(driver):
     try:
-        driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        return driver
+        #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        pass
     except:
         return ValueError("Error on final submission")
+
+if __name__ == "__main__":
+    driver = webdriver.Chrome("/usr/bin/chromedriver")
+    url = "https://ca.indeed.com/viewjob?cmp=C.-F.-Crozier-%26-Associates&t=Transportation%20Engineer&jk=0eb2bd1324d739a7&q=engineer&vjs=3"
+    driver.get(url)
+    time.sleep(1)
+    driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']/div").click()
+    while driver.current_url != "https://m5.apply.indeed.com/beta/indeedapply/form/contact-info":
+        continue
+
+    runApplication(driver)
+    #driver.get(url)
