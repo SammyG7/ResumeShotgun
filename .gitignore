@@ -132,3 +132,8 @@ dmypy.json
 
 # Debugging files
 debug.py
+
+# Building .exe
+*.spec
+dist/
+build/
