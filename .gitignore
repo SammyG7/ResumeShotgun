@@ -124,8 +124,8 @@ dmypy.json
 *.lot
 
 # Chromedriver
-ChromeDrivers/
-!ChromeDrivers/default/
+*/ChromeDrivers/*
+!*/ChromeDrivers/default/
 
 # YAML
 *.yaml
