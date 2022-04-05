@@ -103,7 +103,7 @@ def verificationHandler(driver):
 def run(driver, profile):
     success = False
     
-    if(True or profile.getAutoLogin()): # *** Change with working autoLogin
+    if(profile.getAutoLogin()): # *** Change with working autoLogin
         ## Attempt Auto Login
         print("Attempting Automatic Login")
         try:    
@@ -136,7 +136,7 @@ def run(driver, profile):
 
     print("Logged in")
 
-    linkbot = Indeed("engineer", "collingwood", driver)
+    linkbot = Indeed(profile.getJobTitle(), profile.getLocation()[0], driver)
     linkbot.run()
     return linkbot.returnLinks()
 

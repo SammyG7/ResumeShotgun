@@ -326,12 +326,12 @@ if __name__ == '__main__':
 
     profile = userProfile()
     profile.loadProfile()
-    #menu.run(profile)
-    #profile.saveProfile()
+    menu.run(profile)
+    profile.saveProfile()
  
 
-    #site = profile.getSite()
-    site = ""                   ##-----
+    site = profile.getSite()
+    #site = ""                   ##-----
 
     #path = './chromedriver'
     #servicePath = Service(path) 
