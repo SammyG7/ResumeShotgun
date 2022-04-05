@@ -124,7 +124,8 @@ dmypy.json
 *.lot
 
 # Chromedriver
-# chromedriver.exe
+ChromeDrivers/
+!/default/chromedriver.exe
 
 # YAML
 *.yaml
@@ -132,8 +133,3 @@ dmypy.json
 
 # Debugging files
 debug.py
-
-# Building .exe
-*.spec
-dist/
-build/
