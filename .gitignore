@@ -132,3 +132,8 @@ chromedriver.exe
 
 # Debugging files
 debug.py
+
+# Building .exe
+*.spec
+dist/
+build/
