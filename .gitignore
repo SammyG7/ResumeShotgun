@@ -125,7 +125,7 @@ dmypy.json
 
 # Chromedriver
 ChromeDrivers/
-!/default/chromedriver.exe
+!ChromeDrivers/default/
 
 # YAML
 *.yaml
