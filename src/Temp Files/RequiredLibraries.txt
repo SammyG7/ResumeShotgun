@@ -6,5 +6,6 @@ requests
 selenium
 pyyaml
 beautifulsoup
+webdriver_manager
 
 * Random
