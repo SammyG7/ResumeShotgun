@@ -91,12 +91,8 @@ def run(profile):
     menu = 0
     resume = pdfReader(profile.getResumePath())
     #resume = pdfReader(./Resumes/BobBobberResume.pdf)
+    
     clearScreen()
-
-##    print("Hello")
-##    print(resume.path)
-##    print("Hello")
-    #print(profile)
     
     while menu >= 0:
         ## Main
@@ -119,9 +115,8 @@ def run(profile):
                     resume.setPath(profile.getResumePath())
                     __changeMenu()
                     updated = True
-                elif choice == "2": # Dsiplay Current Resume
-                    # Implement Display Resume
-                    displayError("missing")
+                elif choice == "2": # Display Current Resume
+                    resume.showPDF()
                 elif choice == "3": 
                     __fillWords(profile, resume);
                 elif profile.setResumePath(choice):

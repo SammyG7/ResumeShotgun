@@ -368,6 +368,7 @@ class PDFdisplay(wx.Dialog):
         bmp = bmp_buffer(pix.w, pix.h, pix.samples)
         r = dl.rect
         paper = FindFit(r.x1, r.y1)
+        print(paper)
         self.paperform.Label = "Page format: " + paper
         if self.links.Value:
             self.current_lnks = self.doc[pno].get_links()
