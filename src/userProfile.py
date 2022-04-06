@@ -42,7 +42,7 @@ class userProfile:
         self.__resumePath = DEFAULT["resumePath"][0]
         ## @brief List of links to user's social media pages
         self.__socials = DEFAULT["socials"][0]
-        ## @brief User's area of residence
+        ## @brief Area for job search
         self.__location = DEFAULT["location"][0]
         ## @brief User's date of graudation from their program
         self.__gradDate = DEFAULT["gradDate"][0]
@@ -240,9 +240,9 @@ class userProfile:
     def getSocials(self):
         return self.__socials
 
-    ## @brief Method gets city, state/province if applicable, and country of residence
+    ## @brief Method gets city, state/province if applicable, and country of job
     #  @return Tuple of 3 strings indicating city, state/province (empty string if none was provided),
-    #  and country of residence
+    #  and country of job
     def getLocation(self):
         return self.__location
 

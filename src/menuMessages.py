@@ -151,26 +151,6 @@ def displayMenuOrganisation(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for location menu (profile submenu) options
-#  @param path Tuple indicating location
-def displayMenuLocation(loc):
-    if loc == DEFAULT["location"][0]: loc = ("N/A", "N/A", "N/A")
-    print("==============================\n" +
-          "        RESUME SHOTGUN        \n" +
-          " > Main/Personal/Location     \n" +
-          "==============================\n" +
-          " Current location: \n" +
-          " City: {0}".format(loc[0]) + "\n" +
-          ((" State/Prov.: {0}".format(loc[1]) + "\n") if (loc[1] != "") else "") +
-          " Country: {0}".format(loc[2]) + "\n" +
-          "\n" +
-          wrappedString("Input either city then country, or " +
-                        "city then state/province then country " +
-                        "to update the location to search.") + "\n" +
-          "\n" +
-          " 0) Go back \n" +
-          "\n")
-
 ## @brief Displays text for graduation date menu (profile submenu) options
 #  @param path Tuple indicating graduation date
 def displayMenuGradDate(grad):
@@ -232,6 +212,26 @@ def displayMenuJobTitle(title):
           "\n" +
           wrappedString("Input text to " +
                         "update the job title.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for location menu (profile submenu) options
+#  @param path Tuple indicating location
+def displayMenuLocation(loc):
+    if loc == DEFAULT["location"][0]: loc = ("N/A", "N/A", "N/A")
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Search/Location       \n" +
+          "==============================\n" +
+          " Current location: \n" +
+          " City: {0}".format(loc[0]) + "\n" +
+          ((" State/Prov.: {0}".format(loc[1]) + "\n") if (loc[1] != "") else "") +
+          " Country: {0}".format(loc[2]) + "\n" +
+          "\n" +
+          wrappedString("Input either city then country, or " +
+                        "city then state/province then country " +
+                        "to update the location to search.") + "\n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
