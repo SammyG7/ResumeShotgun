@@ -7,5 +7,6 @@ selenium
 pyyaml
 beautifulsoup
 webdriver_manager
+pwinput
 
 * Random

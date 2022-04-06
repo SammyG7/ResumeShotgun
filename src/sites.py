@@ -7,12 +7,6 @@
 #  @details In order of implementation, arbitrarily chosen to be this way
 SITESLIST = ["glassdoor", "indeed"]
 
-## @brief Dictionary to swap site name to correct file for scraping links
-GETLINKSFILE = {
-	"glassdoor": "get_links_glassdoor.py",
-	"indeed": "get_links_indeed.py"
-}
-
 ## @brief Dictionary to swap name of site to a formattable string
 #  indicating URL
 __SOCIALLINKS = {
