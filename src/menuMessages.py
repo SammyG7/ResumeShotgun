@@ -58,9 +58,8 @@ def displayMenuPersonal():
           " 4) Phone \n" +
           " 5) Organisation \n" +
           " 6) Socials \n" +
-          " 7) Location \n" +
-          " 8) gradDate \n" +
-          " 9) University \n" +
+          " 7) gradDate \n" +
+          " 8) University \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -216,8 +215,9 @@ def displayMenuSearch():
           " > Main/Search                  \n" +
           "==============================\n" +
           " 1) Job Title \n" +
-          " 2) Keywords \n" +
-          " 3) Auto-Login \n" +
+          " 2) Location \n" +
+          " 3) Keywords \n" +
+          " 4) Auto-Login \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
