@@ -183,11 +183,9 @@ def indeed(driver):
     applyBtn = soup.find("span", class_="jobsearch-IndeedApplyButton-newDesign")
     
     if applyBtn.text != "Apply now":
-        #print("Error! Cannot apply on indeed")
         return ValueError("Error! Cannot apply on indeed")
     else:
         driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']").click()
-        #print("worked")
     time.sleep(round(random.uniform(0.1,0.75), 4))
 
     runApplication(driver)
@@ -223,7 +221,6 @@ def runApplication(driver):
     # Go through all application steps
     for _ in range(numSteps):
         header = getHeader(driver)
-        print(header)
         try:
             #check if header is in the dicitonary of possible pages
             if header in pages:
@@ -231,7 +228,6 @@ def runApplication(driver):
             else:
                 manual(driver)
         except:
-            print("yikes")
             return ValueError("Overall function broke")
         time.sleep(1)
 
