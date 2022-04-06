@@ -75,7 +75,7 @@ def run(profile):
     
     global menu
     menu = 0
-    #resume = pdfReader(profile.getResumePath())
+    resume = pdfReader(profile.getResumePath())
     
     clearScreen()
 
@@ -104,7 +104,7 @@ def run(profile):
                     updated = True
                 elif choice == "2": # Dsiplay Current Resume
                     # Implement Display Resume
-                    displayError("missing")
+                    resume.showPDF()
                 elif profile.setResumePath(choice):
                     __changeMenu()
                     updated = True

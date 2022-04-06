@@ -263,17 +263,12 @@ def indeed(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
-    
-    ## PDF Tests. Just delete if you're working in apply
-    resume = pdfReader("./Resumes/BobBobberResume.pdf")
 
-    
-    '''
 
     profile = userProfile()
     profile.loadProfile()
-    #menu.run(profile)
-    #profile.saveProfile()
+    menu.run(profile)
+    profile.saveProfile()
  
 
     #site = profile.getSite()
@@ -287,7 +282,7 @@ if __name__ == '__main__':
     
     #driver.close()
 
-    '''
+  
     '''
     for link in aggregatedURLs:
         ##indeed(driver.get(link))
@@ -304,7 +299,7 @@ if __name__ == '__main__':
     profile.saveProfile()
     site = profile.getSite()
     '''
-    '''
+    
     
 
     ## Get Links From User Specified Website
@@ -360,5 +355,5 @@ if __name__ == '__main__':
     
 
     driver.close()
-    '''
+   
     
