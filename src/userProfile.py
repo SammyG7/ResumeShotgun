@@ -17,39 +17,50 @@ except ImportError:
 ## @brief This class represents the preferences of a user for job searching 
 class userProfile:
 
+    ## @brief Makes shallow copy of data
+    @staticmethod
+    def __cpy(thing):
+        if type(thing) is tuple:
+            return tuple(thing)
+        if type(thing) is list:
+            return list(thing)
+        if type(thing) is str:
+            return str(thing)
+        else: return thing
+
     ## @brief Constructor for userProfile
     #  @details Sets default values for profile
     #  @param userPrompts (optional) Boolean default class value for if user
     #  should require confirmations when performing tasks like saving/loading
     def __init__(self, userPrompts = True):
         ## @brief Words used in searches to help locate better fitting jobs
-        self.__keywords = DEFAULT["keywords"][0]
+        self.__keywords = self.__cpy(DEFAULT["keywords"][0])
         ## @brief Title of target job position
-        self.__jobTitle = DEFAULT["jobTitle"][0]
+        self.__jobTitle = self.__cpy(DEFAULT["jobTitle"][0])
         ## @brief The site that will be scraped for URLs
-        self.__site = DEFAULT["site"][0]
+        self.__site = self.__cpy(DEFAULT["site"][0])
         ## @brief User's first name
-        self.__firstName = DEFAULT["firstName"][0]
+        self.__firstName = self.__cpy(DEFAULT["firstName"][0])
         ## @brief User's last name
-        self.__lastName = DEFAULT["lastName"][0]
+        self.__lastName = self.__cpy(DEFAULT["lastName"][0])
         ## @brief User's email address
-        self.__email = DEFAULT["email"][0]
+        self.__email = self.__cpy(DEFAULT["email"][0])
         ## @brief User's phone number
-        self.__phone = DEFAULT["phone"][0]
+        self.__phone = self.__cpy(DEFAULT["phone"][0])
         ## @brief User's current workplace/affiliation
-        self.__organisation = DEFAULT["organisation"][0]
+        self.__organisation = self.__cpy(DEFAULT["organisation"][0])
         ## @brief Path to resume file
-        self.__resumePath = DEFAULT["resumePath"][0]
+        self.__resumePath = self.__cpy(DEFAULT["resumePath"][0])
         ## @brief List of links to user's social media pages
-        self.__socials = DEFAULT["socials"][0]
-        ## @brief User's area of residence
-        self.__location = DEFAULT["location"][0]
+        self.__socials = self.__cpy(DEFAULT["socials"][0])
+        ## @brief Area for job search
+        self.__location = self.__cpy(DEFAULT["location"][0])
         ## @brief User's date of graudation from their program
-        self.__gradDate = DEFAULT["gradDate"][0]
+        self.__gradDate = self.__cpy(DEFAULT["gradDate"][0])
         ## @brief User's university
-        self.__university = DEFAULT["university"][0]
+        self.__university = self.__cpy(DEFAULT["university"][0])
         ## @brief Whether or not the program should automatically log into sites
-        self.__autoLogin = DEFAULT["autoLogin"][0]
+        self.__autoLogin = self.__cpy(DEFAULT["autoLogin"][0])
         ## @brief Default value of whether or not confirmation messages should be shown
         self.__userPrompts = userPrompts
 
@@ -240,9 +251,9 @@ class userProfile:
     def getSocials(self):
         return self.__socials
 
-    ## @brief Method gets city, state/province if applicable, and country of residence
+    ## @brief Method gets city, state/province if applicable, and country of job
     #  @return Tuple of 3 strings indicating city, state/province (empty string if none was provided),
-    #  and country of residence
+    #  and country of job
     def getLocation(self):
         return self.__location
 
@@ -389,7 +400,7 @@ class userProfile:
                         removed = True
                 if not removed: self.__socials.append(link)
         else: 
-            self.__socials = [link]
+            self.__socials = DEFAULT["socials"][0] if link == DEFAULT["socials"][0] else [link]
 
     ## @brief Method sets location
     #  @details If 2 inputs received, it will be stored as a length 3 with a blank value

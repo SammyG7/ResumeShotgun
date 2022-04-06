@@ -22,6 +22,9 @@ def displayMenuMain():
           " 3) Search Preferences \n" +
           " 4) Sites \n" +
           "\n" +
+          " 5) Go to all empty fields \n" +
+          " 6) Preview \n" +
+          "\n" +
           " 0) Save and Start \n" +
           "\n")
     
@@ -59,14 +62,13 @@ def displayMenuPersonal():
           " 4) Phone \n" +
           " 5) Organisation \n" +
           " 6) Socials \n" +
-          " 7) Location \n" +
-          " 8) gradDate \n" +
-          " 9) University \n" +
+          " 7) gradDate \n" +
+          " 8) University \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for first name menu (profile submenu) options
+## @brief Displays text for first name menu (personal submenu) options
 #  @param path String for first name
 def displayMenuFirstName(name):
     if name == DEFAULT["firstName"][0]: name = "N/A"
@@ -83,7 +85,7 @@ def displayMenuFirstName(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for last name menu (profile submenu) options
+## @brief Displays text for last name menu (personal submenu) options
 #  @param path String for last name
 def displayMenuLastName(name):
     if name == DEFAULT["lastName"][0]: name = "N/A"
@@ -100,7 +102,7 @@ def displayMenuLastName(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for email menu (profile submenu) options
+## @brief Displays text for email menu (personal submenu) options
 #  @param path String for email
 def displayMenuEmail(email):
     if email == DEFAULT["email"][0]: email = "N/A"
@@ -117,7 +119,7 @@ def displayMenuEmail(email):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for phone menu (profile submenu) options
+## @brief Displays text for phone menu (personal submenu) options
 #  @param path String for phone number
 def displayMenuPhone(phone):
     if phone == DEFAULT["phone"][0]: phone = "N/A"
@@ -135,7 +137,7 @@ def displayMenuPhone(phone):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for organisation menu (profile submenu) options
+## @brief Displays text for organisation menu (personal submenu) options
 #  @param path String for organisation name
 def displayMenuOrganisation(name):
     if name == DEFAULT["organisation"][0]: name = "N/A"
@@ -152,27 +154,30 @@ def displayMenuOrganisation(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for location menu (profile submenu) options
-#  @param path Tuple indicating location
-def displayMenuLocation(loc):
-    if loc == DEFAULT["location"][0]: loc = ("N/A", "N/A", "N/A")
+## @brief Displays text for socials menu (personal submenu) options
+#  @param socials List of strings of current social links
+def displayMenuSocials(socials):
+    if socials == DEFAULT["socials"][0]: socials = ["N/A"]
+    string = ""
+    for s in socials: string += " " + s + "\n"
     print("==============================\n" +
           "        RESUME SHOTGUN        \n" +
-          " > Main/Personal/Location     \n" +
+          " > Main/Personal/Socials      \n" +
           "==============================\n" +
-          " Current location: \n" +
-          " City: {0}".format(loc[0]) + "\n" +
-          ((" State/Prov.: {0}".format(loc[1]) + "\n") if (loc[1] != "") else "") +
-          " Country: {0}".format(loc[2]) + "\n" +
+          " Current socials: \n" +
+          string +
           "\n" +
-          wrappedString("Input either city then country, or " +
-                        "city then state/province then country " +
-                        "to update the location to search.") + "\n" +
+          wrappedString("Input social website link to add, " +
+                        "or your username and site names all separated " +
+                        "by commas to build links. Input link again or " +
+                        "site name to remove.") + "\n" +
+          "\n" +
+          " 1) Clear all links \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for graduation date menu (profile submenu) options
+## @brief Displays text for graduation date menu (personal submenu) options
 #  @param path Tuple indicating graduation date
 def displayMenuGradDate(grad):
     if grad == DEFAULT["gradDate"][0]: grad = "N/A"
@@ -190,7 +195,7 @@ def displayMenuGradDate(grad):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for university menu (profile submenu) options
+## @brief Displays text for university menu (personal submenu) options
 #  @param path String for university name
 def displayMenuUniversity(name):
     if name == DEFAULT["university"][0]: name = "N/A"
@@ -214,8 +219,9 @@ def displayMenuSearch():
           " > Main/Search                  \n" +
           "==============================\n" +
           " 1) Job Title \n" +
-          " 2) Keywords \n" +
-          " 3) Auto-Login \n" +
+          " 2) Location \n" +
+          " 3) Keywords \n" +
+          " 4) Auto-Login \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -233,6 +239,26 @@ def displayMenuJobTitle(title):
           "\n" +
           wrappedString("Input text to " +
                         "update the job title.") + "\n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for location menu (search submenu) options
+#  @param path Tuple indicating location
+def displayMenuLocation(loc):
+    if loc == DEFAULT["location"][0]: loc = ("N/A", "N/A", "N/A")
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Search/Location       \n" +
+          "==============================\n" +
+          " Current location: \n" +
+          " City: {0}".format(loc[0]) + "\n" +
+          ((" State/Prov.: {0}".format(loc[1]) + "\n") if (loc[1] != "") else "") +
+          " Country: {0}".format(loc[2]) + "\n" +
+          "\n" +
+          wrappedString("Input either city then country, or " +
+                        "city then state/province then country " +
+                        "to update the location to search.") + "\n" +
           "\n" +
           " 0) Go back \n" +
           "\n")
@@ -259,7 +285,7 @@ def displayMenuKeywords(keywords):
           "\n")
 
 ## @brief Displays text for auto login menu (search submenu) options
-#  @param site Boolean indicating current setting
+#  @param setting Boolean indicating current setting
 def displayMenuAutoLogin(setting):
     if setting == DEFAULT["autoLogin"][0]: setting = "N/A"
     else: setting = "Use auto-login" if setting else "Do not use auto-login"
@@ -299,6 +325,29 @@ def displayMenuSites(site, siteList):
           siteString +
           "\n" +
           " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for previewing profile
+#  @param profileDict Dictionary containing all profile values
+def displayMenuPreview(profileDict):
+    string = ""
+    for key in profileDict:
+        val = profileDict[key]
+        star = ""
+        if val == DEFAULT[key][0]:
+            val = "N/A"
+            if DEFAULT[key][1]: star = "**"
+            else: star = "*"
+        string += wrappedString("-" + key + star + ": " + str(val)) + "\n"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Preview               \n" +
+          "==============================\n" +
+          wrappedString("Items with '*' are the same as the default. " +
+                        "Items with '**' are the default and must " +
+                        "be changed for applications to work.") + "\n" +
+          "\n" +
+          string +
           "\n")
 
 

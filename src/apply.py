@@ -323,8 +323,12 @@ if __name__ == '__main__':
 
     profile = userProfile()
     profile.loadProfile()
-    menu.run(profile)
+    unfilled = True
+    while unfilled:
+        menu.run(profile)
+        unfilled = not profile.isComplete()
     profile.saveProfile()
+    print("Please wait for Chrome to automatically open...")
  
 
     site = profile.getSite()

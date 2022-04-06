@@ -5,7 +5,8 @@
 #  @date Apr 2, 2022
 
 from menuMessages import *
-from sites import SITESLIST
+from sites import SITESLIST, userToURL
+from pDef import DEFAULT
 from time import sleep
 import wx
 from pdfReader import pdfReader
@@ -89,16 +90,41 @@ def run(profile):
     
     global menu
     menu = 0
+
+    menuQueue = []
+    menuQueueTop = None
+    menuIndexes = {
+        "keywords": 23,
+        "jobTitle": 21,
+        "site": 4,
+        "firstName": 11,
+        "lastName": 12,
+        "email": 13,
+        "phone": 14,
+        "organisation": 15,
+        "resumePath": 1,
+        "socials": 16,
+        "location": 22,
+        "gradDate": 17,
+        "university": 18,
+        "autoLogin": 24
+    }
+
     resume = pdfReader(profile.getResumePath())
     #resume = pdfReader(./Resumes/BobBobberResume.pdf)
-    
+
     clearScreen()
     
     while menu >= 0:
+        ## For taking user to menus for blank items
+        if len(menuQueue) > 0 and menu != menuQueueTop:
+            n = menuQueue.pop()
+            __changeMenu(n)
+            menuQueueTop = n
         ## Main
         if menu == 0:
             displayMenuMain()
-            while not __changeMenu(__limit(__promptInput(), mx = 4, mn = 0)): pass
+            while not __changeMenu(__limit(__promptInput(), mx = 6, mn = 0)): pass
             ## only occurs when going "back" on main, aka exit
             if menu == 0: menu = -1
         ## Main/Resume
@@ -130,7 +156,7 @@ def run(profile):
             displayMenuPersonal()
             updated = False
             while not updated:
-                choice = __limit(__promptInput(), mx = 9, mn = 0)
+                choice = __limit(__promptInput(), mx = 8, mn = 0)
                 if choice > 0: choice += 10
                 updated = __changeMenu(choice)
         ## Main/Search
@@ -138,7 +164,7 @@ def run(profile):
             displayMenuSearch()
             updated = False
             while not updated:
-                choice = __limit(__promptInput(), mx = 3, mn = 0)
+                choice = __limit(__promptInput(), mx = 4, mn = 0)
                 if choice > 0: choice += 20
                 updated = __changeMenu(choice)
         ## Main/Sites
@@ -155,6 +181,20 @@ def run(profile):
                     updated = True
                 else:
                     displayError("input")
+        ## Main/Empties
+        elif menu == 5:
+            profileDict = profile.getProfileDict()
+            menuQueue = [0]
+            menuQueueTop = None
+            for key in profileDict:
+                val = profileDict[key]
+                if val == DEFAULT[key][0]:
+                    menuQueue.append(menuIndexes[key])
+        ## Main/Preview
+        elif menu == 6:
+            displayMenuPreview(profile.getProfileDict())
+            waitForUser()
+            __changeMenu(0)
         ## Main/Personal/First
         elif menu == 11:
             displayMenuFirstName(profile.getFirstName())
@@ -233,27 +273,33 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Socials
         elif menu == 16:
-            displayMenuPlaceholder("Main/Personal/Socials")
-            sleep(3)
-            __changeMenu(2)
-        ## Main/Personal/Location
-        elif menu == 17:
-            displayMenuLocation(profile.getLocation())
+            displayMenuSocials(profile.getSocials())
             updated = False
             while not updated:
                 choice = __promptInput(forceInt = False, multiple = True)
-                if len(choice) == 1 and choice[0] == "0":
+                if len(choice) == 1 and choice[0] == "1":
+                    profile.setSocials(list(DEFAULT["socials"][0]))
+                    __changeMenu()
+                    updated = True
+                elif len(choice) == 1 and choice[0] == "0":
                     __changeMenu(2)
                     updated = True
-                elif len(choice) > 0:
-                    if profile.setLocation(choice):
-                        __changeMenu()
-                        updated = True
-                    else: displayError("input")
+                elif len(choice) == 1:
+                    #if "." in choice and "/" in choice:   disabled for easier removal of links
+                    profile.setSocials(choice[0].strip(), toggleMode = True)
+                    __changeMenu()
+                    updated = True
+                    #else:
+                        #displayError("input")
+                elif len(choice) > 1:
+                    for site in choice[1:]:
+                        profile.setSocials(userToURL(choice[0].strip(), site.strip()), toggleMode = True)
+                    __changeMenu()
+                    updated = True
                 else:
                     displayError("empty")
         ## Main/Personal/Grad
-        elif menu == 18:
+        elif menu == 17:
             displayMenuGradDate(profile.getGradDate())
             updated = False
             while not updated:
@@ -269,7 +315,7 @@ def run(profile):
                 else:
                     displayError("empty")
         ## Main/Personal/Uni
-        elif menu == 19:
+        elif menu == 18:
             displayMenuUniversity(profile.getUniversity())
             updated = False
             while not updated:
@@ -298,14 +344,30 @@ def run(profile):
                     updated = True
                 else:
                     displayError("empty")
-        ## Main/Search/Keywords
+        ## Main/Search/Location
         elif menu == 22:
+            displayMenuLocation(profile.getLocation())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(3)
+                    updated = True
+                elif len(choice) > 0:
+                    if profile.setLocation(choice):
+                        __changeMenu()
+                        updated = True
+                    else: displayError("input")
+                else:
+                    displayError("empty")
+        ## Main/Search/Keywords
+        elif menu == 23:
             displayMenuKeywords(profile.getKeywords())
             updated = False
             while not updated:
                 choice = __promptInput(forceInt = False, multiple = True)
                 if len(choice) == 1 and choice[0] == "1":
-                    profile.setKeywords([])
+                    profile.setKeywords(list(DEFAULT["keywords"][0]))
                     __changeMenu()
                     updated = True
                 elif len(choice) == 1 and choice[0] == "0":
@@ -318,7 +380,7 @@ def run(profile):
                 else:
                     displayError("empty")
         ## Main/Search/Auto-Login
-        elif menu == 23:
+        elif menu == 24:
             displayMenuAutoLogin(profile.getAutoLogin(convert = False))
             updated = False
             while not updated:
@@ -341,6 +403,4 @@ def run(profile):
             displayMenuPlaceholder("FORBIDDEN MENU :O")
             sleep(3)
             __changeMenu(0)
-
-# missing things to add: QOL review all, see whats missing
 
