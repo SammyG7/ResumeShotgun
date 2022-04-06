@@ -67,6 +67,20 @@ def __browse():
     dlg.ShowModal()
 
     return dlg.GetPath()
+
+## @brief Automatically fills fields gathered from resume
+#  @param profile userProfile object to set values into
+#  @param resume pdfReader object to pull values from
+def __fillWords(profile, resume):
+    if(resume.expectedinfo["links"]["email"][0]):
+       profile.setEmail(resume.expectedinfo["links"]["email"][1])
+
+    keylist = []
+    for key in resume.expectedinfo["languages"].keys():
+        if(key):
+            keylist.append(key)
+        profile.setKeywords(keylist, toggleMode = True)
+            
     
 
 ## @brief Runs menu, allowing user to tweak preferences
@@ -76,12 +90,12 @@ def run(profile):
     global menu
     menu = 0
     resume = pdfReader(profile.getResumePath())
-    
+    #resume = pdfReader(./Resumes/BobBobberResume.pdf)
     clearScreen()
 
-    print("Hello")
-    print(resume.path)
-    print("Hello")
+##    print("Hello")
+##    print(resume.path)
+##    print("Hello")
     #print(profile)
     
     while menu >= 0:
@@ -102,12 +116,16 @@ def run(profile):
                     updated = True
                 elif choice == "1": # Manual Browse Window
                     profile.setResumePath(__browse())
+                    resume.setPath(profile.getResumePath())
                     __changeMenu()
                     updated = True
                 elif choice == "2": # Dsiplay Current Resume
                     # Implement Display Resume
                     displayError("missing")
+                elif choice == "3": 
+                    __fillWords(profile, resume);
                 elif profile.setResumePath(choice):
+                    resume.setPath(profile.getResumePath())
                     __changeMenu()
                     updated = True
                 else:

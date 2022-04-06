@@ -42,6 +42,7 @@ def displayMenuResume(path):
           "\n" +
           " 1) Manually Choose File \n" +
           " 2) Display Resume \n" +
+          " 3) Automatically Pull Info From Resume \n" +
           "\n" +
           " 0) Go back \n" +
           "\n")

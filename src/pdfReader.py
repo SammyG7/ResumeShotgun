@@ -25,9 +25,11 @@ class pdfReader:
         self.expectedinfo["languages"] = {}
         
         try: # Try instead of if for invalid paths
-            self.plaintext = self.getText()
-##            self.getAllLinks()
-##            self.setKnownLinks()
+            if(path != None and path != ''):
+                self.plaintext = self.getText()
+                self.getAllLinks()
+                self.setKnownLinks()
+                self.setKnownLanguages()
         except:
             self.plaintext = None
         
@@ -68,10 +70,6 @@ class pdfReader:
     #  @return String on plaintext
     def getText(self):
         text = ''
-
-        print("Go")
-        result = fitz.open("No.pdf")
-        print("Result ", result)
     
         with fitz.open(self.path) as doc:
             for page in doc:
@@ -90,6 +88,7 @@ class pdfReader:
             self.plaintext = self.getText()
             self.getAllLinks()
             self.setKnownLinks()
+            self.setKnownLanguages()
         except:
             self.plaintext = None
 
@@ -126,16 +125,18 @@ class pdfReader:
     def setKnownLinks(self):
         for link in self.links:
             if "github" in link:
-                self.expectedinfo["links"]["git"] = True
+                self.expectedinfo["links"]["git"] = [True, link]
             else:
-                self.expectedinfo["links"]["git"] = False
+                self.expectedinfo["links"]["git"] = [False, '']
             if "linkedin" in link:
-                self.expectedinfo["links"]["linkedin"] = True
+                self.expectedinfo["links"]["linkedin"] = [True, link]
             else:
-                self.expectedinfo["links"]["linkedin"] = False
-
-        # Email
-        # 
+                self.expectedinfo["links"]["linkedin"] = [False, '']
+            if "@" in link:
+                self.expectedinfo["links"]["email"] = [True, link]
+            else:
+                self.expectedinfo["links"]["email"] = [False, '']
+                
 
     def setKnownLanguages(self):
         if "python" in self.plaintext or "Python" in self.plaintext:

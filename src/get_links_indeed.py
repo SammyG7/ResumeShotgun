@@ -104,6 +104,7 @@ def verificationHandler(driver):
 
 ## @brief Instantiates a Selenium chrome driver with executable path to the chrome driver lcoation then calls login()
 def run(driver, profile):
+    ## Non Hardcoded Email + Resume
     success = False
     
     if(profile.getAutoLogin()): # *** Change with working autoLogin
