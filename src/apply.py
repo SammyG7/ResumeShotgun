@@ -24,8 +24,6 @@ from bs4 import BeautifulSoup
 import requests
 import random
 
-from pdfReader import pdfReader ##*****Temp
-
 ## Global Variables
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
 URL_l3 = 'https://jobs.lever.co/fleetsmith/eb6648a6-7ad9-4f4a-9918-8b124e10c525/apply?lever-source=Glassdoor'
