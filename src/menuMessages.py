@@ -65,7 +65,7 @@ def displayMenuPersonal():
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for first name menu (profile submenu) options
+## @brief Displays text for first name menu (personal submenu) options
 #  @param path String for first name
 def displayMenuFirstName(name):
     if name == DEFAULT["firstName"][0]: name = "N/A"
@@ -82,7 +82,7 @@ def displayMenuFirstName(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for last name menu (profile submenu) options
+## @brief Displays text for last name menu (personal submenu) options
 #  @param path String for last name
 def displayMenuLastName(name):
     if name == DEFAULT["lastName"][0]: name = "N/A"
@@ -99,7 +99,7 @@ def displayMenuLastName(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for email menu (profile submenu) options
+## @brief Displays text for email menu (personal submenu) options
 #  @param path String for email
 def displayMenuEmail(email):
     if email == DEFAULT["email"][0]: email = "N/A"
@@ -116,7 +116,7 @@ def displayMenuEmail(email):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for phone menu (profile submenu) options
+## @brief Displays text for phone menu (personal submenu) options
 #  @param path String for phone number
 def displayMenuPhone(phone):
     if phone == DEFAULT["phone"][0]: phone = "N/A"
@@ -134,7 +134,7 @@ def displayMenuPhone(phone):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for organisation menu (profile submenu) options
+## @brief Displays text for organisation menu (personal submenu) options
 #  @param path String for organisation name
 def displayMenuOrganisation(name):
     if name == DEFAULT["organisation"][0]: name = "N/A"
@@ -151,7 +151,30 @@ def displayMenuOrganisation(name):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for graduation date menu (profile submenu) options
+## @brief Displays text for socials menu (personal submenu) options
+#  @param socials List of strings of current social links
+def displayMenuSocials(socials):
+    if socials == DEFAULT["socials"][0]: socials = ["N/A"]
+    string = ""
+    for s in socials: string += " " + s + "\n"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Personal/Socials      \n" +
+          "==============================\n" +
+          " Current socials: \n" +
+          string +
+          "\n" +
+          wrappedString("Input social website link to add, " +
+                        "or your username and site names all separated " +
+                        "by commas to build links. Input link again or " +
+                        "site name to remove.") + "\n" +
+          "\n" +
+          " 1) Clear all links \n" +
+          "\n" +
+          " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for graduation date menu (personal submenu) options
 #  @param path Tuple indicating graduation date
 def displayMenuGradDate(grad):
     if grad == DEFAULT["gradDate"][0]: grad = "N/A"
@@ -169,7 +192,7 @@ def displayMenuGradDate(grad):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for university menu (profile submenu) options
+## @brief Displays text for university menu (personal submenu) options
 #  @param path String for university name
 def displayMenuUniversity(name):
     if name == DEFAULT["university"][0]: name = "N/A"
@@ -216,7 +239,7 @@ def displayMenuJobTitle(title):
           " 0) Go back \n" +
           "\n")
 
-## @brief Displays text for location menu (profile submenu) options
+## @brief Displays text for location menu (search submenu) options
 #  @param path Tuple indicating location
 def displayMenuLocation(loc):
     if loc == DEFAULT["location"][0]: loc = ("N/A", "N/A", "N/A")

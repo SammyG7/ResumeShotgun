@@ -389,7 +389,7 @@ class userProfile:
                         removed = True
                 if not removed: self.__socials.append(link)
         else: 
-            self.__socials = [link]
+            self.__socials = DEFAULT["socials"][0] if link == DEFAULT["socials"][0] else [link]
 
     ## @brief Method sets location
     #  @details If 2 inputs received, it will be stored as a length 3 with a blank value

@@ -5,7 +5,8 @@
 #  @date Apr 2, 2022
 
 from menuMessages import *
-from sites import SITESLIST
+from sites import SITESLIST, userToURL
+from pDef import DEFAULT
 from time import sleep
 import wx
 from pdfReader import pdfReader
@@ -218,9 +219,31 @@ def run(profile):
                     displayError("empty")
         ## Main/Personal/Socials
         elif menu == 16:
-            displayMenuPlaceholder("Main/Personal/Socials")
-            sleep(3)
-            __changeMenu(2)
+            displayMenuSocials(profile.getSocials())
+            updated = False
+            while not updated:
+                choice = __promptInput(forceInt = False, multiple = True)
+                if len(choice) == 1 and choice[0] == "1":
+                    profile.setSocials(DEFAULT["socials"][0])
+                    __changeMenu()
+                    updated = True
+                elif len(choice) == 1 and choice[0] == "0":
+                    __changeMenu(2)
+                    updated = True
+                elif len(choice) == 1:
+                    #if "." in choice and "/" in choice:   disabled for easier removal of links
+                    profile.setSocials(choice[0].strip(), toggleMode = True)
+                    __changeMenu()
+                    updated = True
+                    #else:
+                        #displayError("input")
+                elif len(choice) > 1:
+                    for site in choice[1:]:
+                        profile.setSocials(userToURL(choice[0].strip(), site.strip()), toggleMode = True)
+                    __changeMenu()
+                    updated = True
+                else:
+                    displayError("empty")
         ## Main/Personal/Grad
         elif menu == 17:
             displayMenuGradDate(profile.getGradDate())
@@ -290,7 +313,7 @@ def run(profile):
             while not updated:
                 choice = __promptInput(forceInt = False, multiple = True)
                 if len(choice) == 1 and choice[0] == "1":
-                    profile.setKeywords([])
+                    profile.setKeywords(DEFAULT["keywords"][0])
                     __changeMenu()
                     updated = True
                 elif len(choice) == 1 and choice[0] == "0":
