@@ -63,11 +63,14 @@ class userProfile:
         self.__autoLogin = self.__cpy(DEFAULT["autoLogin"][0])
         ## @brief Default value of whether or not confirmation messages should be shown
         self.__userPrompts = userPrompts
+        ## @brief Location of profile
+        self.__fileLoc = "profile.yaml"
 
     ## @brief Method attempts to load values from the given file to itself
     #  @param userPrompts (optional) Boolean for if user should require confirmations
-    #  @param file (optional) A string of the path to the saved profile
-    def loadProfile(self, userPrompts = "", file = "profile.yaml"):
+    def loadProfile(self, userPrompts = ""):
+        file = join(getcwd(), "profile.yaml")
+        self.__fileLoc = file
         if userPrompts == "": userPrompts = self.__userPrompts
         if isfile(file):
             if userPrompts: print(wS("Loading profile from " + file + "...") + "\n")
@@ -164,9 +167,9 @@ class userProfile:
 
     ## @brief Method attempts to save its variable values to the given file
     #  @details Will overwrite the file if it exists already
-    #  @param userPrompts (optional) Boolean for if user should require confirmations
-    #  @param file (optional) A string indicating a path to the profile to write 
-    def saveProfile(self, userPrompts = "", file = "profile.yaml"):
+    #  @param userPrompts (optional) Boolean for if user should require confirmations 
+    def saveProfile(self, userPrompts = ""):
+        file = self.__fileLoc
         if userPrompts == "": userPrompts = self.__userPrompts
         if userPrompts: print(wS("Saving profile to " + file + "...") + "\n")
         profileFile = open(file, "w")
