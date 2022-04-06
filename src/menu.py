@@ -76,6 +76,24 @@ def run(profile):
     
     global menu
     menu = 0
+    menuQueue = []
+    menuQueueTop = None
+    menuIndexes = {
+        "keywords": 23,
+        "jobTitle": 21,
+        "site": 4,
+        "firstName": 11,
+        "lastName": 12,
+        "email": 13,
+        "phone": 14,
+        "organisation": 15,
+        "resumePath": 1,
+        "socials": 16,
+        "location": 22,
+        "gradDate": 17,
+        "university": 18,
+        "autoLogin": 24
+    }
     #resume = pdfReader(profile.getResumePath())
     
     clearScreen()
@@ -84,10 +102,15 @@ def run(profile):
     #print(profile)
     
     while menu >= 0:
+        ## For taking user to menus for blank items
+        if len(menuQueue) > 0 and menu != menuQueueTop:
+            n = menuQueue.pop()
+            __changeMenu(n)
+            menuQueueTop = n
         ## Main
         if menu == 0:
             displayMenuMain()
-            while not __changeMenu(__limit(__promptInput(), mx = 4, mn = 0)): pass
+            while not __changeMenu(__limit(__promptInput(), mx = 6, mn = 0)): pass
             ## only occurs when going "back" on main, aka exit
             if menu == 0: menu = -1
         ## Main/Resume
@@ -141,6 +164,20 @@ def run(profile):
                     updated = True
                 else:
                     displayError("input")
+        ## Main/Empties
+        elif menu == 5:
+            profileDict = profile.getProfileDict()
+            menuQueue = [0]
+            menuQueueTop = None
+            for key in profileDict:
+                val = profileDict[key]
+                if val == DEFAULT[key][0]:
+                    menuQueue.append(menuIndexes[key])
+        ## Main/Preview
+        elif menu == 6:
+            displayMenuPreview(profile.getProfileDict())
+            waitForUser()
+            __changeMenu(0)
         ## Main/Personal/First
         elif menu == 11:
             displayMenuFirstName(profile.getFirstName())
@@ -224,7 +261,7 @@ def run(profile):
             while not updated:
                 choice = __promptInput(forceInt = False, multiple = True)
                 if len(choice) == 1 and choice[0] == "1":
-                    profile.setSocials(DEFAULT["socials"][0])
+                    profile.setSocials(list(DEFAULT["socials"][0]))
                     __changeMenu()
                     updated = True
                 elif len(choice) == 1 and choice[0] == "0":
@@ -313,7 +350,7 @@ def run(profile):
             while not updated:
                 choice = __promptInput(forceInt = False, multiple = True)
                 if len(choice) == 1 and choice[0] == "1":
-                    profile.setKeywords(DEFAULT["keywords"][0])
+                    profile.setKeywords(list(DEFAULT["keywords"][0]))
                     __changeMenu()
                     updated = True
                 elif len(choice) == 1 and choice[0] == "0":
@@ -349,6 +386,4 @@ def run(profile):
             displayMenuPlaceholder("FORBIDDEN MENU :O")
             sleep(3)
             __changeMenu(0)
-
-# missing things to add: QOL review all, see whats missing
 

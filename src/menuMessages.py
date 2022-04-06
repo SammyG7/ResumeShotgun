@@ -22,6 +22,9 @@ def displayMenuMain():
           " 3) Search Preferences \n" +
           " 4) Sites \n" +
           "\n" +
+          " 5) Go to all empty fields \n" +
+          " 6) Preview \n" +
+          "\n" +
           " 0) Save and Start \n" +
           "\n")
     
@@ -281,7 +284,7 @@ def displayMenuKeywords(keywords):
           "\n")
 
 ## @brief Displays text for auto login menu (search submenu) options
-#  @param site Boolean indicating current setting
+#  @param setting Boolean indicating current setting
 def displayMenuAutoLogin(setting):
     if setting == DEFAULT["autoLogin"][0]: setting = "N/A"
     else: setting = "Use auto-login" if setting else "Do not use auto-login"
@@ -321,6 +324,29 @@ def displayMenuSites(site, siteList):
           siteString +
           "\n" +
           " 0) Go back \n" +
+          "\n")
+
+## @brief Displays text for previewing profile
+#  @param profileDict Dictionary containing all profile values
+def displayMenuPreview(profileDict):
+    string = ""
+    for key in profileDict:
+        val = profileDict[key]
+        star = ""
+        if val == DEFAULT[key][0]:
+            val = "N/A"
+            if DEFAULT[key][1]: star = "**"
+            else: star = "*"
+        string += wrappedString("-" + key + star + ": " + str(val)) + "\n"
+    print("==============================\n" +
+          "        RESUME SHOTGUN        \n" +
+          " > Main/Preview               \n" +
+          "==============================\n" +
+          wrappedString("Items with '*' are the same as the default. " +
+                        "Items with '**' are the default and must " +
+                        "be changed for applications to work.") + "\n" +
+          "\n" +
+          string +
           "\n")
 
 
