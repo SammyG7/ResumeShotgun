@@ -123,9 +123,6 @@ dmypy.json
 *.lof
 *.lot
 
-# Chromedriver
-chromedriver.exe
-
 # YAML
 *.yaml
 !testprofile*.yaml

@@ -10,6 +10,10 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 import os 
 import time 
 import get_links_glassdoor
@@ -167,7 +171,7 @@ def lever(driver):
     driver.find_element_by_name('resume').send_keys(os.getcwd()+"/resume.pdf")
     driver.find_element_by_class_name('template-btn-submit').click()
 
-## @brief Fills in website text boxes with user information and submits resume for Indeed native application
+## @brief Ensures that the job page support an application through indeed then initiates the applicaiton process
 #  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
 def indeed(driver):
 
@@ -178,87 +182,141 @@ def indeed(driver):
     applyBtn = soup.find("span", class_="jobsearch-IndeedApplyButton-newDesign")
     
     if applyBtn.text != "Apply now":
-        print("Error! Cannot apply on indeed")
-        return 0
+        #print("Error! Cannot apply on indeed")
+        return ValueError("Error! Cannot apply on indeed")
     else:
         driver.find_element(By.XPATH, "//*[@id='indeedApplyButton']").click()
         #print("worked")
     time.sleep(round(random.uniform(0.1,0.75), 4))
 
-    try:
+    runApplication(driver)
         
-        # Information page
+
+## @brief Main method to execute to traverse indeed application process
+#  @detail Creates a dict to store the different steps of an indeed applicaiotn process which are usually not in order. Then the module determines which step is at and applies the automatic applicaiotn for such step
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def runApplication(driver):
+
+    # dictionary of application step to corresponding function
+    pages = {
+        "contact-info": contactInfo,
+        "resume": selectResume,
+        "work-experience": pastJob,
+        "documents": coverLetter,
+        "review": reviewApp,
+    }
+
+    '''
+    Typical indeed questions:
+    Contact Information
+    Potential employer questions (experience, job interview times)
+    Resume
+    Relevant Info(optional)
+    Cover Letter(Optional)
+    Review
+    '''
+
+    #get number of application steps
+    numSteps = int((driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[1]/div/div[2]/div[2]").text)[-1])
+
+    # Go through all application steps
+    for _ in range(numSteps):
+        header = getHeader(driver)
+        print(header)
         try:
-            '''
-            nameInput = driver.find_element(By.XPATH, "//*[@id='input-firstName']")
-            time.sleep(0.5)
-            nameInput = driver.find_element(By.XPATH, "//*[@id='input-lastName']")
-            time.sleep(0.5)
-            nameInput = driver.find_element(By.XPATH, "//*[@id='input-phoneNumber']")
-            nameInput.send_keys(JOB_APP["phone"])
-            '''
-            time.sleep(round(random.uniform(0.1,0.75), 4))
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-            time.sleep(0.5)
+            #check if header is in the dicitonary of possible pages
+            if header in pages:
+                pages[header](driver)
+            else:
+                manual(driver)
         except:
-            print("Error on information page input")
-            return 
+            print("yikes")
+            return ValueError("Overall function broke")
+        time.sleep(1)
 
-        # Available interview times
-        try:
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-            time.sleep(0.5)
-        except:
-            print("Error on interview times")
-            return 
+## @brief Function that gets the application step based on the url
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+#  @return header of type string of the header keyword that summarizes what the step needs
+def getHeader(driver):
+    element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
 
-        # Upload resume
-        try:
-            #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div[1]/div/div/div[2]/span[1]").click()
-            driver.find_element(By.XPATH, "//*[@id='resume-display-buttonHeader']/div[2]/span[1]").click()
-
-            #UPLOAD FILE
-            #select first resume file from below
-            time.sleep(0.5)
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-        except:
-            print("Error on resume upload")
-            return 
-
-        # Optional job experience filling out
-        try: 
-            #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[3]/div/div[1]/div/div/div/div[1]/span[2]").click()
-            #time.sleep(0.5)
-            time.sleep(0.5)
-            driver.find_element(By.XPATH, "//*[@id='jobTitle']")
-            driver.send_keys("Blank")
-            time.sleep(0.75)
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
-            time.sleep(0.5)
-        except:
-            print("Error on job expereience")
-            return
-
-        # Cover letter upload
-        coverLetter = False
-        if coverLetter:
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div/div/div[2]/div/div/div[1]/div/div[2]/span[2]").click()
-            #UPLOAD FILE
+    link = driver.current_url
+    header = ""
+    for char in reversed(link):
+        if char == "/":
+            break
         else:
-            driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div[2]/span[1]").click()
-        
-        # Finish application
-        time.sleep(round(random.uniform(0.1,0.75), 4))
-        driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button/span").click()
-    
-        # Confirm applicaiton
-        time.sleep(round(random.uniform(0.1,0.75), 4))
-        # Uncomment below to confirm application
-        #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+            header = char + header
 
+    return header
+
+## @brief Function that handles user contact info submission
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def contactInfo(driver):
+
+    try:        
+        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
+        element.click();
     except:
-        print("Error")
-        
+        print("Error on contact info")
+        return ValueError
+
+## @brief Function that handles user manual info submission and interaction with user
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def manual(driver):
+    # Lets user know they need to add info then requests them to press Enter!
+    print("Please fill out form on the open google chrome tab then press Enter!")
+    inp = input()
+    if inp == "":
+        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
+        element.click();
+
+## @brief Function that handles user resume selection page submission
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def selectResume(driver):
+
+    try:
+        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='resume-display-buttonHeader']/div[2]/span[1]")))
+        element.click();
+
+        element2 = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
+        element2.click();
+    except:
+        print("Error on resume")
+        return ValueError
+
+## @brief Function that handles past job experience submission
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def pastJob(driver):
+    
+    try:
+        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
+        element.click();
+    except:
+        print("Error on upload past job exp")
+        return ValueError
+
+## @brief Function that handles user cover letter submission
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def coverLetter(driver):
+    
+    try:
+        element = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//*[@id='ia-container']/div/div[1]/div/main/div[2]/div[2]/div/div/div[2]/div/button")))
+        element.click();
+    except:
+        print("Error on cover letter upload")
+        return ValueError
+
+## @brief Function that handles user final user info submission and application
+#  @param driver: Webdriver for chrome which parses and interacts with the HTML from a given website
+def reviewApp(driver):
+    try:
+        #driver.find_element(By.XPATH, "//*[@id='ia-container']/div/div/div/main/div[2]/div[2]/div/div/div[2]/div/button").click()
+        print("Not submitting final submission")
+        return
+    except:
+        return ValueError("Error on final submission")
+
 
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
@@ -279,7 +337,10 @@ if __name__ == '__main__':
 
     #path = './chromedriver'
     #servicePath = Service(path) 
-    driver = webdriver.Chrome('./chromedriver')
+    #driver = webdriver.Chrome("/usr/bin/chromedriver") # Jeremy's path
+    #driver = webdriver.Chrome("./ChomeDrivers/v100/chromedriver.exe") # depreciated
+    driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
+    
     
     #aggregatedURLs = get_links_indeed.run(driver, profile)
     
@@ -330,9 +391,9 @@ if __name__ == '__main__':
 
             try:
                 indeed(driver)
-                #print(f'SUCCESS FOR: {url}')
+                print(f'SUCCESS FOR: {url}')
             except:
-                print(url, "totally broken")
+                print(f"Apply manually for: {url}")
             
         elif 'greenhouse' in url:
             driver.get(url)
@@ -354,6 +415,6 @@ if __name__ == '__main__':
 
         time.sleep(1)
     
-
+    print("Finished")
     driver.close()
     
