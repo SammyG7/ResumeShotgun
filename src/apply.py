@@ -23,6 +23,9 @@ from userProfile import *
 from bs4 import BeautifulSoup
 import requests
 import random
+from pwinput import pwinput
+
+from pdfReader import pdfReader ##*****Temp
 
 ## Global Variables
 URL_l2 = 'https://jobs.lever.co/scratch/2f09a461-f01d-4041-a369-c64c1887ed97/apply?lever-source=Glassdoor'
@@ -319,7 +322,10 @@ def reviewApp(driver):
 ## @brief Initial function run upon execution of program
 #  @details Gathers links through secondary modules then coordinates the apllication process
 if __name__ == '__main__':
-
+    '''
+    ## PDF Tests. Just delete if you're working in apply
+    resume = pdfReader("./Resumes/BobBobberResume.pdf")
+    '''
 
     profile = userProfile()
     profile.loadProfile()
@@ -328,6 +334,17 @@ if __name__ == '__main__':
         menu.run(profile)
         unfilled = not profile.isComplete()
     profile.saveProfile()
+
+    if profile.getAutoLogin():
+        username = str(input("Input username for {0}: ".format(profile.getSite())))
+        password = ""
+        passwordConfirm = None
+        while password != passwordConfirm:
+            if passwordConfirm is not None:
+                print("Passwords do not match, please try again.")
+            password = str(pwinput("Input password for {0}: ".format(profile.getSite())))
+            passwordConfirm = str(pwinput("Confirm password: "))
+
     print("Please wait for Chrome to automatically open...")
  
 
@@ -345,7 +362,6 @@ if __name__ == '__main__':
     
     #driver.close()
 
-  
     '''
     for link in aggregatedURLs:
         ##indeed(driver.get(link))
@@ -362,7 +378,6 @@ if __name__ == '__main__':
     profile.saveProfile()
     site = profile.getSite()
     '''
-    
     
 
     ## Get Links From User Specified Website
@@ -418,5 +433,4 @@ if __name__ == '__main__':
     
     print("Finished")
     driver.close()
-   
     
