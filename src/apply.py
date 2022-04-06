@@ -336,7 +336,11 @@ if __name__ == '__main__':
     profile.saveProfile()
 
     if profile.getAutoLogin():
-        username = str(input("Input username for {0}: ".format(profile.getSite())))
+        username = str(input(("Input username for {0} (leave blank to use " +
+                             "email from profile): ").format(profile.getSite())))
+        if username == "":
+            username = profile.getEmail()
+            print(username)
         password = ""
         passwordConfirm = None
         while password != passwordConfirm:
