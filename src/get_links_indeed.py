@@ -22,8 +22,6 @@ from indeed import Indeed
 #  @param driver a Selenium object utilized to navigate the page.
 #  @return boolean representing sign in has been prompted or user is already signed in.
 def login(driver):
-    driver.get('https://ca.indeed.com/')
-    
     page_source = driver.page_source
     soup = BeautifulSoup(page_source, 'html.parser')
     mosaic = soup.find(id='mosaic-data')
@@ -106,6 +104,7 @@ def verificationHandler(driver):
 def run(driver, profile):
     ## Non Hardcoded Email + Resume
     success = False
+    driver.get('https://ca.indeed.com/')
     
     if(profile.getAutoLogin()): # *** Change with working autoLogin
         ## Attempt Auto Login
@@ -116,6 +115,8 @@ def run(driver, profile):
             print("Something Went Wrong")
             print("Switching to Manual Login")
             pass
+    else:
+        print("Manual Login Required")
 
         
         
@@ -133,7 +134,7 @@ def run(driver, profile):
                 if('window.mosaic.providerData["mosaic-provider-serpreportjob"]' in x[:70]):
                     logInCheck = x
 
-            if('"isLoggedIn":false' in logInCheck):
+            if('"isLoggedIn":true' in logInCheck):
                 success = True
         except:
             pass
