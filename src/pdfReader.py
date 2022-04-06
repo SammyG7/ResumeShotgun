@@ -81,7 +81,7 @@ class pdfReader:
         #print("Musk" in text)
         #print("Sam" in text)
 
-    def setPath(self):
+    def setPath(self, path):
         self.path = path
 
         try: # Try instead of if for invalid paths
